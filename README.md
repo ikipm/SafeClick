@@ -1,5 +1,5 @@
 # Creació d'una plataforma de divulgació de ciberseguretat
-Autor: Iker Pérez
+Autor: Iker Pérez\
 Tutor: Albert Granados
 
 ### Objecte d'estudi
