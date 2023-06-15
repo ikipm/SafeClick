@@ -15,7 +15,7 @@
                 <div class="language-menu">
                     <div class="current-language">ES</div>
                     <ul class="language-list">
-                        <li><a href="/es">CAT</a></li>
+                        <li><a href="/">CAT</a></li>
                         <li><a href="/en">EN</a></li>
                     </ul>
                 </div>
