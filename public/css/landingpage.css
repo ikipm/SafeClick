@@ -44,7 +44,7 @@ header {
 
 .language-list {
   position: absolute;
-  top: 70%;
+  top: 65%;
   left: 1;
   background-color: white;
   list-style: none;
@@ -263,9 +263,8 @@ footer {
     color: white;
   }
 
-  .info-section {
+  .why-section, .how-section, .about-section {
     background-color: #222;
-    color: white;
   }
 
   h2 {

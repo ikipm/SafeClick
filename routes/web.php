@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Landing page
 Route::get('/', function () {
     return view('/landingPage/cat');
 });
 Route::get('/es', function () {
     return view('/landingPage/es');
+});
+Route::get('/en', function () {
+    return view('/landingPage/en');
 });
