@@ -13,13 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Landing page
+// Catalan
 Route::get('/', function () {
-    return view('/landingPage/cat');
+    return view('landingPage/cat');
 });
-Route::get('/es', function () {
-    return view('/landingPage/es');
+Route::get('login/', function() {
+    return view('loginPage/cat');
 });
-Route::get('/en', function () {
-    return view('/landingPage/en');
+
+// Spanish
+Route::group(['prefix' => 'es'], function() {
+    Route::get('/', function () {
+        return view('landingPage/es');
+    });
+    Route::get('login/', function() {
+        return view('loginPage/es');
+    });
+});
+
+// English
+Route::group(['prefix' => 'en'], function() {
+    Route::get('/', function () {
+        return view('landingPage/en');
+    });
+    Route::get('login/', function() {
+        return view('loginPage/en');
+    });
 });

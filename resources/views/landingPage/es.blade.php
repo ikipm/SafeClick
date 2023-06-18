@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>Academia ciberseguridad</title>
-        <link rel="stylesheet" type="text/css" href="{{asset('css/landingpage.css')}}">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/landingPage.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/shared.css')}}">
         <script src="{{asset('js/landingpage.js')}}"></script>
     </head>
     <body>
@@ -20,7 +20,7 @@
                     </ul>
                 </div>
                 <div class="login-button">
-                    <a href="#">Inicia sesión</a>
+                    <a href="es/login">Inicia sesión</a>
                 </div>
             </nav>
         </header>        

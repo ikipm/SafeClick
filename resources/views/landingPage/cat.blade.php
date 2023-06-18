@@ -2,8 +2,9 @@
 <html>
     <head>
         <title>Acadèmia ciberseguretat</title>
-        <link rel="stylesheet" type="text/css" href="{{asset('css/landingpage.css')}}">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/landingPage.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/shared.css')}}">
+        <script src="{{asset('js/landingpage.js')}}"></script>
     </head>
     <body>
         <header>
@@ -19,7 +20,7 @@
                     </ul>
                 </div>
                 <div class="login-button">
-                    <a href="#">Inicia sessió</a>
+                    <a href="/login">Inicia sessió</a>
                 </div>
             </nav>
         </header>        
@@ -42,7 +43,7 @@
         
         <section class="why-section">
             <div class="container">
-            <h2>Per que cal aprendre cyberseguretat?</h2>
+            <h2>Per que cal aprendre ciberseguretat?</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet libero et mauris mattis consectetur. Nam eget sem ut nunc venenatis fermentum. In eleifend consectetur sapien, vitae volutpat enim pulvinar id.</p>
             <p>Morbi rutrum odio vitae elit euismod malesuada. Mauris lacinia rutrum eros, a condimentum erat tincidunt nec. Nullam tristique risus eu leo facilisis, a ultricies turpis consectetur.</p>
             </div>
@@ -78,5 +79,4 @@
             <p>&copy; 2023 Online Academy. All rights reserved.</p>
         </footer>
     </body>
-    <script src="{{asset('js/landingpage.js')}}"></script>
 </html>
