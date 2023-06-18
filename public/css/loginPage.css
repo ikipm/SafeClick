@@ -1,0 +1,88 @@
+/* Login and Register page styles */
+.login-container,
+.register-container {
+    width: 350px;
+    margin: 100px 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2,
+.register-container h2 {
+    color: #64c97e;
+    margin-bottom: 20px;
+}
+
+.login-container form,
+.register-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container label,
+.register-container label,
+.login-container input,
+.register-container input {
+    margin-bottom: 10px;
+}
+
+.login-container input,
+.register-container input {
+    padding: 8px;
+}
+
+.login-container button,
+.register-container button {
+    background-color: #64c97e;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container button:hover,
+.register-container button:hover {
+    background-color: #5ab272;
+}
+
+.login-container .message,
+.register-container .message {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login-container .message a,
+.register-container .message a {
+    color: #64c97e;
+    text-decoration: none;
+}
+
+.container-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    .login-container,
+    .register-container {
+        background-color: #222;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .container-wrapper {
+        flex-direction: column; /* Display containers in a column */
+    }
+
+    .login-container,
+    .register-container {
+        margin: 20px auto; /* Adjust the margin for mobile devices */
+    }
+
+    .register-container {
+        margin-top: 100px;
+    }
+}
