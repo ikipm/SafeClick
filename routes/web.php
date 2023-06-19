@@ -13,12 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(["prefix" => "{locale}"], function () {
-    Route::get('/', function () {
-        return view('landingPage');
-    })->middleware("setLocale");
+$locales = ['cat', 'es', 'en'];
+
+Route::prefix('{locale}')->group(function () use ($locales) {
+    Route::view('/', 'landingPage')->name('landingPage')->middleware('setLocale');
+    Route::view('/login', 'loginPage')->name('loginPage')->middleware('setLocale');
 });
 
-Route::get("/", function() {
+Route::get("/", function () {
     return redirect("cat");
+});
+
+Route::bind('locale', function ($value) use ($locales) {
+    if (!in_array($value, $locales)) {
+        abort(404);
+    }
+    return $value;
 });
