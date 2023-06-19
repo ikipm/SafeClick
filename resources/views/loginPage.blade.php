@@ -38,7 +38,7 @@
                 </ul>
             </div>
             <div class="login-button">
-                <a href="/">@lang("shared.home")</a>
+                <a href="{{url(app()->getLocale())}}">@lang("shared.home")</a>
             </div>
         </nav>
     </header>
@@ -47,11 +47,11 @@
             <h2>@lang("loginPage.register")</h2>
             <form>
                 <label for="register-user">@lang("loginPage.userName")</label>
-                <input type="text" id="register-user" placeholder="{{@lang("loginPage.insetUserName")}}" required>
+                <input type="text" id="register-user" placeholder="@lang("loginPage.insertUserName")" required>
                 <label for="register-email">@lang("loginPage.email")</label>
-                <input type="email" id="register-email" placeholder="{{@lang("loginPage.insertEmail")}}" required>
+                <input type="email" id="register-email" placeholder="@lang("loginPage.insertEmail")" required>
                 <label for="register-password">@lang("loginPage.password")</label>
-                <input type="password" id="register-password" placeholder="{{@lang("loginPage.insertPassword")}}" required>
+                <input type="password" id="register-password" placeholder="@lang("loginPage.insertPassword")" required>
                 <button type="submit">@lang("loginPage.register")</button>
             </form>
         </div>
@@ -59,9 +59,9 @@
             <h2>@lang("loginPage.login")</h2>
             <form>
                 <label for="login-email">@lang("loginPage.email")</label>
-                <input type="email" id="login-email" placeholder="{{@lang("loginPage.insertEmail")}}" required>
+                <input type="email" id="login-email" placeholder="@lang("loginPage.insertEmail")" required>
                 <label for="login-password">@lang("loginPage.password")</label>
-                <input type="password" id="login-password" placeholder="{{@lang("loginPage.insertPassword")}}" required>
+                <input type="password" id="login-password" placeholder="@lang("loginPage.insertPassword")" required>
                 <button type="submit">@lang("loginPage.login")</button>
             </form>
         </div>

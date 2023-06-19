@@ -38,7 +38,7 @@
                 </ul>
             </div>
             <div class="login-button">
-                <a href="/login">@lang("shared.login")</a>
+                <a href="{{app()->getLocale()}}/login">@lang("shared.login")</a>
             </div>
         </nav>
     </header>
