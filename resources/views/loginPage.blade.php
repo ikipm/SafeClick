@@ -46,18 +46,23 @@
         <div class="register-container">
             <h2>@lang("loginPage.register")</h2>
             <form>
+                @csrf
+                <label for="register-name">@lang("loginPage.name")</label>
+                <input type="text" id="register-name" placeholder="@lang("loginPage.insertName")" required>
                 <label for="register-user">@lang("loginPage.userName")</label>
                 <input type="text" id="register-user" placeholder="@lang("loginPage.insertUserName")" required>
                 <label for="register-email">@lang("loginPage.email")</label>
                 <input type="email" id="register-email" placeholder="@lang("loginPage.insertEmail")" required>
                 <label for="register-password">@lang("loginPage.password")</label>
                 <input type="password" id="register-password" placeholder="@lang("loginPage.insertPassword")" required>
+                <input type="password" id="register-password2" placeholder="@lang("loginPage.insertPasswordConfirmation")" required>
                 <button type="submit">@lang("loginPage.register")</button>
             </form>
         </div>
         <div class="login-container">
             <h2>@lang("loginPage.login")</h2>
             <form>
+                @csrf
                 <label for="login-email">@lang("loginPage.email")</label>
                 <input type="email" id="login-email" placeholder="@lang("loginPage.insertEmail")" required>
                 <label for="login-password">@lang("loginPage.password")</label>

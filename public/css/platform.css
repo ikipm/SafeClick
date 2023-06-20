@@ -1,0 +1,93 @@
+.container {
+    max-width: 1200px;
+    margin: 80px auto 0;
+    padding: 20px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Updated: align cards from left to right */
+    gap: 20px;
+}
+
+.card {
+    width: calc(
+        33.33% - 15px
+    );
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+.card-header {
+    background-color: #64c97e;
+    padding: 10px;
+    color: #fff;
+}
+
+.card-header.dark-mode {
+    background-color: #5ab272;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.card-description {
+    padding: 20px;
+}
+
+.card-description p {
+    margin: 0;
+}
+
+.progress-bar {
+    background-color: #eaeaea;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.progress-bar-fill {
+    background-color: #64c97e;
+    height: 100%;
+    width: 50%; /* Adjust the progress width as needed */
+}
+
+/* Dark mode styles */
+
+@media (prefers-color-scheme: dark) {
+    .cards-section {
+        background-color: #111;
+    }
+
+    .card {
+        background-color: #333;
+        color: white;
+    }
+
+    .card-header {
+        background-color: #5ab272;
+    }
+}
+
+@media (max-width: 767px) {
+    .card {
+        width: calc(50% - 15px); /* Adjusted to fit 2 cards per row */
+    }
+}
