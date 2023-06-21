@@ -72,8 +72,12 @@
 /* Dark mode styles */
 
 @media (prefers-color-scheme: dark) {
+    body{
+        background-color: #222;
+    }
+    
     .cards-section {
-        background-color: #111;
+        background-color: #222;
     }
 
     .card {

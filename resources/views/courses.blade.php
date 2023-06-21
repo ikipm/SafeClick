@@ -4,7 +4,6 @@
 <head>
     <title>@lang("shared.title")</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/shared.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/platform.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -38,7 +37,7 @@
                 </ul>
             </div>
             <div class="login-button">
-                <a href="{{route("logout")}}">Username</a>
+                <a href="">Username</a>
             </div>
         </nav>
     </header>
@@ -72,6 +71,7 @@
             <p>&copy; 2023 My Website. All rights reserved.</p>
         </div>
     </footer>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/platform.css') }}">
 </body>
 
 </html>

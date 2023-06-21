@@ -3,9 +3,8 @@
 
 <head>
     <title>@lang('shared.title')</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/landingPage.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/shared.css') }}">
-    <script src="{{ asset('js/landingpage.js') }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -105,6 +104,8 @@
         </div>
         <p>&copy; 2023 Online Academy. All rights reserved.</p>
     </footer>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/landingPage.css') }}">
+    <script src="{{ asset('js/landingpage.js') }}"></script>
 </body>
 
 </html>

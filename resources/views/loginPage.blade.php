@@ -3,7 +3,6 @@
 
 <head>
     <title>@lang("loginPage.title") - @lang("shared.title")</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/loginPage.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/shared.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -71,6 +70,7 @@
             </form>
         </div>
     </div>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/loginPage.css') }}">
 </body>
 
 </html>

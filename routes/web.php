@@ -18,6 +18,7 @@ $locales = ['cat', 'es', 'en'];
 Route::prefix('{locale}')->group(function () use ($locales) {
     Route::view('/', 'landingPage')->name('landingPage')->middleware('setLocale');
     Route::view('/login', 'loginPage')->name('loginPage')->middleware('setLocale');
+    Route::view('/courses', 'courses')->name('courses')->middleware('setLocale');
 });
 
 Route::get("/", function () {
