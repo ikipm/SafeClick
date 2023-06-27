@@ -80,7 +80,7 @@ h1 {
 .how-section,
 .about-section {
     background-color: white;
-    padding: 40px 0;
+    padding: 15px 0;
 }
 
 .container {
@@ -92,7 +92,7 @@ h1 {
 footer {
     background-color: #333;
     color: white;
-    padding: 40px 0;
+    padding: 20px 0px 0px 0px;
     text-align: center;
 }
 
@@ -104,13 +104,14 @@ footer {
 }
 
 .footer-logo img {
-    width: 80px;
+    width: 15%;
     height: auto;
-    margin-left: 50px;
 }
 
 .footer-links {
     margin-right: 50px;
+    display: flex;
+    flex-direction: row; /* Set to row layout by default */
 }
 
 .footer-links a {
@@ -161,5 +162,17 @@ footer {
     .how-section,
     .about-section {
         background-color: #222;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer-links {
+        flex-direction: column; /* Change to column layout on mobile */
+        margin-right: 0; /* Remove right margin on mobile */
+    }
+
+    .footer-links a {
+        margin-right: 0; /* Remove right margin on mobile */
+        margin-bottom: 10px; /* Add margin between links on mobile */
     }
 }
