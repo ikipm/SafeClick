@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,15 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 $locales = ['cat', 'es', 'en'];
 
-Route::prefix('{locale}')->group(function () use ($locales) {
-    Route::view('/', 'landingPage')->name('landingPage')->middleware('setLocale');
-    Route::view('/login', 'loginPage')->name('loginPage')->middleware('setLocale');
-    Route::view('/courses', 'courses')->name('courses')->middleware('setLocale');
+Route::redirect('/', '/cat');
+
+Route::group(['prefix' => '{locale}', 'middleware' => 'setLocale'], function () use ($locales) {
+    Route::view('/', 'landingPage')->name('landingPage');
+    Route::view('/login', 'loginPage')->name('loginPage');
+    Route::view('/courses', 'courses')->name('courses');
 });
 
-Route::get("/", function () {
-    return redirect("cat");
-});
+Route::post('/register', [UserController::class, 'register'])->name('register');
+Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::bind('locale', function ($value) use ($locales) {
     if (!in_array($value, $locales)) {

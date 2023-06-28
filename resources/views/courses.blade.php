@@ -37,7 +37,7 @@
                 </ul>
             </div>
             <div class="login-button">
-                <a href="">Username</a>
+                <a href="{{route('logout')}}">Username</a>
             </div>
         </nav>
     </header>
