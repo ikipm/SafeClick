@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validatePassword() {
-        const lang = window.location.href.split('/')[3];
-        Lang.setLocale(lang);
+        Lang.setLocale(currentLocale);
 
         const password = passwordField.value;
         const passwordConfirmation = passwordConfirmationField.value;

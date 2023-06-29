@@ -15,24 +15,21 @@
             </div>
             <div class="language-menu">
                 <div class="current-language">
-                    @if (app()->getLocale() == 'cat')
-                        CAT
-                    @elseif(app()->getLocale() == 'es')
-                        ES
-                    @elseif(app()->getLocale() == 'en')
-                        EN
-                    @endif
+                    @php
+                        $locale = app()->getLocale();
+                    @endphp
+                    {{ strtoupper($locale) }}
                 </div>
                 <ul class="language-list">
-                    @if (app()->getLocale() == 'cat')
-                        <li><a href="{{ url('/es/courses/') }}">ES</a></li>
-                        <li><a href="{{ url('/en/courses') }}">EN</a></li>
-                    @elseif(app()->getLocale() == 'es')
-                        <li><a href="{{ url('/cat/courses') }}">CAT</a></li>
-                        <li><a href="{{ url('/en/courses') }}">EN</a></li>
-                    @elseif(app()->getLocale() == 'en')
-                        <li><a href="{{ url('/cat/courses') }}">CAT</a></li>
-                        <li><a href="{{ url('/es/courses') }}">ES</a></li>
+                    @if ($locale == 'cat')
+                        <li><a href="{{ url('/locale/es/') }}">ES</a></li>
+                        <li><a href="{{ url('/locale/en') }}">EN</a></li>
+                    @elseif ($locale == 'es')
+                        <li><a href="{{ url('/locale/cat') }}">CAT</a></li>
+                        <li><a href="{{ url('/locale/en') }}">EN</a></li>
+                    @elseif ($locale == 'en')
+                        <li><a href="{{ url('/locale/cat') }}">CAT</a></li>
+                        <li><a href="{{ url('/locale/es') }}">ES</a></li>
                     @endif
                 </ul>
             </div>

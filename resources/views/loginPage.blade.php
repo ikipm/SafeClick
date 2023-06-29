@@ -22,19 +22,19 @@
                 </div>
                 <ul class="language-list">
                     @if ($locale == 'cat')
-                        <li><a href="{{ url('/es/login/') }}">ES</a></li>
-                        <li><a href="{{ url('/en/login') }}">EN</a></li>
+                        <li><a href="{{ url('/locale/es/') }}">ES</a></li>
+                        <li><a href="{{ url('/locale/en') }}">EN</a></li>
                     @elseif ($locale == 'es')
-                        <li><a href="{{ url('/cat/login') }}">CAT</a></li>
-                        <li><a href="{{ url('/en/login') }}">EN</a></li>
+                        <li><a href="{{ url('/locale/cat') }}">CAT</a></li>
+                        <li><a href="{{ url('/locale/en') }}">EN</a></li>
                     @elseif ($locale == 'en')
-                        <li><a href="{{ url('/cat/login') }}">CAT</a></li>
-                        <li><a href="{{ url('/es/login') }}">ES</a></li>
+                        <li><a href="{{ url('/locale/cat') }}">CAT</a></li>
+                        <li><a href="{{ url('/locale/es') }}">ES</a></li>
                     @endif
                 </ul>
             </div>
             <div class="login-button">
-                <a href="{{ url($locale) }}">@lang('shared.home')</a>
+                <a href="/">@lang('shared.home')</a>
             </div>
         </nav>
     </header>
@@ -84,7 +84,11 @@
         </div>
     </div>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/loginPage.css') }}">
-    <script src="{{ asset('js/messages.js') }}"></script>
+    <script src="{{ asset('messages.js') }}"></script>
+    <script>
+        // Pass the locale value to JavaScript
+        var currentLocale = "{{ app()->getLocale() }}";
+    </script>
     <script src="{{ asset('js/loginpage.js') }}"></script>
 </body>
 

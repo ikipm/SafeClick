@@ -15,7 +15,7 @@ return [
     'login' => 'Login',
     'errorUser' => 'This username is already in use.',
     'errorEmail' => 'This email is already in use.',
-    'errorLogin' => 'The email or the password are invalids',
+    'errorLogin' => 'The email or the password are invalids.',
     'passwordUpper' => 'Password must contain at least one uppercase letter.',
     'passwordLower' => 'Password must contain at least one lowercase letter.',
     'passwordNumber' => 'Password must contain at least one number.',

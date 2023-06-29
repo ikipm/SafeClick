@@ -16,7 +16,19 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next)
     {
-        app()->setLocale($request->segment(1));
+        // Check if the lang parameter is present in the URL
+        if ($request->has('lang')) {
+            $locale = $request->input('lang');
+            app()->setLocale($locale);
+            session(['locale' => $locale]);
+        } else {
+            // If the lang parameter is not present, check if the locale is stored in the session
+            $locale = session('locale');
+            if ($locale) {
+                app()->setLocale($locale);
+            }
+        }
+
         return $next($request);
     }
 }
