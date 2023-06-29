@@ -44,8 +44,8 @@
     <div class="container-wrapper">
         <div class="register-container">
             <h2>@lang('loginPage.register')</h2>
-            @if ($errors->any())
-                <div id="warning-alert" class="alert-warning" style="display: block" role="alert">
+            @if ($errors->any() && !$errors->has("errorLogin"))
+                <div id="warning-alert-r" class="alert-warning" style="display: block" role="alert">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -72,6 +72,11 @@
         </div>
         <div class="login-container">
             <h2>@lang('loginPage.login')</h2>
+            @if ($errors->has("errorLogin"))
+                <div id="warning-alert-l" class="alert-warning" style="display: block" role="alert">{{$errors->first("errorLogin")}}</div>
+            @else
+                <div id="warning-alert" class="alert-warning d-none" style="display: none" role="alert"></div>
+            @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <label for="login-email">@lang('loginPage.email')</label>

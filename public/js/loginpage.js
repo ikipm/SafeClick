@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordField = document.getElementById('register-password');
     const passwordConfirmationField = document.getElementById('register-password2');
     const submitButton = document.getElementById('register-submit');
-    const warningAlert = document.getElementById('warning-alert');
+    const warningAlert = document.getElementById('warning-alert-l');
 
     function setCustomValidity(field, message) {
         field.setCustomValidity(message);
