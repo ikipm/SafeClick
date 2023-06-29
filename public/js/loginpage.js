@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordField = document.getElementById('register-password');
     const passwordConfirmationField = document.getElementById('register-password2');
     const submitButton = document.getElementById('register-submit');
-    const warningAlert = document.getElementById('warning-alert-l');
+    const warningAlert = document.getElementById('warning-alert-r');
 
     function setCustomValidity(field, message) {
         field.setCustomValidity(message);
@@ -10,20 +10,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validatePassword() {
+        const lang = window.location.href.split('/')[3];
+        Lang.setLocale(lang);
+
         const password = passwordField.value;
         const passwordConfirmation = passwordConfirmationField.value;
 
         const minLength = 8;
         const requirements = [
-            { regex: /[A-Z]/, message: 'Password must contain at least one uppercase letter.' },
-            { regex: /[a-z]/, message: 'Password must contain at least one lowercase letter.' },
-            { regex: /[0-9]/, message: 'Password must contain at least one number.' }
+            { regex: /[A-Z]/, message: Lang.get("loginPage.passwordUpper") },
+            { regex: /[a-z]/, message: Lang.get("loginPage.passwordLower") },
+            { regex: /[0-9]/, message: Lang.get("loginPage.passwordNumbers") }
         ];
 
         let isValid = true;
 
         if (password.length < minLength) {
-            isValid = setCustomValidity(passwordField, 'Password must be at least ' + minLength + ' characters long.');
+            isValid = setCustomValidity(passwordField, Lang.get('loginPage.passwordLong', { characters: minLength }));
         }
 
         requirements.forEach(function(requirement) {
@@ -33,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (password !== passwordConfirmation) {
-            isValid = setCustomValidity(passwordConfirmationField, 'Passwords do not match.');
+            isValid = setCustomValidity(passwordConfirmationField, Lang.get("loginPage.passwordMatch"));
         }
 
         if (isValid) {

@@ -37,7 +37,7 @@
                 </ul>
             </div>
             <div class="login-button">
-                <a href="{{route('logout')}}">Username</a>
+                <a href="{{route('logout')}}">{{Auth::user()->userName}}</a>
             </div>
         </nav>
     </header>

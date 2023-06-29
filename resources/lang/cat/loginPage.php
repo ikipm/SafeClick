@@ -13,4 +13,12 @@ return [
     'insertPassword' => 'Insereix la teva contrasenya',
     'insertPasswordConfirmation' => 'Insereix la teva contrasenya de nou',
     'login' => 'Inicia sessió',
+    'errorUser' => 'Aquest usuari ja existeix.',
+    'errorEmail' => 'Aquest correu electrònic ja està en ús.',
+    'errorLogin' => 'Correu electrònic o contrasenya invàlids.',
+    'passwordUpper' => 'La contrasenya ha de contenir com a mínim una lletra majúscula.',
+    'passwordLower' => 'La contrasenya ha de contenir com a mínim una lletra minúscula',
+    'passwordNumber' => 'La contrasenya ha de contenir com a mínim un número.',
+    'passwordMatch' => 'Les contrasenyes no coincideixen',
+    'passwordLong' => 'La contrasenya ha de contenir :characters caràcters com a mínim.',
 ];

@@ -4,6 +4,7 @@
 <head>
     <title>@lang('loginPage.title') - @lang('shared.title')</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/shared.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/loginPage.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -11,33 +12,30 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo"></img>
+                <img src="{{ asset('img/logo.png') }}" alt="Logo">
             </div>
             <div class="language-menu">
                 <div class="current-language">
-                    @if (app()->getLocale() == 'cat')
-                        CAT
-                    @elseif(app()->getLocale() == 'es')
-                        ES
-                    @elseif(app()->getLocale() == 'en')
-                        EN
-                    @endif
+                    @php
+                        $locale = app()->getLocale();
+                    @endphp
+                    {{ strtoupper($locale) }}
                 </div>
                 <ul class="language-list">
-                    @if (app()->getLocale() == 'cat')
+                    @if ($locale == 'cat')
                         <li><a href="{{ url('/es/login/') }}">ES</a></li>
                         <li><a href="{{ url('/en/login') }}">EN</a></li>
-                    @elseif(app()->getLocale() == 'es')
+                    @elseif ($locale == 'es')
                         <li><a href="{{ url('/cat/login') }}">CAT</a></li>
                         <li><a href="{{ url('/en/login') }}">EN</a></li>
-                    @elseif(app()->getLocale() == 'en')
+                    @elseif ($locale == 'en')
                         <li><a href="{{ url('/cat/login') }}">CAT</a></li>
                         <li><a href="{{ url('/es/login') }}">ES</a></li>
                     @endif
                 </ul>
             </div>
             <div class="login-button">
-                <a href="{{ url(app()->getLocale()) }}">@lang('shared.home')</a>
+                <a href="{{ url($locale) }}">@lang('shared.home')</a>
             </div>
         </nav>
     </header>
@@ -53,11 +51,11 @@
                     </ul>
                 </div>
             @else
-                <div id="warning-alert" class="alert-warning d-none" style="display: none" role="alert"></div>
+                <div id="warning-alert-r" class="alert-warning d-none" style="display: none" role="alert"></div>
             @endif
             <form method="POST" action="{{ route('register') }}">
                 @csrf
-                <label for="name">@lang('loginPage.name')</label>
+                <label for="register-name">@lang('loginPage.name')</label>
                 <input type="text" id="register-name" name="name" placeholder="@lang('loginPage.insertName')" required>
                 <label for="register-user">@lang('loginPage.userName')</label>
                 <input type="text" id="register-user" name="userName" placeholder="@lang('loginPage.insertUserName')" required>
@@ -65,17 +63,16 @@
                 <input type="email" id="register-email" name="email" placeholder="@lang('loginPage.insertEmail')" required>
                 <label for="register-password">@lang('loginPage.password')</label>
                 <input type="password" id="register-password" name="password" placeholder="@lang('loginPage.insertPassword')" required>
-                <input type="password" id="register-password2" name="password2" placeholder="@lang('loginPage.insertPasswordConfirmation')"
-                    required>
+                <input type="password" id="register-password2" name="password2" placeholder="@lang('loginPage.insertPasswordConfirmation')" required>
                 <button type="submit" id="register-submit">@lang('loginPage.register')</button>
             </form>
         </div>
         <div class="login-container">
             <h2>@lang('loginPage.login')</h2>
             @if ($errors->has("errorLogin"))
-                <div id="warning-alert-l" class="alert-warning" style="display: block" role="alert">{{$errors->first("errorLogin")}}</div>
+                <div id="warning-alert-l" class="alert-warning" style="display: block" role="alert">{{ $errors->first("errorLogin") }}</div>
             @else
-                <div id="warning-alert" class="alert-warning d-none" style="display: none" role="alert"></div>
+                <div id="warning-alert-l" class="alert-warning d-none" style="display: none" role="alert"></div>
             @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -88,6 +85,7 @@
         </div>
     </div>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/loginPage.css') }}">
+    <script src="{{ asset('messages.js') }}"></script>
     <script src="{{ asset('js/loginpage.js') }}"></script>
 </body>
 
