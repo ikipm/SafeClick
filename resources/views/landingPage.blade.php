@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo"></img>
+                <img src="{{ asset('img/logo.webp') }}" alt="Logo"></img>
             </div>
             <div class="language-menu">
                 <div class="current-language">
@@ -94,7 +94,7 @@
     <footer>
         <div class="footer-container">
             <div class="footer-logo">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo">
+                <img src="{{ asset('img/logo.webp') }}" alt="Logo">
             </div>
             <div class="footer-links">
                 <a href="">@lang('shared.home')</a>

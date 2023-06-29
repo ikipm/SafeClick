@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo"></img>
+                <img src="{{ asset('img/logo.webp') }}" alt="Logo"></img>
             </div>
             <div class="language-menu">
                 <div class="current-language">
@@ -52,7 +52,7 @@
                             <div class="card-header">
                                 <h3>Title {{ $i }}</h3>
                             </div>
-                            <img src="{{ asset('img/cybersec.png') }}" alt="Card Image">
+                            <img src="{{ asset('img/cybersec.webp') }}" alt="Card Image">
                             <div class="card-description">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             </div>

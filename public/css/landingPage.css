@@ -15,7 +15,7 @@ header {
 
 .hero-image {
     position: relative;
-    background-image: url("../img/cybersec.png");
+    background-image: url("../img/cybersec.webp");
     background-position: center;
     background-size: cover;
     height: 70vh;
