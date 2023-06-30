@@ -9,34 +9,7 @@
 
 <body>
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="{{ asset('img/logo.webp') }}" alt="Logo"></img>
-            </div>
-            <div class="language-menu">
-                <div class="current-language">
-                    @php
-                        $locale = app()->getLocale();
-                    @endphp
-                    {{ strtoupper($locale) }}
-                </div>
-                <ul class="language-list">
-                    @if ($locale == 'cat')
-                        <li><a href="{{ url('/locale/es/') }}">ES</a></li>
-                        <li><a href="{{ url('/locale/en') }}">EN</a></li>
-                    @elseif ($locale == 'es')
-                        <li><a href="{{ url('/locale/cat') }}">CAT</a></li>
-                        <li><a href="{{ url('/locale/en') }}">EN</a></li>
-                    @elseif ($locale == 'en')
-                        <li><a href="{{ url('/locale/cat') }}">CAT</a></li>
-                        <li><a href="{{ url('/locale/es') }}">ES</a></li>
-                    @endif
-                </ul>
-            </div>
-            <div class="login-button">
-                <a href="/login">@lang('shared.login')</a>
-            </div>
-        </nav>
+        <x-navbar :isLoggedIn="Auth::check()" />
     </header>
 
     <section class="hero-section">
@@ -49,7 +22,7 @@
                     </div>
                 </div>
                 <div class="hero-button-container">
-                    <a href="#" class="hero-button">@lang('landingPage.start')</a>
+                    <a href="/login" class="hero-button">@lang('landingPage.start')</a>
                 </div>
             </div>
         </div>
