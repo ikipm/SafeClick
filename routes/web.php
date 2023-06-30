@@ -29,5 +29,5 @@ Route::group(['middleware' => 'setLocale'], function () {
     Route::view('/', 'landingPage')->name('landingPage');
     Route::view('/login', 'loginPage')->name('loginPage');
     Route::view('/courses', 'courses')->middleware('auth')->name('courses');
-    Route::view('/admin', 'admin')->middleware('auth')->middleware('admin')->name('admin');
+    Route::view('/admin', 'admin')->middleware('admin')->name('admin');
 });
