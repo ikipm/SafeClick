@@ -12,9 +12,7 @@
 }
 
 .card {
-    width: calc(
-        33.33% - 15px
-    );
+    width: calc(33.33% - 15px);
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -38,29 +36,10 @@
     object-fit: cover;
 }
 
-.card-description {
-    padding: 20px;
+.content-text h3 {
+    text-align: center;
+    padding: 40px 0;
 }
-
-.card-description p {
-    margin: 0;
-}
-
-.progress-bar {
-    background-color: #eaeaea;
-    height: 8px;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-top: 20px;
-}
-
-.progress-bar-fill {
-    background-color: #64c97e;
-    height: 100%;
-    width: 50%; /* Adjust the progress width as needed */
-}
-
-/* Dark mode styles */
 
 @media (prefers-color-scheme: dark) {
     .card {
