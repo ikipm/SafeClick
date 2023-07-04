@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 // User system /register and /login (POST) /logout (GET)
 Route::post('/register', [UserController::class, 'register'])->name('register');
+Route::post('/admin/register', [UserController::class, 'adminRegister'])->middleware('admin')->name('admin.register');
+Route::get('/admin/search', [UserController::class, 'adminSearch'])->middleware('admin')->name('admin.search');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -30,4 +32,5 @@ Route::group(['middleware' => 'setLocale'], function () {
     Route::view('/login', 'loginPage')->name('loginPage');
     Route::view('/courses', 'courses')->middleware('auth')->name('courses');
     Route::view('/admin', 'admin')->middleware('admin')->name('admin');
+    Route::view('/admin/users', 'admin.users')->middleware('admin')->name('admin.users');
 });

@@ -24,9 +24,9 @@
     </div>
     @if(Auth::user())
         <div class="admin-button">
-            @if (Auth::user()->admin and !Request::is('admin'))
+            @if (Auth::user()->admin and !Request::is('admin*'))
                 <a href="{{ route('admin') }}">@lang('admin.adminButton')</a>
-            @elseif(Auth::user()->admin and Request::is('admin'))
+            @elseif(Auth::user()->admin and Request::is('admin*'))
                 <a href="/courses">@lang('courses.courses')</a>
             @endif
         </div>
@@ -40,7 +40,7 @@
             @endif
         @elseif(Request::is('login'))
             <a href="/">@lang('shared.home')</a>
-        @elseif(Request::is('courses') or Request::is('admin'))
+        @elseif(Request::is('courses') or Request::is('admin*'))
             <a href="{{ route('logout') }}">{{ Auth::user()->userName }}</a>
         @else
             <a href="/login">@lang('shared.login')</a>

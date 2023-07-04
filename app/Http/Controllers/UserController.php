@@ -49,6 +49,68 @@ class UserController extends Controller
         return redirect("/courses");
     }
 
+    public function adminRegister(Request $request)
+    {
+        // Get the current locale from the session
+        $locale = Session::get('locale', 'cat');
+
+        // Set the locale for the logged-in user
+        app()->setLocale($locale);
+
+        // Check if the "admin" key exists and set a default value if it doesn't
+        $admin = $request->admin;
+        if ($admin == "on") {
+            $admin = true;
+        } else {
+            $admin = false;
+        }
+
+        // Validate user input
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'userName' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+        ], [
+            'userName.unique' => __('loginPage.errorUser'),
+            'email.unique' => __('loginPage.errorEmail'),
+        ]);
+
+        // Create a new user
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'userName' => $validatedData['userName'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'admin' => $admin
+        ]);
+
+        return redirect("/admin/users");
+    }
+
+    public function adminSearch(Request $request)
+    {
+        $query = User::query();
+
+        if ($request->filled('name')) {
+            $name = $request->input('name');
+            $query->where('name', 'like', "%$name%");
+        }
+
+        if ($request->filled('userName')) {
+            $userName = $request->input('userName');
+            $query->where('userName', 'like', "%$userName%");
+        }
+
+        if ($request->filled('email')) {
+            $email = $request->input('email');
+            $query->where('email', 'like', "%$email%");
+        }
+
+        $users = $query->get();
+        return redirect('/admin/users')->with('users', $users);
+    }
+
     /**
      * Log in the user.
      *
@@ -62,7 +124,7 @@ class UserController extends Controller
 
         // Set the locale for the logged-in user
         app()->setLocale($locale);
-        
+
         // Validate user input
         $validatedData = $request->validate([
             'email' => 'required|email',
