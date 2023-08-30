@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const requirements = [
             { regex: /[A-Z]/, message: Lang.get("loginPage.passwordUpper") },
             { regex: /[a-z]/, message: Lang.get("loginPage.passwordLower") },
-            { regex: /[0-9]/, message: Lang.get("loginPage.passwordNumbers") }
+            { regex: /[0-9]/, message: Lang.get("loginPage.passwordNumber") }
         ];
 
         let isValid = true;
