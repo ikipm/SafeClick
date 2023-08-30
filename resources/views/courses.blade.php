@@ -9,28 +9,33 @@
 
 <body>
     <header>
-        <x-navbar/>
+        <x-navbar />
     </header>
 
     <main>
+        @php
+        use App\Models\Course;
+        $courses = Course::all();
+        @endphp
+        
         <section class="cards-section">
             <div class="container">
                 <h2>@lang("courses.courses")</h2>
                 <div class="card-container">
-                    @for ($i = 1; $i <= 10; $i++)
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Title {{ $i }}</h3>
-                            </div>
-                            <img src="{{ asset('img/cybersec.webp') }}" alt="Card Image">
-                            <div class="card-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-bar-fill"></div>
-                            </div>
+                    @foreach ($courses as $course)
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>{{ $course->title }}</h3>
                         </div>
-                    @endfor
+                        <img src="{{ asset('img/cybersec.webp') }}" alt="Card Image">
+                        <div class="card-description">
+                            <p>{{ $course->description }}</p>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill"></div>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
