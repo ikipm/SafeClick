@@ -17,24 +17,24 @@
         use App\Models\Course;
         $courses = Course::all();
         @endphp
-        
+
         <section class="cards-section">
             <div class="container">
                 <h2>@lang("courses.courses")</h2>
                 <div class="card-container">
                     @foreach ($courses as $course)
-                    <div class="card">
+                    <a class="card" href="/courses/{{$course->id}}">
                         <div class="card-header">
                             <h3>{{ $course->title }}</h3>
                         </div>
-                        <img src="{{ asset('img/cybersec.webp') }}" alt="Card Image">
+                        <img src="{{$course->img}}" alt="Card Image">
                         <div class="card-description">
                             <p>{{ $course->description }}</p>
                         </div>
                         <div class="progress-bar">
                             <div class="progress-bar-fill"></div>
                         </div>
-                    </div>
+                    </a>
                     @endforeach
                 </div>
             </div>

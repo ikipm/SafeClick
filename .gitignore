@@ -24,3 +24,6 @@ Homestead.json
 
 # VS Code files
 .vscode
+
+# Specific in this project
+/public/img/courses/*

@@ -10,15 +10,31 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'course-name' => 'required|string|max:255',
-            'course-description' => 'required|string',
+            'course-nameCat' => 'required|string|max:255',
+            'course-nameEs' => 'required|string|max:255',
+            'course-nameEn' => 'required|string|max:255',
+            'course-descriptionCat' => 'required|string',
+            'course-descriptionEs' => 'required|string',
+            'course-descriptionEn' => 'required|string',
+            'course-image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $course = Course::create([
-            'title' => $data['course-name'],
-            'description' => $data['course-description'],
+            'title' => $data['course-nameCat'],
+            'description' => $data['course-descriptionCat'],
             'status' => true,
         ]);
+
+        // Handle image upload
+        if ($request->hasFile('course-image')) {
+            $image = $request->file('course-image');
+            $imageName = $course->id . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/img/courses'), $imageName);
+
+            // Update the course's image field with the image name
+            $course->img = '/img/courses/' . $imageName;
+            $course->save();
+        }
 
         return redirect()->back()->with('success', 'Course created successfully');
     }

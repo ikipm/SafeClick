@@ -23,16 +23,18 @@
                         <h3>Create a course</h3>
                     </div>
                     <div class="content-text">
-                        <form method="POST" action="{{ route('admin.createCourse') }}">
+                        <form method="POST" action="{{ route('admin.createCourse') }}" enctype="multipart/form-data">
                             @csrf
                             @if(session('success'))
-                            <div class="success-message">
-                                {{ session('success') }}
+                            <div id="warning-alert-r" class="alert-warning" style="display: block" role="alert">
+                                <ul>
+                                    <li>{{ session('success')  }}</li>
+                                </ul>
                             </div>
                             @endif
 
                             @if($errors->any())
-                            <div class="error-message">
+                            <div id="warning-alert-r" class="alert-warning" style="display: block" role="alert">
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -40,10 +42,21 @@
                                 </ul>
                             </div>
                             @endif
-                            <label for="course-name">@lang('loginPage.name')</label>
-                            <input type="text" id="course-name" name="course-name" placeholder="Course name" required>
-                            <label for="course-description">Description</label>
-                            <input type="text" id="course-description" name="course-description" placeholder="Course description" required>
+                            <label for="course-nameCat">Name in catalan</label>
+                            <input type="text" id="course-nameCat" name="course-nameCat" placeholder="Course name" required>
+                            <label for="course-nameEs">Name in spanish</label>
+                            <input type="text" id="course-nameEs" name="course-nameEs" placeholder="Course name" required>
+                            <label for="course-nameEn">Name in english</label>
+                            <input type="text" id="course-nameEn" name="course-nameEn" placeholder="Course name" required>
+                            <label for="course-descriptionCat">Description in catalan</label>
+                            <input type="text" id="course-descriptionCat" name="course-descriptionCat" placeholder="Course description" required>
+                            <label for="course-descriptionEs">Description in spanish</label>
+                            <input type="text" id="course-descriptionEs" name="course-descriptionEs" placeholder="Course description" required>
+                            <label for="course-descriptionEn">Description in english</label>
+                            <input type="text" id="course-descriptionEn" name="course-descriptionEn" placeholder="Course description" required>
+                            <label for="course-image">Course Image</label>
+                            <input type="file" id="course-image" name="course-image" accept="image/*" required>
+
                             <button type="submit" id="course-submit">Publish</button>
                         </form>
 
