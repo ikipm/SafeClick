@@ -1,0 +1,77 @@
+/* Course section styles */
+.course-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: 2%;
+}
+
+/* Course card styles */
+.course-card {
+    width: 90%; /* Set your desired width */
+    height: 75%; /* Set your desired height */
+    overflow: hidden; /* Hide overflow content */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Course title styles */
+.course-title {
+    background-color: #64c97e;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.course-title h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Course content styles */
+.course-content {
+    padding: 20px;
+    color: #333333;
+    overflow: auto; /* Enable scrolling for content */
+    height: 100%; /* Fill the container's height */
+}
+
+
+/* Course buttons styles */
+.course-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Adjust button styles */
+.button-prev,
+.button-next {
+    padding: 10px 20px;
+    background-color: #64c97e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+    flex: 1; /* Distribute available space equally */
+    margin: 0 5px; /* Add some spacing between buttons */
+}
+
+.button-prev:hover,
+.button-next:hover {
+    background-color: #4faa63;
+}
+
+.button-prev:active,
+.button-next:active {
+    transform: scale(0.95);
+}
