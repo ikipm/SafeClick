@@ -15,10 +15,17 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
             $table->boolean('status')->default(true);
-            $table->string('img')->nullable(true);
+            $table->string('img')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('course_translations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->string('locale');
+            $table->string('title');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -30,6 +37,7 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('course_translations');
         Schema::dropIfExists('courses');
     }
 }

@@ -13,9 +13,13 @@
     </header>
 
     <main>
+        @php
+        use Illuminate\Support\Facades\Session;
+        $locale = Session::get('locale', 'cat');
+        @endphp
         <section class="cards-section">
             <div class="container">
-                <h2>{{ $course->title }}</h2>
+                <h2>{{ $course->translations->where('locale', $locale)->first()->title }}</h2>
             </div>
         </section>
     </main>

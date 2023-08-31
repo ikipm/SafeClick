@@ -5,9 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+class CourseTranslation extends Model
+{
+    protected $fillable = ['locale', 'title', 'description'];
+}
+
 class Course extends Model
 {
-    protected $fillable = ['title', 'description', 'status', 'img'];
+    protected $fillable = ['status', 'img'];
+
+    public function translations()
+    {
+        return $this->hasMany(CourseTranslation::class);
+    }
 
     public function contents()
     {

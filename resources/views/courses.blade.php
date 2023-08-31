@@ -15,7 +15,9 @@
     <main>
         @php
         use App\Models\Course;
+        use Illuminate\Support\Facades\Session;
         $courses = Course::all();
+        $locale = Session::get('locale', 'cat');
         @endphp
 
         <section class="cards-section">
@@ -25,11 +27,11 @@
                     @foreach ($courses as $course)
                     <a class="card" href="/courses/{{$course->id}}">
                         <div class="card-header">
-                            <h3>{{ $course->title }}</h3>
+                            <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
                         </div>
                         <img src="{{$course->img}}" alt="Card Image">
                         <div class="card-description">
-                            <p>{{ $course->description }}</p>
+                            <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
                         </div>
                         <div class="progress-bar">
                             <div class="progress-bar-fill"></div>

@@ -9,7 +9,7 @@ class CourseController extends Controller
 {
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validatedData = $request->validate([
             'course-nameCat' => 'required|string|max:255',
             'course-nameEs' => 'required|string|max:255',
             'course-nameEn' => 'required|string|max:255',
@@ -20,9 +20,25 @@ class CourseController extends Controller
         ]);
 
         $course = Course::create([
-            'title' => $data['course-nameCat'],
-            'description' => $data['course-descriptionCat'],
             'status' => true,
+        ]);
+
+        $course->translations()->createMany([
+            [
+                'locale' => 'cat',
+                'title' => $validatedData['course-nameCat'],
+                'description' => $validatedData['course-descriptionCat'],
+            ],
+            [
+                'locale' => 'es',
+                'title' => $validatedData['course-nameEs'],
+                'description' => $validatedData['course-descriptionEs'],
+            ],
+            [
+                'locale' => 'en',
+                'title' => $validatedData['course-nameEn'],
+                'description' => $validatedData['course-descriptionEn'],
+            ],
         ]);
 
         // Handle image upload
@@ -41,7 +57,7 @@ class CourseController extends Controller
 
     public function courseInfo($courseId)
     {
-        $course = Course::findOrFail($courseId);
+        $course = Course::with('translations')->findOrFail($courseId);
         return view('courseID', compact('course'));
     }
 }
