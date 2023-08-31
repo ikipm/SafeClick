@@ -13,4 +13,13 @@ return [
     'feedbackTitle' => 'Feedback',
     'feedback' => ' comments to review',
     'adminButton' => 'Admin Dashboard',
+    'courses' => 'Create and edit courses',
+    'course-title-cat' => 'Title in catalan',
+    'course-title-es' => 'Title in spanish',
+    'course-title-en' => 'Title in english',
+    'course-desc-cat' => 'Description in catalan',
+    'course-desc-es' => 'Description in spanish',
+    'course-desc-en' => 'Description in english',
+    'course-image' => 'Upload a course image',
+    'publish' => 'Publish',
 ];

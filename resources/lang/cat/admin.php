@@ -13,4 +13,13 @@ return [
     'feedbackTitle' => 'Feedback',
     'feedback' => ' comentaris a revisar',
     'adminButton' => 'Panell d\'administració',
+    'courses' => 'Crear i editar cursos',
+    'course-title-cat' => 'Titol en català',
+    'course-title-es' => 'Titol en castellà',
+    'course-title-en' => 'Titol en anglés',
+    'course-desc-cat' => 'Descripció en català',
+    'course-desc-es' => 'Descripció en castellà',
+    'course-desc-en' => 'Descripció en anglés',
+    'course-image' => 'Insereix una imatge pel curs',
+    'publish' => 'Publicar',
 ];

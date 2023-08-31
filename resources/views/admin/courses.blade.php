@@ -16,7 +16,7 @@
 
     <main>
         <div class="container">
-            <h2>Courses</h2>
+            <h2>@lang('admin.courses')</h2>
             <div class="card-container">
                 <div class="card">
                     <div class="card-header">
@@ -42,22 +42,21 @@
                                 </ul>
                             </div>
                             @endif
-                            <label for="course-nameCat">Name in catalan</label>
-                            <input type="text" id="course-nameCat" name="course-nameCat" placeholder="Course name" required>
-                            <label for="course-nameEs">Name in spanish</label>
-                            <input type="text" id="course-nameEs" name="course-nameEs" placeholder="Course name" required>
-                            <label for="course-nameEn">Name in english</label>
-                            <input type="text" id="course-nameEn" name="course-nameEn" placeholder="Course name" required>
-                            <label for="course-descriptionCat">Description in catalan</label>
+                            <label for="course-nameCat">@lang('admin.course-title-cat')</label>
+                            <input type="text" id="course-nameCat" name="course-nameCat" placeholder="@lang('admin.course-title-cat')" required>
+                            <label for="course-nameEs">@lang('admin.course-title-es')</label>
+                            <input type="text" id="course-nameEs" name="course-nameEs" placeholder="@lang('admin.course-title-es')" required>
+                            <label for="course-nameEn">@lang('admin.course-title-en')</label>
+                            <input type="text" id="course-nameEn" name="course-nameEn" placeholder="@lang('admin.course-title-en')" required>
+                            <label for="course-descriptionCat">@lang('admin.course-desc-cat')</label>
                             <input type="text" id="course-descriptionCat" name="course-descriptionCat" placeholder="Course description" required>
-                            <label for="course-descriptionEs">Description in spanish</label>
+                            <label for="course-descriptionEs">@lang('admin.course-desc-es')</label>
                             <input type="text" id="course-descriptionEs" name="course-descriptionEs" placeholder="Course description" required>
-                            <label for="course-descriptionEn">Description in english</label>
+                            <label for="course-descriptionEn">@lang('admin.course-desc-en')</label>
                             <input type="text" id="course-descriptionEn" name="course-descriptionEn" placeholder="Course description" required>
-                            <label for="course-image">Course Image</label>
-                            <input type="file" id="course-image" name="course-image" accept="image/*" required>
-
-                            <button type="submit" id="course-submit">Publish</button>
+                            <label for="course-image">@lang('admin.course-image')"</label>
+                            <input type="file" id="course-image" name="course-image" accept="image/*" required><br/>
+                            <button type="submit" id="course-submit">@lang('admin.publish')</button>
                         </form>
 
                     </div>
