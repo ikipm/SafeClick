@@ -33,14 +33,14 @@
     @endif
     <div class="login-button">
         @if (Request::is('/'))
-            @if ($isLoggedIn)
+            @if (Auth::user())
                 <a href="/courses">@lang('shared.courses')</a>
             @else
                 <a href="/login">@lang('shared.login')</a>
             @endif
         @elseif(Request::is('login'))
             <a href="/">@lang('shared.home')</a>
-        @elseif(Request::is('courses') or Request::is('admin*'))
+        @elseif(Request::is('courses*') or Request::is('admin*'))
             <a href="{{ route('logout') }}">{{ Auth::user()->userName }}</a>
         @else
             <a href="/login">@lang('shared.login')</a>
