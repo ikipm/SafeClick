@@ -60,4 +60,36 @@ class CourseController extends Controller
         $course = Course::with('translations')->findOrFail($courseId);
         return view('courseID', compact('course'));
     }
+
+    public function search(Request $request)
+    {
+        $query = Course::query();
+
+        // Check if any search parameters are provided
+        if ($request->has('course-nameCat')) {
+            $query->whereHas('translations', function ($query) use ($request) {
+                $query->where('title', 'like', '%' . $request->input('course-nameCat') . '%');
+            });
+        }
+
+        if ($request->has('course-nameEs')) {
+            $query->whereHas('translations', function ($query) use ($request) {
+                $query->where('title', 'like', '%' . $request->input('course-nameEs') . '%');
+            });
+        }
+
+        if ($request->has('course-nameEn')) {
+            $query->whereHas('translations', function ($query) use ($request) {
+                $query->where('title', 'like', '%' . $request->input('course-nameEn') . '%');
+            });
+        }
+
+        if ($request->has('id')) {
+            $query->where('id', $request->input('id'));
+        }
+
+        $courses = $query->get();
+
+        return redirect('/admin/courses')->with('courses', $courses);
+    }
 }

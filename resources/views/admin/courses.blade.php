@@ -15,6 +15,9 @@
     <x-admin-side-bar />
 
     <main>
+        @php
+        $courses = session('courses');
+        @endphp
         <div class="container">
             <h2>@lang('admin.courses')</h2>
             <div class="card-container">
@@ -55,11 +58,46 @@
                             <label for="course-descriptionEn">@lang('admin.course-desc-en')</label>
                             <input type="text" id="course-descriptionEn" name="course-descriptionEn" placeholder="Course description" required>
                             <label for="course-image">@lang('admin.course-image')"</label>
-                            <input type="file" id="course-image" name="course-image" accept="image/*" required><br/>
+                            <input type="file" id="course-image" name="course-image" accept="image/*" required><br />
                             <button type="submit" id="course-submit">@lang('admin.publish')</button>
                         </form>
-
                     </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Search for a course</h3>
+                    </div>
+                    <div class="content-text">
+                        <form method="GET" action="{{ route('admin.searchCourse') }}">
+                            @csrf
+                            <label for="course-nameCat">@lang('admin.course-title-cat')</label>
+                            <input type="text" id="course-nameCat" name="course-nameCat" placeholder="@lang('admin.course-title-cat')">
+                            <label for="course-nameEs">@lang('admin.course-title-es')</label>
+                            <input type="text" id="course-nameEs" name="course-nameEs" placeholder="@lang('admin.course-title-es')">
+                            <label for="course-nameEn">@lang('admin.course-title-en')</label>
+                            <input type="text" id="course-nameEn" name="course-nameEn" placeholder="@lang('admin.course-title-en')">
+                            <label for="id">ID:</label>
+                            <input type="text" id="id" name="id" placeholder="Course ID">
+                            <button type="submit" id="search">Search</button>
+                        </form>
+                    </div>
+                    @if($courses)
+                    <div class="result">
+                        <ul class="course-list">
+                            @isset($courses)
+                            @foreach ($courses as $course)
+                            <li>
+                                <span class="course-title">{{ $course->translations->where('locale', app()->getLocale())->first()->title }} | ID: {{ $course->id }}</span>
+                                <div class="course-buttons">
+                                    <a class="course-button" href="/admin/user/info/">Info</a>
+                                    <a class="course-button" href="/admin/user/edit/">Edit</a>
+                                </div>
+                            </li>
+                            @endforeach
+                            @endisset
+                        </ul>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -73,6 +111,6 @@
     </script>
     <script src="{{ asset('js/loginpage.js') }}"></script>
     <script src="{{ asset('js/sideBar.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/users.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/courses.css') }}">
 
 </html>

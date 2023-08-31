@@ -7,7 +7,7 @@
         <a href="" class="sidebar-button">@lang('admin.excercisesTitle')</a>
         <a href="" class="sidebar-button">@lang('admin.questionsTitle')</a>
         <a href="" class="sidebar-button">@lang('admin.feedbackTitle')</a>
-        <a href="admin/courses" class="sidebar-button">@lang('admin.courses')</a>
+        <a href="/admin/courses" class="sidebar-button">@lang('admin.courses')</a>
     </div>
 
     <button class="sidebar-toggle">
