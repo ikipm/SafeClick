@@ -105,7 +105,6 @@
         // Pass the locale value to JavaScript
         var currentLocale = "{{ app()->getLocale() }}";
     </script>
-    <script src="{{ asset('js/loginpage.js') }}"></script>
     <script src="{{ asset('js/sideBar.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/courses.css') }}">
 

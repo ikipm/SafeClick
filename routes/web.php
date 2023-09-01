@@ -23,6 +23,7 @@ Route::get('/admin/search', [UserController::class, 'adminSearch'])->middleware(
 Route::post('/admin/courses/create', [CourseController::class, 'store'])->middleware('auth')->middleware('admin')->name('admin.createCourse');
 Route::post('admin/create-course', [CourseController::class, 'store'])->middleware('auth')->middleware('admin')->name('admin.createCourse');
 Route::get('admin/search-course', [CourseController::class, 'search'])->middleware('auth')->middleware('admin')->name('admin.searchCourse');
+Route::post('admin/courses/edit/{id}', [CourseController::class, 'update'])->middleware('auth')->middleware('admin')->name('admin.editCourse');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -37,4 +38,5 @@ Route::group(['middleware' => 'setLocale'], function () {
     Route::view('/admin', 'admin')->middleware('auth')->middleware('admin')->name('admin');
     Route::view('/admin/users', 'admin.users')->middleware('auth')->middleware('admin')->name('admin.users');
     Route::view('/admin/courses', 'admin.courses')->middleware('auth')->middleware('admin')->name('admin.courses');
+    Route::get('/admin/courses/edit/{courseId}', [CourseController::class, 'courseEditInfo'])->middleware('auth')->middleware('admin')->name('admin.coursesEdit');
 });

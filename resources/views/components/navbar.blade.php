@@ -34,7 +34,7 @@
     <div class="login-button">
         @if (Request::is('/'))
             @if (Auth::user())
-                <a href="/courses">@lang('shared.courses')</a>
+                <a href="/courses">@lang('courses.courses')</a>
             @else
                 <a href="/login">@lang('shared.login')</a>
             @endif

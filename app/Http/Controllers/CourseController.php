@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -81,5 +82,60 @@ class CourseController extends Controller
         $courses = $query->get();
 
         return redirect('/admin/courses')->with('courses', $courses);
+    }
+
+    public function courseEditInfo($courseId)
+    {
+        $course = Course::with('translations')->findOrFail($courseId);
+        return view('admin.coursesEdit', compact('course'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Find the course by its ID
+        $course = Course::findOrFail($id);
+
+        // Validate the updated data (similar to the create method)
+        $validatedData = $request->validate([
+            'course-nameCat' => 'required|string|max:255',
+            'course-nameEs' => 'required|string|max:255',
+            'course-nameEn' => 'required|string|max:255',
+            'course-descriptionCat' => 'required|string',
+            'course-descriptionEs' => 'required|string',
+            'course-descriptionEn' => 'required|string',
+            'course-image' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // Update the course's translations
+        $course->translations()->where('locale', 'cat')->update([
+            'title' => $validatedData['course-nameCat'],
+            'description' => $validatedData['course-descriptionCat'],
+        ]);
+
+        $course->translations()->where('locale', 'es')->update([
+            'title' => $validatedData['course-nameEs'],
+            'description' => $validatedData['course-descriptionEs'],
+        ]);
+
+        $course->translations()->where('locale', 'en')->update([
+            'title' => $validatedData['course-nameEn'],
+            'description' => $validatedData['course-descriptionEn'],
+        ]);
+
+        // Handle image upload if provided
+        if ($request->hasFile('course-image')) {
+            File::delete($course->img);
+            $image = $request->file('course-image');
+            $imageName = $course->id . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/img/courses'), $imageName);
+
+            // Update the course's image field with the new image name
+            $course->img = '/img/courses/' . $imageName;
+        }
+
+        // Save the course
+        $course->save();
+
+        return redirect()->back()->with('success', 'Course updated successfully');
     }
 }
