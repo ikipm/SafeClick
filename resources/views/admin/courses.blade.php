@@ -57,7 +57,7 @@
                             <input type="text" id="course-descriptionEs" name="course-descriptionEs" placeholder="@lang('admin.course-desc-es')" required>
                             <label for="course-descriptionEn">@lang('admin.course-desc-en')</label>
                             <input type="text" id="course-descriptionEn" name="course-descriptionEn" placeholder="@lang('admin.course-desc-en')" required>
-                            <label for="course-image">@lang('admin.course-image')"</label>
+                            <label for="course-image">@lang('admin.course-image')</label>
                             <input type="file" id="course-image" name="course-image" accept="image/*" required><br />
                             <button type="submit" id="course-submit">@lang('admin.publish')</button>
                         </form>
@@ -65,16 +65,16 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h3>Search for a course</h3>
+                        <h3>@lang('admin.search-course')</h3>
                     </div>
                     <div class="content-text">
                         <form method="GET" action="{{ route('admin.searchCourse') }}">
                             @csrf
                             <label for="course-name">@lang('admin.course-name')</label>
-                            <input type="text" id="course-name" name="course-name" placeholder="@lang('admin.course-name)">
+                            <input type="text" id="course-name" name="course-name" placeholder="@lang('admin.course-name')">
                             <label for="id">ID:</label>
                             <input type="text" id="id" name="id" placeholder="Course ID">
-                            <button type="submit" id="search">Search</button>
+                            <button type="submit" id="search">@lang('admin.search')</button>
                         </form>
                     </div>
                     @if($courses)
@@ -85,8 +85,8 @@
                             <li>
                                 <span class="course-title">{{ $course->translations->where('locale', app()->getLocale())->first()->title }} | ID: {{ $course->id }}</span>
                                 <div class="course-buttons">
-                                    <a class="course-button-notworking">Info</a>
-                                    <a class="course-button" href="/admin/courses/edit/{{$course->id}}">Edit</a>
+                                    <a class="course-button-notworking">@lang('admin.info')</a>
+                                    <a class="course-button" href="/admin/courses/edit/{{$course->id}}">@lang('admin.edit')</a>
                                 </div>
                             </li>
                             @endforeach

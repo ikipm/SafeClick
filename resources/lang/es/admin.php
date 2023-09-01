@@ -22,4 +22,10 @@ return [
     'course-desc-en' => 'Descripción en inglés',
     'course-image' => 'Inserta una imagen para el curso',
     'publish' => 'Publicar',
+    'course-name' => 'Inserta el nombre del curso',
+    'search' => 'Busca',
+    'search-course' => 'Busca un curso',
+    'search-user' => 'Busca un usuario',
+    'info' => 'Información',
+    'edit' => 'Editar',
 ];

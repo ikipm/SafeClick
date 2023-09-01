@@ -64,7 +64,7 @@
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h3>Search for an user</h3>
+                        <h3>@lang('admin.search-user')</h3>
                     </div>
                     <div class="content-text">
                         <form method="GET" action="{{ route('admin.search') }}">
@@ -75,7 +75,7 @@
                             <input type="text" id="register-user" name="userName" placeholder="@lang('loginPage.insertUserName')">
                             <label for="register-email">@lang('loginPage.email')</label>
                             <input type="email" id="register-email" name="email" placeholder="@lang('loginPage.insertEmail')">
-                            <button type="submit" id="register-submit">Search</button>
+                            <button type="submit" id="register-submit">@lang('admin.search')</button>
                         </form>
                     </div>
                     @if($users)
@@ -85,8 +85,8 @@
                                     <li>
                                         <span class="user-name">{{ $user->name}} | {{ $user->userName }}</span>
                                         <div class="user-buttons">
-                                            <a class="user-button" href="/admin/user/info/{{$user->id}}">Info</a>
-                                            <a class="user-button" href="/admin/user/edit/{{$user->id}}">Edit</a>
+                                            <a class="user-button" href="/admin/user/info/{{$user->id}}">@lang('admin.info')</a>
+                                            <a class="user-button" href="/admin/user/edit/{{$user->id}}">@lang('admin.edit')</a>
                                         </div>
                                     </li>
                                 @endforeach
