@@ -28,6 +28,15 @@ class CreateCoursesTable extends Migration
             $table->text('description');
             $table->timestamps();
         });
+
+        Schema::create('course_contents', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->string('locale');
+            $table->string('title');
+            $table->text('content');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -38,6 +47,7 @@ class CreateCoursesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('course_translations');
+        Schema::dropIfExists('course_content');
         Schema::dropIfExists('courses');
     }
 }

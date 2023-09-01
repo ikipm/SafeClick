@@ -87,6 +87,7 @@
                                 <div class="course-buttons">
                                     <a class="course-button-notworking">@lang('admin.info')</a>
                                     <a class="course-button" href="/admin/courses/edit/{{$course->id}}">@lang('admin.edit')</a>
+                                    <a class="course-button" href="/admin/courses/content/{{$course->id}}">@lang('admin.content')</a>
                                 </div>
                             </li>
                             @endforeach

@@ -56,6 +56,52 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Course created successfully');
     }
 
+    public function courseInfoContent($courseId)
+    {
+        $course = Course::with('translations')->findOrFail($courseId);
+        return view('admin.coursesContent', compact('course'));
+    }
+
+    public function courseInfoAddContent($courseId)
+    {
+        $course = Course::with('translations')->findOrFail($courseId);
+        return view('admin.coursesAddContent', compact('course'));
+    }
+
+    public function storeContent(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'title-cat' => 'required|string|max:255',
+            'title-es' => 'required|string|max:255',
+            'title-en' => 'required|string|max:255',
+            'content-cat' => 'required|string',
+            'content-es' => 'required|string',
+            'content-en' => 'required|string',
+        ]);
+
+        $course = Course::findOrFail($id);
+
+        $course->contents()->createMany([
+            [
+                'locale' => 'cat',
+                'title' => $validatedData['title-cat'],
+                'content' => $validatedData['content-cat'],
+            ],
+            [
+                'locale' => 'es',
+                'title' => $validatedData['title-es'],
+                'content' => $validatedData['content-es'],
+            ],
+            [
+                'locale' => 'en',
+                'title' => $validatedData['title-en'],
+                'content' => $validatedData['content-en'],
+            ],
+        ]);
+
+        return redirect()->back()->with('success', 'Content added');
+    }
+
     public function courseInfo($courseId)
     {
         $course = Course::with('translations')->findOrFail($courseId);
@@ -90,7 +136,7 @@ class CourseController extends Controller
         return view('admin.coursesEdit', compact('course'));
     }
 
-    public function update(Request $request, $id)
+    public function updateCourseTitle(Request $request, $id)
     {
         // Find the course by its ID
         $course = Course::findOrFail($id);

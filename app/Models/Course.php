@@ -10,6 +10,11 @@ class CourseTranslation extends Model
     protected $fillable = ['locale', 'title', 'description'];
 }
 
+class CourseContent extends Model
+{
+    protected $fillable = ['locale', 'title', 'content'];
+}
+
 class Course extends Model
 {
     protected $fillable = ['status', 'img'];

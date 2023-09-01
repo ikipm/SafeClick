@@ -3,6 +3,7 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\UserController;
+use App\Models\CourseContent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,8 @@ Route::get('/admin/search', [UserController::class, 'adminSearch'])->middleware(
 Route::post('/admin/courses/create', [CourseController::class, 'store'])->middleware('auth')->middleware('admin')->name('admin.createCourse');
 Route::post('admin/course/create', [CourseController::class, 'store'])->middleware('auth')->middleware('admin')->name('admin.createCourse');
 Route::get('admin/course/search', [CourseController::class, 'search'])->middleware('auth')->middleware('admin')->name('admin.searchCourse');
-Route::post('admin/courses/edit/{id}', [CourseController::class, 'update'])->middleware('auth')->middleware('admin')->name('admin.editCourse');
+Route::post('admin/courses/edit/{id}', [CourseController::class, 'updateCourseTitle'])->middleware('auth')->middleware('admin')->name('admin.editCourse');
+Route::post('admin/courses/content/add/{id}', [CourseController::class, 'storeContent'])->middleware('auth')->middleware('admin')->name('admin.addContent');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -39,4 +41,6 @@ Route::group(['middleware' => 'setLocale'], function () {
     Route::view('/admin/users', 'admin.users')->middleware('auth')->middleware('admin')->name('admin.users');
     Route::view('/admin/courses', 'admin.courses')->middleware('auth')->middleware('admin')->name('admin.courses');
     Route::get('/admin/courses/edit/{courseId}', [CourseController::class, 'courseEditInfo'])->middleware('auth')->middleware('admin')->name('admin.coursesEdit');  // This view is in Course controller
+    Route::get('/admin/courses/content/{courseId}', [CourseController::class, 'courseInfoContent'])->middleware('auth')->middleware('admin')->name('admin.coursesContent');
+    Route::get('/admin/courses/content/add/{courseId}', [CourseController::class, 'courseInfoAddContent'])->middleware('auth')->middleware('admin')->name('admin.coursesAddContent');
 });

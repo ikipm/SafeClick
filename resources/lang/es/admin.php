@@ -28,4 +28,5 @@ return [
     'search-user' => 'Busca un usuario',
     'info' => 'Información',
     'edit' => 'Editar',
+    'content' => 'Contenido',
 ];
