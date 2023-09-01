@@ -81,31 +81,41 @@ class CourseController extends Controller
 
         $course = Course::findOrFail($id);
 
+        $content_id = ($course->contents()->latest()->first()->content_id ?? 0) + 1;
+
         $course->contents()->createMany([
             [
                 'locale' => 'cat',
                 'title' => $validatedData['title-cat'],
                 'content' => $validatedData['content-cat'],
+                'content_id' => $content_id,
             ],
             [
                 'locale' => 'es',
                 'title' => $validatedData['title-es'],
                 'content' => $validatedData['content-es'],
+                'content_id' => $content_id,
             ],
             [
                 'locale' => 'en',
                 'title' => $validatedData['title-en'],
                 'content' => $validatedData['content-en'],
+                'content_id' => $content_id,
             ],
         ]);
 
         return redirect()->back()->with('success', 'Content added');
     }
 
-    public function courseInfo($courseId)
+
+    public function courseInfo($courseId, $contentId)
     {
-        $course = Course::with('translations')->findOrFail($courseId);
-        return view('courseID', compact('course'));
+        // Retrieve the course
+        $course = Course::findOrFail($courseId);
+
+        $content = $course->contents()->where('content_id', $contentId);
+
+        return view('courseID', compact('content'));
     }
 
     public function search(Request $request)

@@ -5,6 +5,9 @@
     <title>@lang('shared.title')</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/shared.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include SimpleMDE CSS and JavaScript -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 </head>
 
 <body>
@@ -44,17 +47,17 @@
                             </div>
                             @endif
                             <label for="title-cat">Title in catalan</label>
-                            <input type="text" id="title-cat" name="title-cat" placeholder="Title in catalan"  required>
+                            <input type="text" id="title-cat" name="title-cat" placeholder="Title in catalan" required>
                             <label for="title-es">Title in spanish</label>
                             <input type="text" id="title-es" name="title-es" placeholder="Title in spanish" required>
                             <label for="title-en">Title in english</label>
                             <input type="text" id="title-en" name="title-en" placeholder="Title in english" required>
                             <label for="content-cat">Content in catalan</label>
-                            <input type="text" id="content-cat" name="content-cat" placeholder="Content in catalan" required>
+                            <textarea class="markdown-editor" id="content-cat" name="content-cat" placeholder="Content in catalan"></textarea>
                             <label for="content-es">Content in spanish</label>
-                            <input type="text" id="content-es" name="content-es" placeholder="Content in spanish" required>
+                            <textarea class="markdown-editor" id="content-es" name="content-es" placeholder="Content in spanish"></textarea>
                             <label for="content-en">Content in english</label>
-                            <input type="text" id="content-en" name="content-en" placeholder="Content in english" required>
+                            <textarea class="markdown-editor" id="content-en" name="content-en" placeholder="Content in english"></textarea>
                             <button type="submit" id="course-submit">@lang('admin.publish')</button>
                         </form>
                     </div>
@@ -70,6 +73,16 @@
     </script>
     <script src="{{ asset('js/sideBar.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/courses.css') }}">
+
+    <script>
+        // Initialize SimpleMDE for each textarea with the "markdown-editor" class
+        var editors = document.querySelectorAll('.markdown-editor');
+        editors.forEach(function(editor) {
+            new SimpleMDE({
+                element: editor
+            });
+        });
+    </script>
 </body>
 
 </html>

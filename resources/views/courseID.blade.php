@@ -12,14 +12,19 @@
         <x-navbar />
     </header>
     <main>
+        @php
+        use Illuminate\Support\Facades\Session;
+        $locale = Session::get('locale', 'cat');
+        $content = $content->where('locale', $locale)->first();
+        @endphp
         <section class="course-section">
             <div class="course-card">
                 <div class="card-header">
-                    <h1>Title</h1>
+                    <h1>{{$content->title}}</h1>
                 </div>
                 <div class="course-content">
                     <p>
-                        <!--content-->
+                        {{$content->content}}
                     </p>
                 </div>
                 <div class="course-buttons">

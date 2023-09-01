@@ -32,11 +32,13 @@ class CreateCoursesTable extends Migration
         Schema::create('course_contents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->integer('content_id');
             $table->string('locale');
             $table->string('title');
             $table->text('content');
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -46,8 +48,9 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
+        // Drop the trigger and then the tables
         Schema::dropIfExists('course_translations');
-        Schema::dropIfExists('course_content');
+        Schema::dropIfExists('course_contents');
         Schema::dropIfExists('courses');
     }
 }

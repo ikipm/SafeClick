@@ -12,7 +12,8 @@ class CourseTranslation extends Model
 
 class CourseContent extends Model
 {
-    protected $fillable = ['locale', 'title', 'content'];
+    protected $fillable = ['locale', 'title', 'content', 'content_id'];
+
 }
 
 class Course extends Model
