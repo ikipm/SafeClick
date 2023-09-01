@@ -52,11 +52,11 @@
                             <label for="course-nameEn">@lang('admin.course-title-en')</label>
                             <input type="text" id="course-nameEn" name="course-nameEn" placeholder="@lang('admin.course-title-en')" required>
                             <label for="course-descriptionCat">@lang('admin.course-desc-cat')</label>
-                            <input type="text" id="course-descriptionCat" name="course-descriptionCat" placeholder="Course description" required>
+                            <input type="text" id="course-descriptionCat" name="course-descriptionCat" placeholder="@lang('admin.course-desc-cat')" required>
                             <label for="course-descriptionEs">@lang('admin.course-desc-es')</label>
-                            <input type="text" id="course-descriptionEs" name="course-descriptionEs" placeholder="Course description" required>
+                            <input type="text" id="course-descriptionEs" name="course-descriptionEs" placeholder="@lang('admin.course-desc-es')" required>
                             <label for="course-descriptionEn">@lang('admin.course-desc-en')</label>
-                            <input type="text" id="course-descriptionEn" name="course-descriptionEn" placeholder="Course description" required>
+                            <input type="text" id="course-descriptionEn" name="course-descriptionEn" placeholder="@lang('admin.course-desc-en')" required>
                             <label for="course-image">@lang('admin.course-image')"</label>
                             <input type="file" id="course-image" name="course-image" accept="image/*" required><br />
                             <button type="submit" id="course-submit">@lang('admin.publish')</button>
@@ -70,12 +70,8 @@
                     <div class="content-text">
                         <form method="GET" action="{{ route('admin.searchCourse') }}">
                             @csrf
-                            <label for="course-nameCat">@lang('admin.course-title-cat')</label>
-                            <input type="text" id="course-nameCat" name="course-nameCat" placeholder="@lang('admin.course-title-cat')">
-                            <label for="course-nameEs">@lang('admin.course-title-es')</label>
-                            <input type="text" id="course-nameEs" name="course-nameEs" placeholder="@lang('admin.course-title-es')">
-                            <label for="course-nameEn">@lang('admin.course-title-en')</label>
-                            <input type="text" id="course-nameEn" name="course-nameEn" placeholder="@lang('admin.course-title-en')">
+                            <label for="course-name">@lang('admin.course-name')</label>
+                            <input type="text" id="course-name" name="course-name" placeholder="@lang('admin.course-name)">
                             <label for="id">ID:</label>
                             <input type="text" id="id" name="id" placeholder="Course ID">
                             <button type="submit" id="search">Search</button>
@@ -89,8 +85,8 @@
                             <li>
                                 <span class="course-title">{{ $course->translations->where('locale', app()->getLocale())->first()->title }} | ID: {{ $course->id }}</span>
                                 <div class="course-buttons">
-                                    <a class="course-button" href="/admin/user/info/">Info</a>
-                                    <a class="course-button" href="/admin/user/edit/">Edit</a>
+                                    <a class="course-button-notworking">Info</a>
+                                    <a class="course-button" href="/admin/courses/edit/{{$course->id}}">Edit</a>
                                 </div>
                             </li>
                             @endforeach

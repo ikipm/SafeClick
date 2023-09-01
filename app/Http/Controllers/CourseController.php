@@ -66,25 +66,15 @@ class CourseController extends Controller
         $query = Course::query();
 
         // Check if any search parameters are provided
-        if ($request->has('course-nameCat')) {
-            $query->whereHas('translations', function ($query) use ($request) {
-                $query->where('title', 'like', '%' . $request->input('course-nameCat') . '%');
+        if ($request->input('course-name') != null) {
+            $courseName = $request->input('course-name');
+            // Use whereHas to filter courses based on translations
+            $query->whereHas('translations', function ($query) use ($courseName) {
+                $query->where('title', 'like', "%$courseName%");
             });
         }
 
-        if ($request->has('course-nameEs')) {
-            $query->whereHas('translations', function ($query) use ($request) {
-                $query->where('title', 'like', '%' . $request->input('course-nameEs') . '%');
-            });
-        }
-
-        if ($request->has('course-nameEn')) {
-            $query->whereHas('translations', function ($query) use ($request) {
-                $query->where('title', 'like', '%' . $request->input('course-nameEn') . '%');
-            });
-        }
-
-        if ($request->has('id')) {
+        if ($request->input('id') != null) {
             $query->where('id', $request->input('id'));
         }
 
