@@ -29,4 +29,11 @@ return [
     'info' => 'Informació',
     'edit' => 'Editar',
     'content' => 'Contingut',
+    'create-user' => 'Crea un usuari',
+    'create-course' => 'Crea un curs',
+    'course-id' => 'Id del curs',
+    'add-content' => 'Afegir contingut',
+    'content-cat' => 'Contingut en català',
+    'content-es' => 'Contingut en castellà',
+    'content-en' => 'Contingut en anglés',
 ];

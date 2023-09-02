@@ -21,11 +21,11 @@
         @endphp
 
         <div class="container">
-            <h2>Users</h2>
+            <h2>@lang('admin.usersTitle')</h2>
             <div class="card-container">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Create a user</h3>
+                        <h3>@lang('admin.create-user')</h3>
                     </div>
                     <div class="content-text">
                         @if ($errors->any() && !$errors->has('errorLogin'))

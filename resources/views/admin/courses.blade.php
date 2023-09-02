@@ -23,7 +23,7 @@
             <div class="card-container">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Create a course</h3>
+                        <h3>@lang('admin.create-course')</h3>
                     </div>
                     <div class="content-text">
                         <form method="POST" action="{{ route('admin.createCourse') }}" enctype="multipart/form-data">
@@ -73,7 +73,7 @@
                             <label for="course-name">@lang('admin.course-name')</label>
                             <input type="text" id="course-name" name="course-name" placeholder="@lang('admin.course-name')">
                             <label for="id">ID:</label>
-                            <input type="text" id="id" name="id" placeholder="Course ID">
+                            <input type="text" id="id" name="id" placeholder="@lang('admin.course-id')">
                             <button type="submit" id="search">@lang('admin.search')</button>
                         </form>
                     </div>

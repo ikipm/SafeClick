@@ -18,12 +18,16 @@
     <x-admin-side-bar />
 
     <main>
+        @php
+        use Illuminate\Support\Facades\Session;
+        $locale = Session::get('locale', 'cat');
+        @endphp
         <div class="container">
-            <h2>Add Content</h2>
+            <h2>@lang('admin.add-content')</h2>
             <div class="card-container">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Add Content</h3>
+                        <h3>{{$course->translations->where('locale', $locale)->first()->title}}</h3>
                     </div>
                     <div class="content-text">
                         <form method="POST" action="{{ route('admin.addContent', ['id' => $course->id]) }}" enctype="multipart/form-data">
@@ -46,18 +50,18 @@
                                 </ul>
                             </div>
                             @endif
-                            <label for="title-cat">Title in catalan</label>
-                            <input type="text" id="title-cat" name="title-cat" placeholder="Title in catalan" required>
-                            <label for="title-es">Title in spanish</label>
-                            <input type="text" id="title-es" name="title-es" placeholder="Title in spanish" required>
-                            <label for="title-en">Title in english</label>
-                            <input type="text" id="title-en" name="title-en" placeholder="Title in english" required>
-                            <label for="content-cat">Content in catalan</label>
-                            <textarea class="markdown-editor" id="content-cat" name="content-cat" placeholder="Content in catalan"></textarea>
-                            <label for="content-es">Content in spanish</label>
-                            <textarea class="markdown-editor" id="content-es" name="content-es" placeholder="Content in spanish"></textarea>
-                            <label for="content-en">Content in english</label>
-                            <textarea class="markdown-editor" id="content-en" name="content-en" placeholder="Content in english"></textarea>
+                            <label for="title-cat">@lang('admin.course-title-cat')</label>
+                            <input type="text" id="title-cat" name="title-cat" placeholder="@lang('admin.course-title-cat')" required>
+                            <label for="title-es">@lang('admin.course-title-es')</label>
+                            <input type="text" id="title-es" name="title-es" placeholder="@lang('admin.course-title-es')" required>
+                            <label for="title-en">@lang('admin.course-title-en')</label>
+                            <input type="text" id="title-en" name="title-en" placeholder="@lang('admin.course-title-en')" required>
+                            <label for="content-cat">@lang('admin.content-cat')</label>
+                            <textarea class="markdown-editor" id="content-cat" name="content-cat" placeholder="@lang('admin.content-cat')"></textarea>
+                            <label for="content-es">@lang('admin.content-es')</label>
+                            <textarea class="markdown-editor" id="content-es" name="content-es" placeholder="@lang('admin.content-es')"></textarea>
+                            <label for="content-en">@lang('admin.content-en')</label>
+                            <textarea class="markdown-editor" id="content-en" name="content-en" placeholder="@lang('admin.content-en')"></textarea>
                             <button type="submit" id="course-submit">@lang('admin.publish')</button>
                         </form>
                     </div>

@@ -20,11 +20,11 @@
         $locale = Session::get('locale', 'cat');
         @endphp
         <div class="container">
-            <h2>Users</h2>
+            <h2>@lang('admin.content')</h2>
             <div class="card-container">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Create a user</h3>
+                        <h3>{{$course->translations->where('locale', $locale)->first()->title}}</h3>
                     </div>
                     <div class="content-text">
                         <ul class="content-list">
