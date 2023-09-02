@@ -33,7 +33,7 @@
                     @if($content->content_id !== 1)
                     <a href="/courses/{{$content->course_id}}/{{$content->content_id - 1}}" class="button-prev">&#8592; @lang('courses.previous')</a>
                     @endif
-                    @if($content->content_id !== $content->count() / 3)
+                    @if($content->content_id !== $course->contents->count() / 3)
                     <a href="/courses/{{$content->course_id}}/{{$content->content_id + 1}}" class="button-next">@lang('courses.next') &#8594;</a>
                     @endif
                 </div>

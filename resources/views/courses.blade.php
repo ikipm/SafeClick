@@ -27,14 +27,10 @@
                     ->where('course_id', $course->id)
                     ->first()->last_content_id ?? 0;
 
-
+                    if ($course->contents->count() !== 0) {
                     $totalContents = $course->contents->count() / 3;
                     $percentageCompleted = ($userProgress / $totalContents) * 100;
-                    if ($userProgress < $totalContents) {
-                        $userProgress += 1;
-                    }
-                    @endphp
-                    <a class="card" href="/courses/{{$course->id}}/{{$userProgress}}">
+                    if ($userProgress < $totalContents) { $userProgress +=1; } } else { $percentageCompleted=100; } @endphp @if ($userProgress==0) <a class="card" style="opacity: 0.5;">
                         <div class="card-header">
                             <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
                         </div>
@@ -45,8 +41,22 @@
                         <div class="progress-bar">
                             <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
                         </div>
-                    </a>
-                    @endforeach
+                        </a>
+                        @else
+                        <a class="card" href="/courses/{{$course->id}}/{{$userProgress}}">
+                            <div class="card-header">
+                                <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
+                            </div>
+                            <img src="{{$course->img}}" alt="Card Image">
+                            <div class="card-description">
+                                <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
+                            </div>
+                        </a>
+                        @endif
+                        @endforeach
                 </div>
             </div>
         </section>

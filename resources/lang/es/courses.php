@@ -2,6 +2,6 @@
 
 return [
     'courses' => 'Cursos',
-    'previous' => 'Tornar',
-    'next' => 'Següent',
+    'previous' => 'Volver',
+    'next' => 'Siguiente',
 ];

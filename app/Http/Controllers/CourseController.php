@@ -143,7 +143,7 @@ class CourseController extends Controller
 
         $content = $course->contents()->where('content_id', $contentId);
 
-        return view('courseID', compact('content'));
+        return view('courseID', compact('course', 'content'));
     }
 
     public function search(Request $request)
