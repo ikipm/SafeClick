@@ -54,7 +54,8 @@
 
 /* Adjust button styles */
 .button-prev,
-.button-next {
+.button-next,
+.course-buttons a {
     padding: 10px 20px;
     background-color: #64c97e;
     color: white;
@@ -65,14 +66,12 @@
     transition: background-color 0.3s, transform 0.3s;
     flex: 1; /* Distribute available space equally */
     margin: 0 5px; /* Add some spacing between buttons */
+    text-align: center; /* Center text horizontally */
+    text-decoration: none; /* Remove default underline */
 }
 
 .button-prev:hover,
-.button-next:hover {
+.button-next:hover,
+.course-buttons a:hover {
     background-color: #4faa63;
-}
-
-.button-prev:active,
-.button-next:active {
-    transform: scale(0.95);
 }

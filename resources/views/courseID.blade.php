@@ -30,8 +30,12 @@
                     </p>
                 </div>
                 <div class="course-buttons">
-                    <button class="button-prev">&#8592; @lang('courses.previous')</button>
-                    <button class="button-next">@lang('courses.next') &#8594;</button>
+                    @if($content->content_id !== 1)
+                    <a href="/courses/{{$content->course_id}}/{{$content->content_id - 1}}" class="button-prev">&#8592; @lang('courses.previous')</a>
+                    @endif
+                    @if($content->content_id !== $content->count() / 3)
+                        <a href="/courses/{{$content->course_id}}/{{$content->content_id + 1}}" class="button-next">@lang('courses.next') &#8594;</a>
+                    @endif
                 </div>
             </div>
         </section>

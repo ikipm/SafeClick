@@ -59,7 +59,6 @@
 .progress-bar-fill {
     background-color: #64c97e;
     height: 100%;
-    width: 50%; /* Adjust the progress width as needed */
 }
 
 /* Dark mode styles */

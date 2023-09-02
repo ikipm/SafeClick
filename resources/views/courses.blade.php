@@ -14,10 +14,7 @@
 
     <main>
         @php
-        use App\Models\Course;
-        use Illuminate\Support\Facades\Session;
-        $courses = Course::all();
-        $locale = Session::get('locale', 'cat');
+        use App\Models\UserCourseProgress;
         @endphp
 
         <section class="cards-section">
@@ -25,7 +22,19 @@
                 <h2>@lang("courses.courses")</h2>
                 <div class="card-container">
                     @foreach ($courses as $course)
-                    <a class="card" href="/courses/{{$course->id}}">
+                    @php
+                    $userProgress = UserCourseProgress::where('user_id', auth()->user()->id)
+                    ->where('course_id', $course->id)
+                    ->first()->last_content_id ?? 0;
+
+
+                    $totalContents = $course->contents->count() / 3;
+                    $percentageCompleted = ($userProgress / $totalContents) * 100;
+                    if ($userProgress < $totalContents) {
+                        $userProgress += 1;
+                    }
+                    @endphp
+                    <a class="card" href="/courses/{{$course->id}}/{{$userProgress}}">
                         <div class="card-header">
                             <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
                         </div>
@@ -34,7 +43,7 @@
                             <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
                         </div>
                         <div class="progress-bar">
-                            <div class="progress-bar-fill"></div>
+                            <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
                         </div>
                     </a>
                     @endforeach

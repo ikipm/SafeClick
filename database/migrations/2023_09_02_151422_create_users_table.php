@@ -24,6 +24,14 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->boolean('admin')->default(false);
         });
+        Schema::create('user_course_progress', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->integer('last_content_id')->nullable();
+            $table->boolean('completed')->default(false);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -34,5 +42,6 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('user_course_progress');
     }
 }

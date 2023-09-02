@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\UserCourseProgress;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CourseController extends Controller
 {
@@ -54,6 +56,13 @@ class CourseController extends Controller
         }
 
         return redirect()->back()->with('success', 'Course created successfully');
+    }
+
+    public function courseIndex()
+    {
+        $courses = Course::all();
+        $locale = Session::get('locale', 'cat');
+        return view('courses', compact('courses', 'locale'));
     }
 
     public function courseInfoContent($courseId)
@@ -112,6 +121,25 @@ class CourseController extends Controller
     {
         // Retrieve the course
         $course = Course::findOrFail($courseId);
+
+        // Check if the user has an existing progress record for this course
+        $userProgress = UserCourseProgress::where('user_id', auth()->user()->id)
+            ->where('course_id', $courseId)
+            ->first();
+        if ($contentId <= $course->contents->count() / 3) {
+            if (!$userProgress) {
+                // Create a new progress record if it doesn't exist
+                UserCourseProgress::create([
+                    'user_id' => auth()->user()->id,
+                    'course_id' => $courseId,
+                    'last_content_id' => $contentId,
+                ]);
+            } elseif ($userProgress->last_content_id < $contentId) {
+                // Update the last_content_id for the existing progress record
+                $userProgress->last_content_id = $contentId;
+                $userProgress->save();
+            }
+        }
 
         $content = $course->contents()->where('content_id', $contentId);
 
