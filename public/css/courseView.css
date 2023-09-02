@@ -4,7 +4,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin-top: 2%;
 }
 
 /* Course card styles */
@@ -74,4 +73,25 @@
 .button-next:hover,
 .course-buttons a:hover {
     background-color: #4faa63;
+}
+
+.fixed-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #64c97e;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fixed-button:hover {
+    background-color: #5ab272;
 }
