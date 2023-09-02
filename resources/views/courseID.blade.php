@@ -16,6 +16,8 @@
         use Illuminate\Support\Facades\Session;
         $locale = Session::get('locale', 'cat');
         $content = $content->where('locale', $locale)->first();
+        $parsedown = new Parsedown(); // Create a Parsedown instance
+        $parsedContent = $parsedown->text($content->content); // Parse the Markdown content
         @endphp
         <section class="course-section">
             <div class="course-card">
@@ -24,7 +26,7 @@
                 </div>
                 <div class="course-content">
                     <p>
-                        {{$content->content}}
+                        {!!$parsedContent!!}
                     </p>
                 </div>
                 <div class="course-buttons">
@@ -35,7 +37,6 @@
         </section>
     </main>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/courseView.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/platform.css') }}">
 </body>
 
 </html>

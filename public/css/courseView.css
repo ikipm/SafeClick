@@ -15,24 +15,21 @@
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-/* Course title styles */
-.course-title {
+.card-header {
+    text-align: center;
     background-color: #64c97e;
-    color: white;
     padding: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    color: #fff;
 }
 
-.course-title h1 {
+.card-header h3 {
     margin: 0;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 /* Course content styles */
@@ -41,6 +38,10 @@
     color: #333333;
     overflow: auto; /* Enable scrolling for content */
     height: 100%; /* Fill the container's height */
+}
+
+.course-content h1 {
+    color: #333333;
 }
 
 
