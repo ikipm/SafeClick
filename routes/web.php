@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\UserController;
