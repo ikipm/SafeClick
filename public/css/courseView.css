@@ -22,7 +22,7 @@
 .card-header {
     text-align: center;
     background-color: #64c97e;
-    padding: 10px;
+    padding: 5px;
     color: #fff;
 }
 
@@ -42,7 +42,6 @@
 .course-content h1 {
     color: #333333;
 }
-
 
 /* Course buttons styles */
 .course-buttons {
@@ -94,4 +93,23 @@
 
 .fixed-button:hover {
     background-color: #5ab272;
+}
+
+.alert-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-warning {
+    position: fixed;
+    bottom: 30px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 10px;
+    border-radius: 4px;
+    width: 90%;
+    margin: 20px auto;
+    display: none;
 }

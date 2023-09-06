@@ -22,7 +22,6 @@ Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::post('/admin/register', [UserController::class, 'adminRegister'])->middleware('auth')->middleware('admin')->name('admin.register');
 Route::get('/admin/search', [UserController::class, 'adminSearch'])->middleware('auth')->middleware('admin')->name('admin.search');
 Route::post('/admin/courses/create', [CourseController::class, 'store'])->middleware('auth')->middleware('admin')->name('admin.createCourse');
-Route::post('admin/course/create', [CourseController::class, 'store'])->middleware('auth')->middleware('admin')->name('admin.createCourse');
 Route::get('admin/course/search', [CourseController::class, 'search'])->middleware('auth')->middleware('admin')->name('admin.searchCourse');
 Route::post('admin/courses/edit/{id}', [CourseController::class, 'updateCourseTitle'])->middleware('auth')->middleware('admin')->name('admin.editCourse');
 Route::post('admin/courses/content/add/{id}', [CourseController::class, 'storeContent'])->middleware('auth')->middleware('admin')->name('admin.addContent');
