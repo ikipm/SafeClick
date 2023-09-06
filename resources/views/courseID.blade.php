@@ -46,6 +46,11 @@
             <path fill="none" d="M0 0h24v24H0z" />
         </svg>
     </a>
+    <script src="{{ asset('messages.js') }}"></script>
+    <script>
+        // Pass the locale value to JavaScript
+        var currentLocale = "{{ app()->getLocale() }}";
+    </script>
     <script src="{{ asset('js/courses.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/courseView.css') }}" type="text/css">
 </body>

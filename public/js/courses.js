@@ -44,18 +44,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextButton = document.querySelector(".button-next");
 
     prevButton.addEventListener("click", function (e) {
+        Lang.setLocale(currentLocale);
         if (!isMarkedDown()) {
             e.preventDefault();
-            showWarningMessage("This is not the correct answer.");
+            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
         } else {
             hideWarningMessage();
         }
     });
 
     nextButton.addEventListener("click", function (e) {
+        Lang.setLocale(currentLocale);
         if (!isMarkedDown()) {
             e.preventDefault();
-            showWarningMessage("This is not the correct answer.");
+            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
         } else {
             hideWarningMessage();
         }
