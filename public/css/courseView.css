@@ -1,0 +1,115 @@
+/* Course section styles */
+.course-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Course card styles */
+.course-card {
+    width: 90%; /* Set your desired width */
+    height: 75%; /* Set your desired height */
+    overflow: hidden; /* Hide overflow content */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-header {
+    text-align: center;
+    background-color: #64c97e;
+    padding: 5px;
+    color: #fff;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Course content styles */
+.course-content {
+    padding: 20px;
+    color: #333333;
+    overflow: auto; /* Enable scrolling for content */
+    height: 100%; /* Fill the container's height */
+}
+
+.course-content h1 {
+    color: #333333;
+}
+
+/* Course buttons styles */
+.course-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Adjust button styles */
+.button-prev,
+.button-next,
+.course-buttons a {
+    padding: 10px 20px;
+    background-color: #64c97e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+    flex: 1; /* Distribute available space equally */
+    margin: 0 5px; /* Add some spacing between buttons */
+    text-align: center; /* Center text horizontally */
+    text-decoration: none; /* Remove default underline */
+}
+
+.button-prev:hover,
+.button-next:hover,
+.course-buttons a:hover {
+    background-color: #4faa63;
+}
+
+.fixed-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #64c97e;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fixed-button:hover {
+    background-color: #5ab272;
+}
+
+.alert-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-warning {
+    position: fixed;
+    bottom: 30px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 10px;
+    border-radius: 4px;
+    width: 90%;
+    margin: 20px auto;
+    display: none;
+}

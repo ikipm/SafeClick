@@ -21,3 +21,9 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+
+# VS Code files
+.vscode
+
+# Specific in this project
+/public/img/courses/*

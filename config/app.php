@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'cat',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'es_CA',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
 
         /*
          * Package Service Providers...
