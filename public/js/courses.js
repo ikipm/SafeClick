@@ -40,26 +40,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const courseContent = document.querySelector(".course-content");
     courseContent.innerHTML = convertedHTML;
 
-    const prevButton = document.querySelector(".button-prev");
-    const nextButton = document.querySelector(".button-next");
+    // Check if [exercise] exists in parsedContent
+    if (parsedContent.includes("[exercise]")) {
+        const prevButton = document.querySelector(".button-prev");
+        const nextButton = document.querySelector(".button-next");
 
-    prevButton.addEventListener("click", function (e) {
-        Lang.setLocale(currentLocale);
-        if (!isMarkedDown()) {
-            e.preventDefault();
-            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
-        } else {
-            hideWarningMessage();
-        }
-    });
+        prevButton.addEventListener("click", function (e) {
+            Lang.setLocale(currentLocale);
+            if (!isMarkedDown()) {
+                e.preventDefault();
+                showWarningMessage(Lang.get("courses.notCorrectAnswer"));
+            } else {
+                hideWarningMessage();
+            }
+        });
 
-    nextButton.addEventListener("click", function (e) {
-        Lang.setLocale(currentLocale);
-        if (!isMarkedDown()) {
-            e.preventDefault();
-            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
-        } else {
-            hideWarningMessage();
-        }
-    });
+        nextButton.addEventListener("click", function (e) {
+            Lang.setLocale(currentLocale);
+            if (!isMarkedDown()) {
+                e.preventDefault();
+                showWarningMessage(Lang.get("courses.notCorrectAnswer"));
+            } else {
+                hideWarningMessage();
+            }
+        });
+    }
 });
