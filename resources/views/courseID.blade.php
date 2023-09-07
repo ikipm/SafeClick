@@ -24,7 +24,7 @@
                     <h1>{{ $content->title }}</h1>
                 </div>
                 <div class="course-content">
-                    <div id="parsed-content" data-content="{!! $parsedContent !!}" style="display: none;"></div>
+                    <div id="parsed-content" data-content="{{ json_encode($parsedContent) }}" style="display: none;"></div>
                 </div>
                 <div class="course-buttons">
                     @if($content->content_id !== 1)

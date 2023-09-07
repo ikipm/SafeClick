@@ -34,7 +34,8 @@ function isMarkedDown() {
 
 document.addEventListener("DOMContentLoaded", function () {
     const parsedContentElement = document.getElementById("parsed-content");
-    const parsedContent = parsedContentElement.dataset.content;
+    const parsedContentJSON = parsedContentElement.getAttribute("data-content");
+    const parsedContent = JSON.parse(parsedContentJSON);
 
     const convertedHTML = convertMarkdownToHTML(parsedContent);
     const courseContent = document.querySelector(".course-content");
