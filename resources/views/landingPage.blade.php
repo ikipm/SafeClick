@@ -31,22 +31,14 @@
     <section class="why-section">
         <div class="container">
             <h2>@lang('landingPage.why')</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet libero et mauris mattis
-                consectetur. Nam eget sem ut nunc venenatis fermentum. In eleifend consectetur sapien, vitae volutpat
-                enim pulvinar id.</p>
-            <p>Morbi rutrum odio vitae elit euismod malesuada. Mauris lacinia rutrum eros, a condimentum erat tincidunt
-                nec. Nullam tristique risus eu leo facilisis, a ultricies turpis consectetur.</p>
+            @lang('landingPage.whyDescription')
         </div>
     </section>
 
     <section class="how-section">
         <div class="container">
             <h2>@lang('landingPage.how')</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet libero et mauris mattis
-                consectetur. Nam eget sem ut nunc venenatis fermentum. In eleifend consectetur sapien, vitae volutpat
-                enim pulvinar id.</p>
-            <p>Morbi rutrum odio vitae elit euismod malesuada. Mauris lacinia rutrum eros, a condimentum erat tincidunt
-                nec. Nullam tristique risus eu leo facilisis, a ultricies turpis consectetur.</p>
+            @lang('landingPage.howDescription')
         </div>
     </section>
 

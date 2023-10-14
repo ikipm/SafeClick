@@ -74,11 +74,19 @@ h1 {
     padding: 12px 24px;
     text-decoration: none;
     border-radius: 4px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.hero-button:hover {
+    background-color: #48b963;
 }
 
 .why-section,
 .how-section,
 .about-section {
+    text-align: justify;
     background-color: white;
     padding: 15px 0;
 }
