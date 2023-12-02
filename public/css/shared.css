@@ -1,6 +1,6 @@
 /* Shared styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: #333;
     margin: 0;
     padding: 0;
@@ -52,6 +52,11 @@ h2 {
     padding: 4px 8px;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.current-language:hover {
+    background-color: #35a852;
 }
 
 .language-list {
@@ -99,6 +104,11 @@ h2 {
     border-radius: 4px;
     margin-right: auto; /* Adjust the margin as needed */
     margin-right: 50px; /* Adjust the margin as needed */
+    transition: background-color 0.3s;
+}
+
+.login-button a:hover {
+    background-color: #35a852;
 }
 
 .admin-button a {
@@ -109,6 +119,11 @@ h2 {
     border-radius: 4px;
     margin-right: 10px; /* Adjust the margin as needed */
     margin-left: auto;
+    transition: background-color 0.3s;
+}
+
+.admin-button a:hover{
+    background-color: #35a852;
 }
 
 /* Dark mode styles */
