@@ -10,6 +10,7 @@ return [
     'feature3Title' => 'Contenidos revisados',
     'feature3Desc' => 'Temario planificado y actualizado que no se limita a los conceptos básicos',
     'about' => 'Sobre esta iniciativa',
+    'aboutDesc' => 'Como consecuencia del aumento de los ataques cibernéticos, el incremento de los vectores de ataque y la falta de información, nace esta propuesta. Esta plataforma forma parte de un TDR (Trabajo de Investigación) que busca llevar la ciberseguridad a todos.',
     'aboutUs' => 'Sobre nosotros',
     'contact' => 'Contacto',
     'collaborators' => 'Nuestros colaboradores'

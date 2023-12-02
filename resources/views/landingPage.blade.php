@@ -49,8 +49,7 @@
     <section class="about-section">
         <div class="container">
             <h2>@lang('landingPage.about')</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet libero et mauris mattis
-                consectetur...</p>
+            <p>@lang('landingPage.aboutDesc')</p>
         </div>
     </section>
 
@@ -71,11 +70,11 @@
         <div class="footer-container">
             <div class="footer-links">
                 <a href="">@lang('shared.home')</a>
-                <a href="">@lang('landingPage.aboutUs')</a>
-                <a href="">@lang('landingPage.contact')</a>
+                <a href="#about-section">@lang('landingPage.aboutUs')</a>
+                <a href="mailto:info@safeclick.cat">@lang('landingPage.contact')</a>
             </div>
         </div>
-        <p>&copy; 2023 SafeClick. All rights reserved.</p>
+        <p>SafeClick.cat © 2023 by Iker Pérez is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1">CC BY 4.0</a></p>
     </footer>
 
     <script>
