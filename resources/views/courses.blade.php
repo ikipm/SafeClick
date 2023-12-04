@@ -35,7 +35,7 @@
                         <div class="card-header">
                             <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
                         </div>
-                        <img src="{{$course->img}}" alt="Card Image">
+                        <img src="{{asset($course->img)}}" alt="Card Image">
                         <div class="card-description">
                             <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
                         </div>
@@ -48,7 +48,7 @@
                             <div class="card-header">
                                 <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
                             </div>
-                            <img src="{{$course->img}}" alt="Card Image">
+                            <img src="{{asset($course->img)}}" alt="Card Image">
                             <div class="card-description">
                                 <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
                             </div>
