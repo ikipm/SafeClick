@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Cybersecurity academy',
+    'title' => 'SafeClick | Cybersecurity for everyone',
     'login' => 'Login',
     'home' => 'Home',
 ];
