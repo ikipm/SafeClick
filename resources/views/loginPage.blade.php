@@ -10,21 +10,21 @@
 
 <body>
     <header>
-        <x-navbar/>
+        <x-navbar />
     </header>
     <div class="container-wrapper">
         <div class="register-container">
             <h2>@lang('loginPage.register')</h2>
             @if ($errors->any() && !$errors->has("errorLogin"))
-                <div id="warning-alert-r" class="alert-warning" style="display: block" role="alert">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div id="warning-alert-r" class="alert-warning" style="display: block" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @else
-                <div id="warning-alert-r" class="alert-warning d-none" style="display: none" role="alert"></div>
+            <div id="warning-alert-r" class="alert-warning d-none" style="display: none" role="alert"></div>
             @endif
             <form method="POST" action="{{ route('register') }}">
                 @csrf
@@ -37,15 +37,25 @@
                 <label for="register-password">@lang('loginPage.password')</label>
                 <input type="password" id="register-password" name="password" placeholder="@lang('loginPage.insertPassword')" required>
                 <input type="password" id="register-password2" name="password2" placeholder="@lang('loginPage.insertPasswordConfirmation')" required>
+                <div class="form-group">
+                    <input type="checkbox" id="privacy-checkbox" name="privacy" required>
+                    <label for="privacy-checkbox">@lang('loginPage.privacy')</label>
+                    <a href="/privacy-politics">@lang('loginPage.privacyLink')</a>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="terms-checkbox" name="terms" required>
+                    <label for="terms-checkbox">@lang('loginPage.terms')</label>
+                    <a href="/terms-conditions">@lang('loginPage.termsLink')</a>
+                </div>
                 <button type="submit" id="register-submit">@lang('loginPage.register')</button>
             </form>
         </div>
         <div class="login-container">
             <h2>@lang('loginPage.login')</h2>
             @if ($errors->has("errorLogin"))
-                <div id="warning-alert-l" class="alert-warning" style="display: block" role="alert">{{ $errors->first("errorLogin") }}</div>
+            <div id="warning-alert-l" class="alert-warning" style="display: block" role="alert">{{ $errors->first("errorLogin") }}</div>
             @else
-                <div id="warning-alert-l" class="alert-warning d-none" style="display: none" role="alert"></div>
+            <div id="warning-alert-l" class="alert-warning d-none" style="display: none" role="alert"></div>
             @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf

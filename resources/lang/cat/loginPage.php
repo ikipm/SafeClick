@@ -21,4 +21,8 @@ return [
     'passwordNumber' => 'La contrasenya ha de contenir com a mínim un número.',
     'passwordMatch' => 'Les contrasenyes no coincideixen',
     'passwordLong' => 'La contrasenya ha de contenir :characters caràcters com a mínim.',
+    'privacy' => 'Accepto la',
+    'privacyLink' => 'Política de Privacitat',
+    'terms' => 'Accepto els',
+    'termsLink' => 'Termes i Condicions'
 ];

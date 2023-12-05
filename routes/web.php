@@ -35,6 +35,8 @@ Route::get('/locale/{lang}', [LocaleController::class, 'changeLocale'])->name('c
 Route::group(['middleware' => 'setLocale'], function () {
     Route::view('/', 'landingPage')->name('landingPage');
     Route::view('/login', 'loginPage')->name('loginPage');
+    Route::view('/privacy-policy', 'legal.privacy')->name('legal.privacy');
+    Route::view('/terms-conditions', 'legal.terms')->name('legal.terms');
     Route::get('/courses', [CourseController::class, 'courseIndex'])->middleware('auth')->name('courses');
     Route::get('/courses/{courseId}/{contentId}', [CourseController::class, 'courseInfo'])->middleware('auth')->name('courseID'); // The view is in Course controller
     Route::view('/admin', 'admin')->middleware('auth')->middleware('admin')->name('admin');

@@ -79,6 +79,19 @@ input {
     justify-content: center;
 }
 
+.form-group {
+    display: flex;
+    align-items:baseline;
+}
+
+.form-group input {
+    margin-right: 8px;
+}
+
+.form-group a {
+    margin-left: 4px; /* Add some space between the checkbox and the link */
+}
+
 @media (prefers-color-scheme: dark) {
     .login-container,
     .register-container {
