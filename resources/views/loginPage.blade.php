@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <input type="checkbox" id="privacy-checkbox" name="privacy" required>
                     <label for="privacy-checkbox">@lang('loginPage.privacy')</label>
-                    <a href="/privacy-politics">@lang('loginPage.privacyLink')</a>
+                    <a href="/privacy-policy">@lang('loginPage.privacyLink')</a>
                 </div>
                 <div class="form-group">
                     <input type="checkbox" id="terms-checkbox" name="terms" required>
