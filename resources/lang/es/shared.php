@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Academia de ciberseguridad',
+    'title' => 'SafeClick | Ciberseguridad para todos',
     'login' => 'Inicia sesión',
     'home' => 'Inicio',
 ];

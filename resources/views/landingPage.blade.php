@@ -59,9 +59,8 @@
                 <h2>@lang('landingPage.collaborators')</h2>
             </h2>
             <div class="collaborators-container">
-                <img src="https://codelearn.com/wp-content/uploads/sites/5/2020/11/codelearn-logo.png" href="https://codelearn.cat/" alt="Collaborator 1">
-                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2022/10/fundacio-300x97.png" href="https://fundació.cat/" alt="Collaborator 2">
-                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2023/02/dinahosting-e1676293773743-300x74.png" href="https://ca.dinahosting.com/" alt="Collaborator 3">
+                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2022/10/fundacio-300x97.png" href="https://fundació.cat/" alt="Collaborator 1">
+                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2023/02/dinahosting-e1676293773743-300x74.png" href="https://ca.dinahosting.com/" alt="Collaborator 2">
             </div>
         </div>
     </section>
@@ -77,6 +76,29 @@
         <p>SafeClick.cat © 2023 by Iker Pérez is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1">CC BY 4.0</a></p>
     </footer>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#ffffff",
+                        "text": "#000000"
+                    },
+                    "button": {
+                        "background": "#1abc9c",
+                        "text": "#ffffff"
+                    }
+                },
+                "content": {
+                    "message": "@lang('landingPage.cookiesDesc')",
+                    "dismiss": "@lang('landingPage.cookiesButton')",
+                    "link": "@lang('landingPage.cookiesInfo')"
+                }
+            });
+        });
+    </script>
     <script>
         // Pass the locale value to JavaScript
         var currentLocale = "{{ app()->getLocale() }}";

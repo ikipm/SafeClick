@@ -30,6 +30,8 @@ class UserController extends Controller
             'userName' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
+            'privacy' => 'accepted',
+            'terms' => 'accepted'
         ], [
             'userName.unique' => __('loginPage.errorUser'),
             'email.unique' => __('loginPage.errorEmail'),

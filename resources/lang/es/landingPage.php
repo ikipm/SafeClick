@@ -13,5 +13,8 @@ return [
     'aboutDesc' => 'Como consecuencia del aumento de los ataques cibernéticos, el incremento de los vectores de ataque y la falta de información, nace esta propuesta. Esta plataforma forma parte de un TDR (Trabajo de Investigación) que busca llevar la ciberseguridad a todos.',
     'aboutUs' => 'Sobre nosotros',
     'contact' => 'Contacto',
-    'collaborators' => 'Nuestros colaboradores'
+    'collaborators' => 'Nuestros colaboradores',
+    'cookiesDesc' => "Esta página utiliza cookies esenciales para garantizar un correcto funcionamiento. Si continuáis utilizando este sitio, accederéis a utilizarlas.",
+    'cookiesButton' => 'De acuerdo',
+    'cookiesInfo' => 'Más información'
 ];

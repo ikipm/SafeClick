@@ -13,5 +13,8 @@ return [
     'aboutDesc' => 'As a result of the increasing number of cyber attacks, the rise of attack vectors, and the lack of information, this proposal is born. This platform is part of a research project (TDR) that aims to bring cybersecurity to everyone.',
     'aboutUs' => 'About us',
     'contact' => 'Contact',
-    'collaborators' => 'Our collaborators'
+    'collaborators' => 'Our collaborators',
+    'cookiesDesc' => "This page uses essential cookies to ensure proper functionality. If you continue to use this site, you agree to use them.",
+    'cookiesButton' => 'Agree',
+    'cookiesInfo' => 'More information'
 ];

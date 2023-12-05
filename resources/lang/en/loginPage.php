@@ -21,4 +21,9 @@ return [
     'passwordNumber' => 'Password must contain at least one number.',
     'passwordMatch' => 'The passwords don\'t match.',
     'passwordLong' => 'Password must be at least :characters characters long.',
+    'privacy' => 'I agree to the',
+    'privacyLink' => 'Privacy Policy',
+    'terms' => 'I agree to the',
+    'termsLink' => 'Terms and Conditions',
+
 ];
