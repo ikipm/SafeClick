@@ -17,5 +17,4 @@ return [
     'cookiesDesc' => "This page uses essential cookies to ensure proper functionality. If you continue to use this site, you agree to use them.",
     'cookiesButton' => 'Agree',
     'cookiesInfo' => 'More information'
-
 ];
