@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'description' => 'Descobreix SafeClick: la plataforma gratuïta de cursos en línia especialitzats en ciberseguretat. Protegeix-te en el món digital amb les nostres lliçons avançades. Comença avui mateix la teva formació a SafeClick!',
+    'keywords' => 'SafeClick, ciberseguretat, cursos',
     'start' => 'Començar',
     'subtitle' => 'Seguretat per a tothom',
     'feature1Title' => 'Cursos ben pensats',

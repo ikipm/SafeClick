@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'description' => 'Discover SafeClick: the free online platform for specialized cybersecurity courses. Protect yourself in the digital world with our advanced lessons. Start your training at SafeClick today!',
+    'keywords' => 'SafeClick, cybersecurity, courses',
     'start' => 'Start',
     'subtitle' => 'Security for everyone',
     'feature1Title' => 'Well-Designed Courses',

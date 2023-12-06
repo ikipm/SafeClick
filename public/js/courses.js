@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const prevButton = document.querySelector(".button-prev");
         const nextButton = document.querySelector(".button-next");
 
-        prevButton.addEventListener("click", function (e) {
+        /*prevButton.addEventListener("click", function (e) {
             Lang.setLocale(currentLocale);
             if (!isMarkedDown()) {
                 e.preventDefault();
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 hideWarningMessage();
             }
-        });
+        });*/
 
         nextButton.addEventListener("click", function (e) {
             Lang.setLocale(currentLocale);

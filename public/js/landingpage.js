@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const texts = {
         "": ["Aprèn", "Comprèn", "Protegeix-te"], // Català
         es: ["Aprende", "Comprende", "Protegete"], // Castellà
-        en: ["Learn", "Understand", "Secure you"], // Anglès
+        en: ["Learn", "Understand", "Secure yourself"], // Anglès
     };
     let currentTextIndex = 0;
     const typedTextElement = document.getElementById("typed-text");
