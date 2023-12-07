@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+@if (app()->getLocale() == 'cat')
+<html lang="ca">
+@elseif (app()->getLocale() == 'es')
+<html lang="es">
+@elseif (app()->getLocale() == 'en')
+<html lang="en">
+@endif
 
 <head>
     <title>@lang('shared.title')</title>
@@ -17,7 +23,7 @@
         <x-navbar :isLoggedIn="Auth::check()" />
     </header>
 
-    <section class="hero-section">
+    <section class="hero-section" aria-label="SafeClick Header">
         <div class="hero-content">
             <h1 class="hero-title">SafeClick</h1>
             <p class="hero-subtitle">@lang('landingPage.subtitle')</p>
@@ -57,12 +63,10 @@
 
     <section class="collaborators-section">
         <div class="container">
-            <h2>
-                <h2>@lang('landingPage.collaborators')</h2>
-            </h2>
+            <h2>@lang('landingPage.collaborators')</h2>
             <div class="collaborators-container">
-                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2022/10/fundacio-300x97.png" href="https://fundació.cat/" alt="Collaborator 1">
-                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2023/02/dinahosting-e1676293773743-300x74.png" href="https://ca.dinahosting.com/" alt="Collaborator 2">
+                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2022/10/fundacio-300x97.png" alt="Collaborator 1">
+                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2023/02/dinahosting-e1676293773743-300x74.png" alt="Collaborator 2">
             </div>
         </div>
     </section>
@@ -81,7 +85,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css">
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js"></script>
     <script>
-        window.addEventListener("load", function(){
+        window.addEventListener("load", function() {
             window.cookieconsent.initialise({
                 "palette": {
                     "popup": {

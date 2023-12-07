@@ -1,7 +1,7 @@
 <nav class="navbar">
     <a href="/">
         <div class="logo">
-            <img src="{{ asset('img/logo.webp') }}" alt="Logo">
+            <img src="{{ asset('img/logo.webp') }}" alt="SafeClick logo">
         </div>
     </a>
     <div class="language-menu">
@@ -13,14 +13,14 @@
         </div>
         <ul class="language-list">
             @if ($locale == 'cat')
-            <li><a href="{{ url('/locale/es/') }}">ES</a></li>
-            <li><a href="{{ url('/locale/en') }}">EN</a></li>
+            <li><a href="{{ url('/locale/es/') }}" lang="es">ES</a></li>
+            <li><a href="{{ url('/locale/en') }}" lang="en">EN</a></li>
             @elseif ($locale == 'es')
-            <li><a href="{{ url('/locale/cat') }}">CAT</a></li>
-            <li><a href="{{ url('/locale/en') }}">EN</a></li>
+            <li><a href="{{ url('/locale/cat') }}" lang="ca">CAT</a></li>
+            <li><a href="{{ url('/locale/en') }}" lang="en">EN</a></li>
             @elseif ($locale == 'en')
-            <li><a href="{{ url('/locale/cat') }}">CAT</a></li>
-            <li><a href="{{ url('/locale/es') }}">ES</a></li>
+            <li><a href="{{ url('/locale/cat') }}" lang="ca">CAT</a></li>
+            <li><a href="{{ url('/locale/es') }}" lang="es">ES</a></li>
             @endif
         </ul>
     </div>
