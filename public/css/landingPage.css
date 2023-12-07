@@ -268,7 +268,7 @@ footer {
     }
 
     .feature-container {
-        flex-direction: column; /* Stacked features on mobile for better readability */
+        flex-direction: column;
     }
 
     .feature {

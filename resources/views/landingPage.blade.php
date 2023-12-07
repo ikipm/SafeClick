@@ -8,14 +8,22 @@
 @endif
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@lang('shared.title')</title>
+    <meta name="description" content="@lang('landingPage.description')">
+    <meta name="keywords" content="@lang('landingPage.keywords')">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('css/shared.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/landingPage.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@lang('landingPage.description')">
-    <meta name="keywords" content="@lang('landingPage.keywords')">
+
+    <!-- Social media -->
+    <meta property="og:title" content="@lang('shared.title')">
+    <meta property="og:description" content="@lang('landingPage.description')">
+    <meta property="og:image" content="{{ asset('img/logo.webp') }}">
+    <meta name="twitter:card" content="{{ asset('img/cybersecurity.webp') }}">
 </head>
 
 <body>
