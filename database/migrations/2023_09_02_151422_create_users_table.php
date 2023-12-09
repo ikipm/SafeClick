@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class CreateUsersTable extends Migration
 {
@@ -24,6 +26,17 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->boolean('admin')->default(false);
         });
+
+        // Guest user
+        DB::table('users')->insert([
+            'name' => 'Test',
+            'userName' => 'SafeClick',
+            'email' => 'test@safeclick.cat',
+            'password' => Hash::make('>c6s0UFa0?|5]J#,AXu('),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         Schema::create('user_course_progress', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');

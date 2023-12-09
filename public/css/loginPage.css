@@ -81,7 +81,7 @@ input {
 
 .form-group {
     display: flex;
-    align-items:baseline;
+    align-items: baseline;
 }
 
 .form-group input {
@@ -90,6 +90,48 @@ input {
 
 .form-group a {
     margin-left: 4px; /* Add some space between the checkbox and the link */
+}
+
+/* Divider line styles */
+.divider {
+    border: 0;
+    height: 1px;
+    background: #ccc; /* Adjust divider color as needed */
+    margin: 10px 0; /* Adjust margin as needed */
+}
+
+/* Continue as Guest styles */
+.continue-as-guest {
+    text-align: center;
+    margin-top: 10px; /* Adjust margin as needed */
+}
+
+.continue-as-guest h3 {
+    font-size: 16px; /* Adjust title font size as needed */
+    margin-bottom: 5px;
+    color: #333; /* Adjust title color as needed */
+}
+
+.continue-as-guest p {
+    font-size: 14px; /* Adjust description font size as needed */
+    color: #777; /* Adjust description color as needed */
+    margin-bottom: 10px;
+}
+
+.guest-link {
+    display: inline-block;
+    padding: 6px 10px; /* Adjust padding to make the button smaller */
+    font-size: 12px; /* Adjust font size to make the text smaller */
+    border: 2px solid #64c97e; /* Adjust border color as needed */
+    color: #64c97e; /* Adjust text color as needed */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.guest-link:hover {
+    color: #4fae6d; /* Adjust hover text color as needed */
+    border-color: #4fae6d; /* Adjust hover border color as needed */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -105,6 +147,20 @@ input {
     input:-webkit-autofill:focus,
     input:-webkit-autofill:active {
         -webkit-box-shadow: 0 0 0 30px #333 inset !important;
+    }
+    .continue-as-guest h3 {
+        color: #fff; /* Dark text color */
+    }
+    .continue-as-guest p {
+        color: #ccc; /* Light text color for description */
+    }
+    .guest-link {
+        border-color: #64c97e; /* Button border color */
+        color: #64c97e; /* Button text color */
+    }
+    .guest-link:hover {
+        color: #4fae6d; /* Hover text color */
+        border-color: #4fae6d; /* Hover border color */
     }
 }
 

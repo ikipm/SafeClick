@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <input type="checkbox" id="privacy-checkbox" name="privacy" required>
                     <label for="privacy-checkbox">@lang('loginPage.privacy')</label>
-                    <a href="/privacy-politics">@lang('loginPage.privacyLink')</a>
+                    <a href="/privacy-policy">@lang('loginPage.privacyLink')</a>
                 </div>
                 <div class="form-group">
                     <input type="checkbox" id="terms-checkbox" name="terms" required>
@@ -65,6 +65,12 @@
                 <input type="password" id="login-password" name="password" placeholder="@lang('loginPage.insertPassword')" required>
                 <button type="submit">@lang('loginPage.login')</button>
             </form>
+            <hr class="divider">
+            <div class="continue-as-guest">
+                <h3>@lang('loginPage.loginTest')</h3>
+                <p>@lang('loginPage.loginTestDescription')</p>
+                <a href="{{ route('loginTest') }}" class="guest-link">@lang('loginPage.loginTest')</a>
+            </div>
         </div>
     </div>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/loginPage.css') }}">

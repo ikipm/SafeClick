@@ -27,6 +27,7 @@ Route::get('admin/course/search', [CourseController::class, 'search'])->middlewa
 Route::post('admin/courses/edit/{id}', [CourseController::class, 'updateCourseTitle'])->middleware('auth')->middleware('admin')->name('admin.editCourse');
 Route::post('admin/courses/content/add/{id}', [CourseController::class, 'storeContent'])->middleware('auth')->middleware('admin')->name('admin.addContent');
 Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::get('/loginTest', [UserController::class, 'loginTest'])->name('loginTest');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 // Define the route for changing the locale

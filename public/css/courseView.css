@@ -43,6 +43,11 @@
     color: #333333;
 }
 
+.course-content img {
+    max-width: 60%;
+    height: auto;
+}
+
 /* Course buttons styles */
 .course-buttons {
     display: flex;

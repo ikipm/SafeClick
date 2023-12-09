@@ -24,5 +24,7 @@ return [
     'privacy' => 'Accepto la',
     'privacyLink' => 'Política de Privacitat',
     'terms' => 'Accepto els',
-    'termsLink' => 'Termes i Condicions'
+    'termsLink' => 'Termes i Condicions',
+    'loginTest' => 'Entra com a convidat',
+    'loginTestDescription' => 'Al entrar com a convidat, el teu progrès no es guardarà!'
 ];

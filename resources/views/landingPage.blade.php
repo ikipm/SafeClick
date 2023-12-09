@@ -1,13 +1,29 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+@if (app()->getLocale() == 'cat')
+<html lang="ca">
+@elseif (app()->getLocale() == 'es')
+<html lang="es">
+@elseif (app()->getLocale() == 'en')
+<html lang="en">
+@endif
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@lang('shared.title')</title>
+    <meta name="description" content="@lang('landingPage.description')">
+    <meta name="keywords" content="@lang('landingPage.keywords')">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('css/shared.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/landingPage.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Social media -->
+    <meta property="og:title" content="@lang('shared.title')">
+    <meta property="og:description" content="@lang('landingPage.description')">
+    <meta property="og:image" content="{{ asset('img/logo.webp') }}">
+    <meta name="twitter:card" content="{{ asset('img/cybersecurity.webp') }}">
 </head>
 
 <body>
@@ -15,7 +31,7 @@
         <x-navbar :isLoggedIn="Auth::check()" />
     </header>
 
-    <section class="hero-section">
+    <section class="hero-section" aria-label="SafeClick Header">
         <div class="hero-content">
             <h1 class="hero-title">SafeClick</h1>
             <p class="hero-subtitle">@lang('landingPage.subtitle')</p>
@@ -55,12 +71,10 @@
 
     <section class="collaborators-section">
         <div class="container">
-            <h2>
-                <h2>@lang('landingPage.collaborators')</h2>
-            </h2>
+            <h2>@lang('landingPage.collaborators')</h2>
             <div class="collaborators-container">
-                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2022/10/fundacio-300x97.png" href="https://fundació.cat/" alt="Collaborator 1">
-                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2023/02/dinahosting-e1676293773743-300x74.png" href="https://ca.dinahosting.com/" alt="Collaborator 2">
+                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2022/10/fundacio-300x97.png" alt="Collaborator 1">
+                <img src="https://dotacio.fundacio.cat/wp-content/uploads/2023/02/dinahosting-e1676293773743-300x74.png" alt="Collaborator 2">
             </div>
         </div>
     </section>
@@ -73,13 +87,13 @@
                 <a href="mailto:info@safeclick.cat">@lang('landingPage.contact')</a>
             </div>
         </div>
-        <p>SafeClick.cat © 2023 by Iker Pérez is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1">CC BY 4.0</a></p>
+        <p>SafeClick.cat © 2023 by Iker Pérez is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1">CC BY-NC-SA 4.0</a></p>
     </footer>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css">
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js"></script>
     <script>
-        window.addEventListener("load", function(){
+        window.addEventListener("load", function() {
             window.cookieconsent.initialise({
                 "palette": {
                     "popup": {

@@ -151,6 +151,23 @@ class UserController extends Controller
         }
     }
 
+    public function loginTest(Request $request)
+    {
+        // Test user credentials
+        $credentials = $credentials = [
+            "email" => 'test@safeclick.cat',
+            "password" => '>c6s0UFa0?|5]J#,AXu('
+        ];
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect("/courses");
+        } else {
+            return redirect('/login');
+        }
+    }
+
     /**
      * Log out the user.
      *

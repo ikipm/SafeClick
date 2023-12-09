@@ -25,4 +25,6 @@ return [
     'privacyLink' => 'Política de Privacidad',
     'terms' => 'Acepto los',
     'termsLink' => 'Términos y Condiciones',
+    'loginTest' => 'Entra como invitado',
+    'loginTestDescription' => '¡Al entrar como un invitado, tu progreso no se guardará!'
 ];
