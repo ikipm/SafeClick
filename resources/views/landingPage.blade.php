@@ -87,7 +87,7 @@
                 <a href="mailto:info@safeclick.cat">@lang('landingPage.contact')</a>
             </div>
         </div>
-        <p>SafeClick.cat © 2023 by Iker Pérez is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1">CC BY 4.0</a></p>
+        <p>SafeClick.cat © 2023 by Iker Pérez is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1">CC BY-NC-SA 4.0</a></p>
     </footer>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css">
