@@ -13,14 +13,14 @@
         </div>
         <ul class="language-list">
             @if ($locale == 'cat')
-            <li><a href="{{ url('/locale/es/') }}" lang="es">ES</a></li>
-            <li><a href="{{ url('/locale/en') }}" lang="en">EN</a></li>
+            <li><a href="{{ url('/locale/es/') }}" lang="es" hreflang="es">ES</a></li>
+            <li><a href="{{ url('/locale/en') }}" lang="en" hreflang="en">EN</a></li>
             @elseif ($locale == 'es')
-            <li><a href="{{ url('/locale/cat') }}" lang="ca">CAT</a></li>
-            <li><a href="{{ url('/locale/en') }}" lang="en">EN</a></li>
+            <li><a href="{{ url('/locale/cat') }}" lang="ca" hreflang="ca">CAT</a></li>
+            <li><a href="{{ url('/locale/en') }}" lang="en" hreflang="en">EN</a></li>
             @elseif ($locale == 'en')
-            <li><a href="{{ url('/locale/cat') }}" lang="ca">CAT</a></li>
-            <li><a href="{{ url('/locale/es') }}" lang="es">ES</a></li>
+            <li><a href="{{ url('/locale/cat') }}" lang="ca" hreflang="ca">CAT</a></li>
+            <li><a href="{{ url('/locale/es') }}" lang="es" hreflang="es">ES</a></li>
             @endif
         </ul>
     </div>

@@ -4,7 +4,7 @@ return [
     'description' => 'Descubre SafeClick: la plataforma gratuita de cursos en línea especializados en ciberseguridad. Protégete en el mundo digital con nuestras lecciones avanzadas. ¡Comienza hoy mismo tu formación en SafeClick!',
     'keywords' => 'SafeClick, ciberseguridad, cursos',
     'start' => 'Empezar',
-    'subtitle' => 'Seguridad para todos',
+    'subtitle' => 'Seguridad para todos con SafeClick',
     'feature1Title' => 'Cursos bien pensados',
     'feature1Desc' => 'Contenidos presentados de manera visual y comprensible',
     'feature2Title' => 'Ejercicios interactivos',

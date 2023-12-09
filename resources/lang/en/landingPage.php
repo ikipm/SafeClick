@@ -4,7 +4,7 @@ return [
     'description' => 'Discover SafeClick: the free online platform for specialized cybersecurity courses. Protect yourself in the digital world with our advanced lessons. Start your training at SafeClick today!',
     'keywords' => 'SafeClick, cybersecurity, courses',
     'start' => 'Start',
-    'subtitle' => 'Security for everyone',
+    'subtitle' => 'Security for everyone with SafeClick',
     'feature1Title' => 'Well-Designed Courses',
     'feature1Desc' => 'Contents presented visually and understandably',
     'feature2Title' => 'Interactive Exercises',
