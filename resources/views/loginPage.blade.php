@@ -65,6 +65,12 @@
                 <input type="password" id="login-password" name="password" placeholder="@lang('loginPage.insertPassword')" required>
                 <button type="submit">@lang('loginPage.login')</button>
             </form>
+            <hr class="divider">
+            <div class="continue-as-guest">
+                <h3>@lang('loginPage.loginTest')</h3>
+                <p>@lang('loginPage.loginTestDescription')</p>
+                <a href="{{ route('loginTest') }}" class="guest-link">@lang('loginPage.loginTest')</a>
+            </div>
         </div>
     </div>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/loginPage.css') }}">
