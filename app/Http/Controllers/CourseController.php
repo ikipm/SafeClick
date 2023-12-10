@@ -126,7 +126,7 @@ class CourseController extends Controller
         $userProgress = UserCourseProgress::where('user_id', auth()->user()->id)
             ->where('course_id', $courseId)
             ->first();
-        if ($contentId <= $course->contents->count() / 3 and auth()->user()->email != 'test@safeclick.cat'){
+        if ($contentId <= $course->contents->count() / 3 and !(auth()->user()->testUser)){
             if (!$userProgress) {
                 // Create a new progress record if it doesn't exist
                 UserCourseProgress::create([
