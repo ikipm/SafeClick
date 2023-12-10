@@ -1,7 +1,14 @@
 <!DOCTYPE html>
+@php
+use Illuminate\Support\Facades\Session;
+$locale = Session::get('locale', 'cat');
+$content = $content->where('locale', $locale)->first();
+$parsedown = new Parsedown();
+$parsedContent = $parsedown->text($content->content);
+@endphp
 
 <head>
-    <title>@lang("shared.title")</title>
+    <title>{{ $content->title }} - @lang("shared.title")</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/shared.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -12,13 +19,6 @@
         <x-navbar />
     </header>
     <main>
-        @php
-        use Illuminate\Support\Facades\Session;
-        $locale = Session::get('locale', 'cat');
-        $content = $content->where('locale', $locale)->first();
-        $parsedown = new Parsedown();
-        $parsedContent = $parsedown->text($content->content);
-        @endphp
         <section class="course-section">
             <div class="course-card">
                 <div class="card-header">
