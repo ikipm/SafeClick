@@ -59,6 +59,8 @@
                                 placeholder="@lang('loginPage.insertPasswordConfirmation')" required>
                             <label for="register-admin">Admin: </label>
                             <input type="checkbox" id="register-admin" name="admin"><br /><br />
+                            <label for="register-admin">Guest: </label>
+                            <input type="checkbox" id="register-testUser" name="testUser"><br /><br />
                             <button type="submit" id="register-submit">@lang('loginPage.register')</button>
                         </form>
                     </div>

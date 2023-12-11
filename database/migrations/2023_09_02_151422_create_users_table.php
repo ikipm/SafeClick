@@ -25,16 +25,18 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->boolean('admin')->default(false);
+            $table->boolean('testUser')->default(false);
         });
 
         // Guest user
         DB::table('users')->insert([
-            'name' => 'Test',
+            'name' => 'SafeClick Test User',
             'userName' => 'SafeClick',
             'email' => 'test@safeclick.cat',
             'password' => Hash::make('>c6s0UFa0?|5]J#,AXu('),
             'created_at' => now(),
             'updated_at' => now(),
+            'testUser' => true,
         ]);
 
         Schema::create('user_course_progress', function (Blueprint $table) {

@@ -18,6 +18,7 @@
     <main>
         @php
             use App\Models\User;
+            use Illuminate\Support\Facades\DB;
         @endphp
 
         <div class="container">
@@ -46,7 +47,7 @@
                         <h3>@lang('admin.newUsers')</h3>
                     </div>
                     <div class="content-text">
-                        <h3>40 @lang('admin.users')</h3>
+                        <h3>{{DB::table('users')->whereBetween('created_at', [now()->startOfWeek()->toDateString() . ' 00:00:00', now()->endOfWeek()->toDateString() . ' 23:59:59'])->count();}} @lang('admin.users')</h3>
                     </div>
                 </a>
 

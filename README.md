@@ -28,7 +28,7 @@ Actualment, un de cada cinc delictes es produeix a internet segons afirma el dia
 ### Com executar el codi
 
 0. Necessari: PHP i Composer
-1. Duplica el codi `git clone https://github.com/ikipm/TDR`
+1. Duplica el codi `git clone https://github.com/ikipm/SafeClick`
 2. Crea una còpia de l'arxiu .env.example i modifica el valor perquè s'ajusti als vostres requisits.
 3. Dintre de la carpeta del projecte, executa el següent codi per instalar el framework i les seves llibreries: `composer install`
 4. Dintre de la mateixa carpeta, executa el següent codi per crear una clau pròpia dintre l'arxiu .env: `php artisan key:generate`

@@ -67,6 +67,13 @@ class UserController extends Controller
             $admin = false;
         }
 
+        $testUser = $request->testUser;
+        if ($testUser == "on") {
+            $testUser = true;
+        } else {
+            $testUser = false;
+        }
+
         // Validate user input
         $validatedData = $request->validate([
             'name' => 'required',
@@ -84,7 +91,8 @@ class UserController extends Controller
             'userName' => $validatedData['userName'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
-            'admin' => $admin
+            'admin' => $admin,
+            'testUser' => $testUser
         ]);
 
         return redirect("/admin/users");
