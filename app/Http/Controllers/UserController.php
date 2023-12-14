@@ -47,6 +47,8 @@ class UserController extends Controller
 
         // Log in the user
         Auth::login($user);
+        $request->session()->regenerate();
+        $request->session()->put('user_ip_address', $request->ip());
 
         return redirect("/courses");
     }
@@ -150,6 +152,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             // If authentication successful, regenerate the session
             $request->session()->regenerate();
+            $request->session()->put('user_ip_address', $request->ip());
 
             // Redirect the user to the courses page
             return redirect("/courses");
@@ -169,6 +172,7 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $request->session()->put('user_ip_address', $request->ip());
 
             return redirect("/courses");
         } else {
@@ -186,6 +190,7 @@ class UserController extends Controller
     {
         // Log out the user
         Auth::logout();
+        $request->session()->forget('user_ip_address');
 
         // Redirect the user to the login page
         return redirect("/login");

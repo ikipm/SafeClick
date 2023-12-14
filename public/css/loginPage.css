@@ -141,12 +141,14 @@ input {
     }
     input {
         background-color: #333;
+        color: white;
     }
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
     input:-webkit-autofill:active {
         -webkit-box-shadow: 0 0 0 30px #333 inset !important;
+        color: white;
     }
     .continue-as-guest h3 {
         color: #fff; /* Dark text color */
