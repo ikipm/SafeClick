@@ -27,6 +27,7 @@ h1 {
     color: white;
     padding: 100px 0;
     text-align: center;
+    user-select: none;
 }
 
 .hero-content {
