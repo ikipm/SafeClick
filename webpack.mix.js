@@ -23,7 +23,7 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss("resources/css/platform.css", "public/css")
     .postCss("resources/css/shared.css", "public/css")
     .postCss("resources/css/sideBar.css", "public/css")
-    .postCss("resources/css/admin/courseAdd.css", "public/css")
-    .postCss("resources/css/admin/courses.css", "public/css")
-    .postCss("resources/css/admin/logs.css", "public/css")
-    .postCss("resources/css/admin/users.css", "public/css");
+    .postCss("resources/css/admin/courseAdd.css", "public/css/admin")
+    .postCss("resources/css/admin/courses.css", "public/css/admin")
+    .postCss("resources/css/admin/logs.css", "public/css/admin")
+    .postCss("resources/css/admin/users.css", "public/css/admin");

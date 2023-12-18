@@ -9,10 +9,10 @@
     "/css/landingPage.css": "/css/landingPage.css",
     "/css/courseView.css": "/css/courseView.css",
     "/css/admin.css": "/css/admin.css",
-    "/css/users.css": "/css/users.css",
-    "/css/logs.css": "/css/logs.css",
-    "/css/courses.css": "/css/courses.css",
-    "/css/courseAdd.css": "/css/courseAdd.css",
+    "/css/admin/users.css": "/css/admin/users.css",
+    "/css/admin/logs.css": "/css/admin/logs.css",
+    "/css/admin/courses.css": "/css/admin/courses.css",
+    "/css/admin/courseAdd.css": "/css/admin/courseAdd.css",
     "/css/sideBar.css": "/css/sideBar.css",
     "/css/shared.css": "/css/shared.css"
 }
