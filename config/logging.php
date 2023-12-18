@@ -113,6 +113,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        // 404 codes are stored with the route and IP
+        '404' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/404.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];

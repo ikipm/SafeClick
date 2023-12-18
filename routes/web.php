@@ -26,6 +26,7 @@ Route::post('/admin/courses/create', [CourseController::class, 'store'])->middle
 Route::get('admin/course/search', [CourseController::class, 'search'])->middleware('auth')->middleware('admin')->name('admin.searchCourse');
 Route::post('admin/courses/edit/{id}', [CourseController::class, 'updateCourseTitle'])->middleware('auth')->middleware('admin')->name('admin.editCourse');
 Route::post('admin/courses/content/add/{id}', [CourseController::class, 'storeContent'])->middleware('auth')->middleware('admin')->name('admin.addContent');
+Route::view('/admin/logs/404', 'admin.logs.404')->middleware('auth')->middleware('admin')->name('admin.logs.404');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/loginTest', [UserController::class, 'loginTest'])->name('loginTest');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
