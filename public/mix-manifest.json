@@ -1,0 +1,18 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/courses.js": "/js/courses.js",
+    "/js/landingpage.js": "/js/landingpage.js",
+    "/js/loginpage.js": "/js/loginpage.js",
+    "/js/sidebar.js": "/js/sidebar.js",
+    "/css/platform.css": "/css/platform.css",
+    "/css/loginPage.css": "/css/loginPage.css",
+    "/css/landingPage.css": "/css/landingPage.css",
+    "/css/courseView.css": "/css/courseView.css",
+    "/css/admin.css": "/css/admin.css",
+    "/css/users.css": "/css/users.css",
+    "/css/logs.css": "/css/logs.css",
+    "/css/courses.css": "/css/courses.css",
+    "/css/courseAdd.css": "/css/courseAdd.css",
+    "/css/sideBar.css": "/css/sideBar.css",
+    "/css/shared.css": "/css/shared.css"
+}

@@ -33,7 +33,10 @@ Actualment, un de cada cinc delictes es produeix a internet segons afirma el dia
 3. Dintre de la carpeta del projecte, executa el següent codi per instalar el framework i les seves llibreries: `composer install`
 4. Dintre de la mateixa carpeta, executa el següent codi per crear una clau pròpia dintre l'arxiu .env: `php artisan key:generate`
 5. Dintre de la carpeta del projecte, executa el següent codi per fer les migracions de la base de dades: `php artisan migrate`
-6. Dintre de la mateixa carpeta, executa el següent codi per executar l'aplicació: `php artisan serve`
+6. Per desplegar el front-end, primer instal·la les dependències necesàries mitjançant: `npm install`
+7.1. En cas de ser un desplegament de desenvolupament, executa `npm run dev`
+7.2. En cas de ser un desplegament de producció, executa `npm run production`
+8. Dintre de la mateixa carpeta, executa el següent codi per executar l'aplicació: `php artisan serve`
 
 ### Built With
 

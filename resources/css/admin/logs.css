@@ -1,0 +1,69 @@
+.container {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 20px;
+    transition: filter 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.card {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #64c97e;
+    padding: 10px;
+    color: #fff;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.content-text {
+    padding: 40px;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #9c9c9c;
+    margin: 0 4px;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #9c9c9c;
+}
+
+@media (prefers-color-scheme: dark) {
+    .card {
+        background-color: #222;
+        color: white;
+    }
+
+    .card-header {
+        background-color: #5ab272;
+    }
+
+    .pagination a{
+        color: #bdbdbd;
+    }
+    
+    .pagination a:hover {
+        background-color: #3d3d3d;
+    }
+}
