@@ -1,0 +1,29 @@
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.snowflake {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fall linear infinite;
+    opacity: 0; /* Initially hide snowflakes */
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh);
+        opacity: 1; /* Fade in at the start of the animation */
+    }
+    100% {
+        transform: translateY(110vh);
+        opacity: 0; /* Fade out at the end of the animation */
+    }
+}
