@@ -10,11 +10,12 @@
 
 .snowflake {
     position: absolute;
-    background: #fff;
+    background: #add8e6; /* Light blue color */
     border-radius: 50%;
     pointer-events: none;
     animation: fall linear infinite;
-    opacity: 0; /* Initially hide snowflakes */
+    opacity: 0;
+    box-shadow: 0 0 5px rgba(173, 216, 230, 0.8); /* Add a subtle shadow */
 }
 
 @keyframes fall {
