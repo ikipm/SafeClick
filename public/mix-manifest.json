@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/courses.js": "/js/courses.js",
+    "/js/contentinfo.js": "/js/contentinfo.js",
     "/js/landingpage.js": "/js/landingpage.js",
     "/js/loginpage.js": "/js/loginpage.js",
     "/js/sideBar.js": "/js/sideBar.js",
@@ -11,6 +12,7 @@
     "/css/courseView.css": "/css/courseView.css",
     "/css/admin.css": "/css/admin.css",
     "/css/snow.css": "/css/snow.css",
+    "/css/admin/courseContentInfo.css": "/css/admin/courseContentInfo.css",
     "/css/admin/users.css": "/css/admin/users.css",
     "/css/admin/logs.css": "/css/admin/logs.css",
     "/css/admin/courses.css": "/css/admin/courses.css",
