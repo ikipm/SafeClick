@@ -33,8 +33,8 @@
                             <li>
                                 <span class="content-name">{{$content->title}}</span>
                                 <div class="content-buttons">
-                                    <a class="content-button" href="">@lang('admin.info')</a>
-                                    <a class="content-button" href="">@lang('admin.edit')</a>
+                                    <a class="content-button contentInfo-button" href="#" data-content-id="{{ $content->content_id }}" data-content-title="{{ $content->title }}" data-content="{{$content->content}}">@lang('admin.info')</a>
+                                    <a class="content-button" href="/admin/courses/content/edit/{{$course->id}}/{{$content->content_id}}">@lang('admin.edit')</a>
                                 </div>
                             </li>
                             @endforeach
@@ -43,17 +43,28 @@
                 </div>
             </div>
         </div>
-
     </main>
 
     <a class="fixed-button" href="/admin/courses/content/add/{{$course->id}}">+</a>
 
+    <div id="courseInfoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalButton">&times;</span>
+            <div class="modal-body">
+                <div id="courseInfoContent"></div>
+            </div>
+        </div>
+    </div>
+    
     <script src="{{ asset('messages.js') }}"></script>
     <script>
         // Pass the locale value to JavaScript
         var currentLocale = "{{ app()->getLocale() }}";
     </script>
     <script src="{{ asset('js/sideBar.js') }}"></script>
+    <script src="{{ asset('js/contentinfo.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/courseAdd.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/courseContentInfo.css') }}">
+</body>
 
 </html>

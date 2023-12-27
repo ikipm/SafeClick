@@ -1,0 +1,77 @@
+#courseInfoModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #64c97e;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    z-index: 1001;
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-body h3 {
+    color: #64c97e;
+    margin-bottom: 10px;
+}
+
+.modal-body p {
+    margin: 0;
+    color: #333;
+}
+
+.close {
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.close:hover {
+    color: #ff0000;
+}
+
+/* Dark mode styles for the modal */
+@media (prefers-color-scheme: dark) {
+    #courseInfoModal {
+        background-color: #222;
+        color: white;
+        border: 2px solid #35a852;
+    }
+
+    .modal-body h3 {
+        color: #35a852;
+    }
+
+    .close {
+        color: white;
+    }
+
+    .close:hover {
+        color: #ff0000;
+    }
+}

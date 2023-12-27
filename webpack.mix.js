@@ -13,9 +13,11 @@ const mix = require("laravel-mix");
 
 mix.js('resources/js/app.js', 'public/js')
     .js("resources/js/courses.js", "public/js")
+    .js("resources/js/contentinfo.js", "public/js")
     .js("resources/js/landingpage.js", "public/js")
     .js("resources/js/loginpage.js", "public/js")
     .js("resources/js/sideBar.js", "public/js")
+    .js("resources/js/snow.js", "public/js")
     .postCss("resources/css/admin.css", "public/css")
     .postCss("resources/css/courseView.css", "public/css")
     .postCss("resources/css/landingPage.css", "public/css")
@@ -26,4 +28,6 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss("resources/css/admin/courseAdd.css", "public/css/admin")
     .postCss("resources/css/admin/courses.css", "public/css/admin")
     .postCss("resources/css/admin/logs.css", "public/css/admin")
-    .postCss("resources/css/admin/users.css", "public/css/admin");
+    .postCss("resources/css/admin/users.css", "public/css/admin")
+    .postCss("resources/css/admin/courseContentInfo.css", "public/css/admin")
+    .postCss("resources/css/snow.css", "public/css");
