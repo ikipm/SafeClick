@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,10 +23,18 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        $this->registerPolicies();
+        // ...
 
-        //
+        VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
+            return (new MailMessage)
+                ->from('noreply@safeclick.cat', 'SafeClick')
+                ->subject(trans('email_verification.subject'))
+                ->greeting(trans('email_verification.greeting', ['username' => $notifiable->name]))
+                ->line(trans('email_verification.message'))
+                ->action(trans('email_verification.action'), $url)
+                ->salutation(trans('email_verification.salutation'));
+        });
     }
 }

@@ -37,6 +37,7 @@ class CreateUsersTable extends Migration
             'created_at' => now(),
             'updated_at' => now(),
             'testUser' => true,
+            'email_verified_at' => now(),
         ]);
 
         Schema::create('user_course_progress', function (Blueprint $table) {
