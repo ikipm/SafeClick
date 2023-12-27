@@ -26,6 +26,7 @@ Route::post('/admin/courses/create', [CourseController::class, 'store'])->middle
 Route::get('admin/course/search', [CourseController::class, 'search'])->middleware('auth')->middleware('admin')->name('admin.searchCourse');
 Route::post('admin/courses/edit/{id}', [CourseController::class, 'updateCourseTitle'])->middleware('auth')->middleware('admin')->name('admin.editCourse');
 Route::post('admin/courses/content/add/{id}', [CourseController::class, 'storeContent'])->middleware('auth')->middleware('admin')->name('admin.addContent');
+Route::post('admin/courses/content/edit/{id}/{contentId}', [CourseController::class, 'updateContent'])->middleware('auth')->middleware('admin')->name('admin.editContent');
 Route::view('/admin/logs/404', 'admin.logs.404')->middleware('auth')->middleware('admin')->name('admin.logs.404');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/loginTest', [UserController::class, 'loginTest'])->name('loginTest');
@@ -47,4 +48,5 @@ Route::group(['middleware' => 'setLocale'], function () {
     Route::get('/admin/courses/edit/{courseId}', [CourseController::class, 'courseEditInfo'])->middleware('auth')->middleware('admin')->name('admin.coursesEdit');  // This view is in Course controller
     Route::get('/admin/courses/content/{courseId}', [CourseController::class, 'courseInfoContent'])->middleware('auth')->middleware('admin')->name('admin.coursesContent');
     Route::get('/admin/courses/content/add/{courseId}', [CourseController::class, 'courseInfoAddContent'])->middleware('auth')->middleware('admin')->name('admin.coursesAddContent');
+    Route::get('/admin/courses/content/edit/{courseId}/{contentId}', [CourseController::class, 'courseEditContent'])->middleware('auth')->middleware('admin')->name('admin.coursesEditContent');
 });

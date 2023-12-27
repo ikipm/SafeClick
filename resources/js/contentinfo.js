@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const openModalButtons = document.querySelectorAll(".contentInfo-button");
     const closeModalButton = document.getElementById("closeModalButton");
 
-    const openModal = (courseId, contentTitle, content) => {
+    const openModal = (contentId, contentTitle, content) => {
         const modalContent = document.getElementById("courseInfoContent");
         modalContent.innerHTML = `
-            <h2>Course ID: ${courseId}</h2>
+            <h2>Content ID: ${contentId}</h2>
             <h3>Content Title: ${contentTitle}</h3>
             <p>${content}</p>
         `;
@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
         openModalButtons.forEach((button) => {
             button.addEventListener("click", (event) => {
                 event.preventDefault();
-                const { courseId, contentTitle, content } = button.dataset;
-                openModal(courseId, contentTitle, content);
+                const { contentId, contentTitle, content } = button.dataset;
+                openModal(contentId, contentTitle, content);
             });
         });
     }

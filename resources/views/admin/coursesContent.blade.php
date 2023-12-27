@@ -33,8 +33,8 @@
                             <li>
                                 <span class="content-name">{{$content->title}}</span>
                                 <div class="content-buttons">
-                                    <a class="contentInfo-button" href="#" data-course-id="{{ $course->id }}" data-content-title="{{ $content->title }}" data-content="{{$content->content}}">@lang('admin.info')</a>
-                                    <a class="content-button" href="">@lang('admin.edit')</a>
+                                    <a class="content-button contentInfo-button" href="#" data-content-id="{{ $content->content_id }}" data-content-title="{{ $content->title }}" data-content="{{$content->content}}">@lang('admin.info')</a>
+                                    <a class="content-button" href="/admin/courses/content/edit/{{$course->id}}/{{$content->content_id}}">@lang('admin.edit')</a>
                                 </div>
                             </li>
                             @endforeach

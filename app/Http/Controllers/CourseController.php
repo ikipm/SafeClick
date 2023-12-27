@@ -222,4 +222,45 @@ class CourseController extends Controller
 
         return redirect()->back()->with('success', 'Course updated successfully');
     }
+
+    public function courseEditContent($courseId, $contentId)
+    {
+        $course = Course::with('translations')->findOrFail($courseId);
+        $content = $course->contents()->where('content_id', $contentId)->get();
+        return view('admin.coursesEditContent', compact('course', 'content'));
+    }
+    
+    public function updateContent(Request $request, $id, $contentId)
+    {
+        // Find the course by its ID
+        $course = Course::findOrFail($id);
+
+        // Validate the updated data (similar to the create method)
+        $validatedData = $request->validate([
+            'title-cat' => 'required|string|max:255',
+            'title-es' => 'required|string|max:255',
+            'title-en' => 'required|string|max:255',
+            'content-cat' => 'required|string',
+            'content-es' => 'required|string',
+            'content-en' => 'required|string',
+        ]);
+
+        // Update the course's translations
+        $course->contents()->where('locale', 'cat')->where('content_id', $contentId)->update([
+            'title' => $validatedData['title-cat'],
+            'content' => $validatedData['content-cat'],
+        ]);
+
+        $course->contents()->where('locale', 'es')->where('content_id', $contentId)->update([
+            'title' => $validatedData['title-es'],
+            'content' => $validatedData['content-es'],
+        ]);
+
+        $course->contents()->where('locale', 'en')->where('content_id', $contentId)->update([
+            'title' => $validatedData['title-en'],
+            'content' => $validatedData['content-en'],
+        ]);
+
+        return redirect()->back()->with('success', 'Content updated successfully');
+    }
 }
