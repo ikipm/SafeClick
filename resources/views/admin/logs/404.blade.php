@@ -16,30 +16,34 @@
     <x-admin-side-bar />
 
     <main>
+        @php
+            $logEntries = array_reverse(file(storage_path('logs/404.log')));
+            $perPage = 15;
+            $currentPage = request('page', 1);
+            $offset = ($currentPage - 1) * $perPage;
+            $entriesToShow = array_slice($logEntries, $offset, $perPage);
+            $totalPages = ceil(count($logEntries) / $perPage);
+        @endphp
         <div class="container">
             <h2>Admin log system</h2>
             <div class="card">
                 <div class="card-header">
-                    <h3>404 codes</h3>
+                    <h3>404 codes | Page: {{$currentPage}}/{{$totalPages}}</h3>
                 </div>
                 <div class="content-text">
-                    @php
-                        $logEntries = array_reverse(file(storage_path('logs/404.log')));
-                        $perPage = 10;
-                        $currentPage = request('page', 1);
-                        $offset = ($currentPage - 1) * $perPage;
-                        $entriesToShow = array_slice($logEntries, $offset, $perPage);
-                    @endphp
-
                     @foreach($entriesToShow as $line)
-                        <p>{{$line}}</p>
+                    <p>{{$line}}</p>
                     @endforeach
 
+                    @if ($totalPages > 1)
                     <div class="pagination">
-                        @for ($i = 1; $i <= ceil(count($logEntries) / $perPage); $i++)
-                            <a href="?page={{ $i }}">{{ $i }}</a>
-                        @endfor
+                        @if ($currentPage > 1)
+                        <a href="?page={{ $currentPage - 1 }}">Previous</a>
+                        @endif
+                        @if ($currentPage < $totalPages) <a href="?page={{ $currentPage + 1 }}">Next</a>
+                            @endif
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
