@@ -13,6 +13,8 @@ return [
     'feedbackTitle' => 'Feedback',
     'feedback' => ' comments to review',
     'adminButton' => 'Admin Dashboard',
+    'courseTitle' => 'Courses',
+    'course' => 'courses',
     'courses' => 'Create and edit courses',
     'course-title-cat' => 'Title in catalan',
     'course-title-es' => 'Title in spanish',

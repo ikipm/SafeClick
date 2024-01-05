@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -178,6 +179,13 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $request->session()->put('user_ip_address', $request->ip());
+            
+            // Logs the guest IP among the access date and time
+            $logMessage = sprintf(
+                'New user guest IP: %s',
+                $request->ip()
+            );
+            Log::channel('guest')->info($logMessage);
 
             return redirect("/courses");
         } else {

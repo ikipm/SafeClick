@@ -18,6 +18,7 @@
     <main>
         @php
             use App\Models\User;
+            use App\Models\Course;
             use Illuminate\Support\Facades\DB;
         @endphp
 
@@ -33,12 +34,12 @@
                     </div>
                 </a>
 
-                <a href="/admin" class="card">
+                <a href="/admin/courses" class="card">
                     <div class="card-header">
-                        <h3>@lang('admin.takingCourse')</h3>
+                        <h3>@lang('admin.courseTitle')</h3>
                     </div>
                     <div class="content-text">
-                        <h3>No graph at the moment</h3>
+                        <h3>{{ Course::count() }} @lang('admin.course')</h3>
                     </div>
                 </a>
 

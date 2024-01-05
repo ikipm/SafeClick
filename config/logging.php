@@ -119,6 +119,11 @@ return [
             'path' => storage_path('logs/404.log'),
             'level' => 'info',
         ],
+        // Guests are stored with the IP
+        'guest' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/guest.log'),
+            'level' => 'info',
+        ],
     ],
-
 ];
