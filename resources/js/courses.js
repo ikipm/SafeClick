@@ -1,3 +1,5 @@
+let draggedItem = null;
+
 function showWarningMessage(message) {
     const warningAlert = document.getElementById("warning-alert");
     warningAlert.innerHTML = message;
@@ -10,8 +12,9 @@ function hideWarningMessage() {
 }
 
 function convertMarkdownToHTML(markdown) {
-    const regex = /\[exercise\]([\s\S]*?)\[\/exercise\]/g;
-    return markdown.replace(regex, (match, content) => {
+    // Handle [exercise] exercises
+    const exerciseRegex = /\[exercise\]([\s\S]*?)\[\/exercise\]/g;
+    markdown = markdown.replace(exerciseRegex, (match, content) => {
         content = content.replace(
             /\[ \]/g,
             '<input type="radio" name="exercise">'
@@ -22,14 +25,74 @@ function convertMarkdownToHTML(markdown) {
         );
         return content;
     });
+
+    // Handle [drag] exercises
+    const dragRegex = /\[drag\]([\s\S]*?)\[\/drag\]/g;
+    const convertedHTML = markdown.replace(dragRegex, (match, content) => {
+        const lines = content.trim().split('\n');
+
+        // Separate drag items and drag zones
+        const dragItems = [];
+        const dragZones = [];
+
+        lines.forEach(line => {
+            if (line.startsWith('[')) {
+                dragZones.push(line);
+            } else {
+                dragItems.push(line);
+            }
+        });
+
+        // Create drag items
+        const dragItemsHTML = dragItems.map((item, index) => {
+            const matchResult = item.match(/^(.*?)\s*\((\d+)\)$/);
+            if (matchResult) {
+                const itemName = matchResult[1].trim();
+                const dragZoneNumber = matchResult[2];
+                return `<div class="draggable-item" draggable="true" data-index="${index}" data-dragzone="${dragZoneNumber}">${itemName}</div>`;
+            }
+            return '';
+        });
+
+        // Create drag zones
+        const dragZoneContainers = dragZones.map((zone, index) => {
+            const matchResult = zone.match(/^\[(.*?)\]\s*\((\d+)\)$/);
+            if (matchResult) {
+                const zoneName = matchResult[1].trim();
+                const zoneNumber = matchResult[2];
+                return `<div class="drag-zone" data-dragzone="${zoneNumber}">${zoneName}</div>`;
+            }
+            return '';
+        });
+
+        return `
+            <div class="draggable-container">${dragItemsHTML.join('')}</div>
+            <div class="drag-zone-container">${dragZoneContainers.join('')}</div>
+        `;
+    });
+
+    return convertedHTML;
 }
 
 function isMarkedDown() {
-    return (
-        document.querySelector(
-            'input[name="exercise"][id="correct"]:checked'
-        ) !== null
-    );
+    return document.querySelector('input[name="exercise"][id="correct"]:checked') !== null;
+}
+
+function areItemsInCorrectZones() {
+    const draggableItems = document.querySelectorAll('.draggable-item');
+    let allCorrect = true;
+    draggableItems.forEach(item => {
+        const parentZone = item.parentElement;
+        if (!parentZone.dataset.dragzone || item.dataset.dragzone !== parentZone.dataset.dragzone) {
+            item.classList.add('incorrect');
+            item.classList.remove('correct');
+            allCorrect = false;
+        } else {
+            item.classList.add('correct');
+            item.classList.remove('incorrect');
+        }
+    });
+    return allCorrect;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -41,29 +104,79 @@ document.addEventListener("DOMContentLoaded", function () {
     const courseContent = document.querySelector(".course-content");
     courseContent.innerHTML = convertedHTML;
 
-    // Check if [exercise] exists in parsedContent
-    if (parsedContent.includes("[exercise]")) {
-        const prevButton = document.querySelector(".button-prev");
-        const nextButton = document.querySelector(".button-next");
+    const nextButton = document.querySelector(".button-next");
+    nextButton.addEventListener("click", function (e) {
+        Lang.setLocale(currentLocale);
+        if (parsedContent.includes("[exercise]") && !isMarkedDown()) {
+            e.preventDefault();
+            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
+        } else if (parsedContent.includes("[drag]") && !areItemsInCorrectZones()) {
+            e.preventDefault();
+            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
+        } else {
+            hideWarningMessage();
+        }
+    });
 
-        /*prevButton.addEventListener("click", function (e) {
-            Lang.setLocale(currentLocale);
-            if (!isMarkedDown()) {
-                e.preventDefault();
-                showWarningMessage(Lang.get("courses.notCorrectAnswer"));
-            } else {
-                hideWarningMessage();
-            }
-        });*/
-
-        nextButton.addEventListener("click", function (e) {
-            Lang.setLocale(currentLocale);
-            if (!isMarkedDown()) {
-                e.preventDefault();
-                showWarningMessage(Lang.get("courses.notCorrectAnswer"));
-            } else {
-                hideWarningMessage();
-            }
-        });
+    if (parsedContent.includes("[drag]")) {
+        initDragAndDrop();
     }
 });
+
+function initDragAndDrop() {
+    const draggableItems = document.querySelectorAll('.draggable-item');
+    const dragZones = document.querySelectorAll('.drag-zone');
+
+    draggableItems.forEach(item => {
+        item.addEventListener('dragstart', handleDragStart);
+        item.addEventListener('touchstart', handleDragStart);
+    });
+
+    dragZones.forEach(zone => {
+        zone.addEventListener('dragover', handleDragOver);
+        zone.addEventListener('drop', handleDrop);
+        zone.addEventListener('touchmove', handleDragOver);
+        zone.addEventListener('touchend', handleDrop);
+    });
+}
+
+function handleDragStart(event) {
+    if (event.type === 'touchstart') {
+        draggedItem = event.target;
+        event.preventDefault();
+    } else { // event.type === 'dragstart'
+        event.dataTransfer.setData('text/plain', event.target.dataset.index);
+    }
+}
+
+function handleDragOver(event) {
+    if (event.type === 'touchmove') {
+        event.preventDefault();
+    } else { // event.type === 'dragover'
+        event.preventDefault();
+        const dragZone = event.target.dataset.dragzone;
+        if (dragZone) {
+            event.dataTransfer.dropEffect = 'move';
+        }
+    }
+}
+
+function handleDrop(event) {
+    if (event.type === 'touchend') {
+        const dragZone = event.target.closest('.drag-zone');
+        if (dragZone && draggedItem) {
+            dragZone.appendChild(draggedItem);
+            draggedItem = null;
+        }
+        event.preventDefault();
+    } else { // event.type === 'drop'
+        event.preventDefault();
+        const data = event.dataTransfer.getData('text/plain');
+        const draggedItem = document.querySelector(`.draggable-item[data-index="${data}"]`);
+        const dragZone = event.target.closest('.drag-zone');
+
+        if (dragZone) {
+            dragZone.appendChild(draggedItem);
+        }
+    }
+}

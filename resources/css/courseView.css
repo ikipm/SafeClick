@@ -118,3 +118,41 @@
     margin: 20px auto;
     display: none;
 }
+
+.draggable-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.drag-zone-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.drag-zone {
+    border: 2px dashed #999;
+    padding: 10px;
+    background-color: #f0f0f0;
+    cursor: move;
+}
+
+.drag-zone:hover {
+    background-color: #e0e0e0;
+}
+
+.draggable-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: grab;
+}
+
+.draggable-item.correct {
+    color: green;
+}
+
+.draggable-item.incorrect {
+    color: red;
+}
