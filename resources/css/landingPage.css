@@ -12,6 +12,19 @@ header {
 
 .hero-button-container {
     text-align: center;
+    margin-top: 2%;
+}
+
+.social-media-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.hero-socialmedia {
+    text-align: center;
+    display: block;
+    margin: 0 15px;
 }
 
 h1 {
