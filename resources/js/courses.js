@@ -1,37 +1,62 @@
-let draggedItem = null;
+import dragDropTouch from 'drag-drop-touch';
+
+const warningAlert = document.getElementById("warning-alert");
+const parsedContentElement = document.getElementById("parsed-content");
+const parsedContentJSON = parsedContentElement.getAttribute("data-content");
+const parsedContent = JSON.parse(parsedContentJSON);
+const courseContent = document.querySelector(".course-content");
+const nextButton = document.querySelector(".button-next");
+const draggableItems = document.querySelectorAll('.draggable-item');
+const dragZones = document.querySelectorAll('.drag-zone');
+
+document.addEventListener("DOMContentLoaded", function () {
+    const convertedHTML = convertMarkdownToHTML(parsedContent);
+    courseContent.innerHTML = convertedHTML;
+
+    nextButton.addEventListener("click", function (e) {
+        Lang.setLocale(currentLocale);
+        if (parsedContent.includes("[exercise]") && !isMarkedDown()) {
+            e.preventDefault();
+            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
+        } else if (parsedContent.includes("[drag]") && !areItemsInCorrectZones()) {
+            e.preventDefault();
+            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
+        } else {
+            hideWarningMessage();
+        }
+    });
+
+    if (parsedContent.includes("[drag]")) {
+        initDragAndDrop();
+    }
+});
 
 function showWarningMessage(message) {
-    const warningAlert = document.getElementById("warning-alert");
     warningAlert.innerHTML = message;
     warningAlert.style.display = "block";
 }
 
 function hideWarningMessage() {
-    const warningAlert = document.getElementById("warning-alert");
     warningAlert.style.display = "none";
 }
 
+/**
+ * Converts markdown content to HTML with specific formatting for exercises and drag items.
+ * 
+ * @param {string} markdown - The markdown content to be converted.
+ * @returns {string} The converted HTML.
+ */
 function convertMarkdownToHTML(markdown) {
-    // Handle [exercise] exercises
     const exerciseRegex = /\[exercise\]([\s\S]*?)\[\/exercise\]/g;
     markdown = markdown.replace(exerciseRegex, (match, content) => {
-        content = content.replace(
-            /\[ \]/g,
-            '<input type="radio" name="exercise">'
-        );
-        content = content.replace(
-            /\[x\]/g,
-            '<input type="radio" name="exercise" id="correct">'
-        );
+        content = content.replace(/\[ \]/g, '<input type="radio" name="exercise">');
+        content = content.replace(/\[x\]/g, '<input type="radio" name="exercise" id="correct">');
         return content;
     });
 
-    // Handle [drag] exercises
     const dragRegex = /\[drag\]([\s\S]*?)\[\/drag\]/g;
     const convertedHTML = markdown.replace(dragRegex, (match, content) => {
         const lines = content.trim().split('\n');
-
-        // Separate drag items and drag zones
         const dragItems = [];
         const dragZones = [];
 
@@ -43,7 +68,6 @@ function convertMarkdownToHTML(markdown) {
             }
         });
 
-        // Create drag items
         const dragItemsHTML = dragItems.map((item, index) => {
             const matchResult = item.match(/^(.*?)\s*\((\d+)\)$/);
             if (matchResult) {
@@ -54,7 +78,6 @@ function convertMarkdownToHTML(markdown) {
             return '';
         });
 
-        // Create drag zones
         const dragZoneContainers = dragZones.map((zone, index) => {
             const matchResult = zone.match(/^\[(.*?)\]\s*\((\d+)\)$/);
             if (matchResult) {
@@ -79,7 +102,6 @@ function isMarkedDown() {
 }
 
 function areItemsInCorrectZones() {
-    const draggableItems = document.querySelectorAll('.draggable-item');
     let allCorrect = true;
     draggableItems.forEach(item => {
         const parentZone = item.parentElement;
@@ -95,88 +117,38 @@ function areItemsInCorrectZones() {
     return allCorrect;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const parsedContentElement = document.getElementById("parsed-content");
-    const parsedContentJSON = parsedContentElement.getAttribute("data-content");
-    const parsedContent = JSON.parse(parsedContentJSON);
-
-    const convertedHTML = convertMarkdownToHTML(parsedContent);
-    const courseContent = document.querySelector(".course-content");
-    courseContent.innerHTML = convertedHTML;
-
-    const nextButton = document.querySelector(".button-next");
-    nextButton.addEventListener("click", function (e) {
-        Lang.setLocale(currentLocale);
-        if (parsedContent.includes("[exercise]") && !isMarkedDown()) {
-            e.preventDefault();
-            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
-        } else if (parsedContent.includes("[drag]") && !areItemsInCorrectZones()) {
-            e.preventDefault();
-            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
-        } else {
-            hideWarningMessage();
-        }
-    });
-
-    if (parsedContent.includes("[drag]")) {
-        initDragAndDrop();
-    }
-});
-
 function initDragAndDrop() {
-    const draggableItems = document.querySelectorAll('.draggable-item');
-    const dragZones = document.querySelectorAll('.drag-zone');
-
     draggableItems.forEach(item => {
         item.addEventListener('dragstart', handleDragStart);
-        item.addEventListener('touchstart', handleDragStart);
     });
 
     dragZones.forEach(zone => {
         zone.addEventListener('dragover', handleDragOver);
         zone.addEventListener('drop', handleDrop);
-        zone.addEventListener('touchmove', handleDragOver);
-        zone.addEventListener('touchend', handleDrop);
     });
+
+    dragDropTouch(draggableItems);
 }
 
 function handleDragStart(event) {
-    if (event.type === 'touchstart') {
-        draggedItem = event.target;
-        event.preventDefault();
-    } else { // event.type === 'dragstart'
-        event.dataTransfer.setData('text/plain', event.target.dataset.index);
-    }
+    event.dataTransfer.setData('text/plain', event.target.dataset.index);
 }
 
 function handleDragOver(event) {
-    if (event.type === 'touchmove') {
-        event.preventDefault();
-    } else { // event.type === 'dragover'
-        event.preventDefault();
-        const dragZone = event.target.dataset.dragzone;
-        if (dragZone) {
-            event.dataTransfer.dropEffect = 'move';
-        }
+    event.preventDefault();
+    const dragZone = event.target.dataset.dragzone;
+    if (dragZone) {
+        event.dataTransfer.dropEffect = 'move';
     }
 }
 
 function handleDrop(event) {
-    if (event.type === 'touchend') {
-        const dragZone = event.target.closest('.drag-zone');
-        if (dragZone && draggedItem) {
-            dragZone.appendChild(draggedItem);
-            draggedItem = null;
-        }
-        event.preventDefault();
-    } else { // event.type === 'drop'
-        event.preventDefault();
-        const data = event.dataTransfer.getData('text/plain');
-        const draggedItem = document.querySelector(`.draggable-item[data-index="${data}"]`);
-        const dragZone = event.target.closest('.drag-zone');
+    event.preventDefault();
+    const data = event.dataTransfer.getData('text/plain');
+    const draggedItem = document.querySelector(`.draggable-item[data-index="${data}"]`);
+    const dragZone = event.target.closest('.drag-zone');
 
-        if (dragZone) {
-            dragZone.appendChild(draggedItem);
-        }
+    if (dragZone) {
+        dragZone.appendChild(draggedItem);
     }
 }
