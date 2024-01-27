@@ -33,7 +33,7 @@ class UserCourseProgress extends Model
     }
 }
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 

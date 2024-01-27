@@ -13,6 +13,8 @@ return [
     'feedbackTitle' => 'Feedback',
     'feedback' => ' comentaris a revisar',
     'adminButton' => 'Panell d\'administració',
+    'courseTitle' => 'Cursos',
+    'course' => 'cursos',
     'courses' => 'Crear i editar cursos',
     'course-title-cat' => 'Titol en català',
     'course-title-es' => 'Titol en castellà',

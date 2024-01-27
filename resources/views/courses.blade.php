@@ -13,7 +13,7 @@
         <x-navbar />
     </header>
 
-    <x-snow />
+    <!--<x-snow />-->
     
     <main>
         @php

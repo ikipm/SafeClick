@@ -17,7 +17,7 @@
 
     <main>
         @php
-            $logEntries = array_reverse(file(storage_path('logs/404.log')));
+            $logEntries = array_reverse(file(storage_path('logs/guest.log')));
             $perPage = 15;
             $currentPage = request('page', 1);
             $offset = ($currentPage - 1) * $perPage;
@@ -28,7 +28,7 @@
             <h2>Admin log system</h2>
             <div class="card">
                 <div class="card-header">
-                    <h3>404 codes | Page: {{$currentPage}}/{{$totalPages}}</h3>
+                    <h3>Guests | Page: {{$currentPage}}/{{$totalPages}}</h3>
                 </div>
                 <div class="content-text">
                     @foreach($entriesToShow as $line)
