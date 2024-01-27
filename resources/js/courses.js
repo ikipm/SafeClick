@@ -1,20 +1,36 @@
 import DragDropTouch from "drag-drop-touch";
 
-let draggedItem = null;
+const draggedItem = null;
+const warningAlert = document.getElementById("warning-alert");
+const parsedContentElement = document.getElementById("parsed-content");
+const parsedContentJSON = parsedContentElement.getAttribute("data-content");
+const parsedContent = JSON.parse(parsedContentJSON);
+const courseContent = document.querySelector(".course-content");
+const nextButton = document.querySelector(".button-next");
+
+document.addEventListener("DOMContentLoaded", function () {
+    const convertedHTML = convertMarkdownToHTML(parsedContent);
+    courseContent.innerHTML = convertedHTML;
+
+    if (parsedContent.includes("[drag]")) {
+        initDragAndDrop();
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener("click", handleNextButtonClick);
+    }
+});
 
 function showWarningMessage(message) {
-    const warningAlert = document.getElementById("warning-alert");
     warningAlert.innerHTML = message;
     warningAlert.style.display = "block";
 }
 
 function hideWarningMessage() {
-    const warningAlert = document.getElementById("warning-alert");
     warningAlert.style.display = "none";
 }
 
 function convertMarkdownToHTML(markdown) {
-    // Handle [exercise] exercises
     const exerciseRegex = /\[exercise\]([\s\S]*?)\[\/exercise\]/g;
     markdown = markdown.replace(exerciseRegex, (match, content) => {
         content = content.replace(
@@ -28,12 +44,9 @@ function convertMarkdownToHTML(markdown) {
         return content;
     });
 
-    // Handle [drag] exercises
     const dragRegex = /\[drag\]([\s\S]*?)\[\/drag\]/g;
     const convertedHTML = markdown.replace(dragRegex, (match, content) => {
         const lines = content.trim().split("\n");
-
-        // Separate drag items and drag zones
         const dragItems = [];
         const dragZones = [];
 
@@ -45,7 +58,6 @@ function convertMarkdownToHTML(markdown) {
             }
         });
 
-        // Create drag items
         const dragItemsHTML = dragItems.map((item, index) => {
             const matchResult = item.match(/^(.*?)\s*\((\d+)\)$/);
             if (matchResult) {
@@ -56,7 +68,6 @@ function convertMarkdownToHTML(markdown) {
             return "";
         });
 
-        // Create drag zones
         const dragZoneContainers = dragZones.map((zone, index) => {
             const matchResult = zone.match(/^\[(.*?)\]\s*\((\d+)\)$/);
             if (matchResult) {
@@ -69,9 +80,7 @@ function convertMarkdownToHTML(markdown) {
 
         return `
             <div class="draggable-container">${dragItemsHTML.join("")}</div>
-            <div class="drag-zone-container">${dragZoneContainers.join(
-                ""
-            )}</div>
+            <div class="drag-zone-container">${dragZoneContainers.join("")}</div>
         `;
     });
 
@@ -79,11 +88,7 @@ function convertMarkdownToHTML(markdown) {
 }
 
 function isMarkedDown() {
-    return (
-        document.querySelector(
-            'input[name="exercise"][id="correct"]:checked'
-        ) !== null
-    );
+    return document.querySelector('input[name="exercise"][id="correct"]:checked') !== null;
 }
 
 function areItemsInCorrectZones() {
@@ -91,10 +96,7 @@ function areItemsInCorrectZones() {
     let allCorrect = true;
     draggableItems.forEach((item) => {
         const parentZone = item.parentElement;
-        if (
-            !parentZone.dataset.dragzone ||
-            item.dataset.dragzone !== parentZone.dataset.dragzone
-        ) {
+        if (!parentZone.dataset.dragzone || item.dataset.dragzone !== parentZone.dataset.dragzone) {
             item.classList.add("incorrect");
             item.classList.remove("correct");
             allCorrect = false;
@@ -105,37 +107,6 @@ function areItemsInCorrectZones() {
     });
     return allCorrect;
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    const parsedContentElement = document.getElementById("parsed-content");
-    const parsedContentJSON = parsedContentElement.getAttribute("data-content");
-    const parsedContent = JSON.parse(parsedContentJSON);
-
-    const convertedHTML = convertMarkdownToHTML(parsedContent);
-    const courseContent = document.querySelector(".course-content");
-    courseContent.innerHTML = convertedHTML;
-
-    const nextButton = document.querySelector(".button-next");
-    nextButton.addEventListener("click", function (e) {
-        Lang.setLocale(currentLocale);
-        if (parsedContent.includes("[exercise]") && !isMarkedDown()) {
-            e.preventDefault();
-            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
-        } else if (
-            parsedContent.includes("[drag]") &&
-            !areItemsInCorrectZones()
-        ) {
-            e.preventDefault();
-            showWarningMessage(Lang.get("courses.notCorrectAnswer"));
-        } else {
-            hideWarningMessage();
-        }
-    });
-
-    if (parsedContent.includes("[drag]")) {
-        initDragAndDrop();
-    }
-});
 
 function initDragAndDrop() {
     const draggableItems = document.querySelectorAll('.draggable-item');
@@ -156,7 +127,6 @@ function handleDragStart(event) {
 }
 
 function handleDragOver(event) {
-    // event.type === 'dragover'
     event.preventDefault();
     const dragZone = event.target.dataset.dragzone;
     if (dragZone) {
@@ -167,12 +137,23 @@ function handleDragOver(event) {
 function handleDrop(event) {
     event.preventDefault();
     const data = event.dataTransfer.getData("text/plain");
-    const draggedItem = document.querySelector(
-        `.draggable-item[data-index="${data}"]`
-    );
+    const draggedItem = document.querySelector(`.draggable-item[data-index="${data}"]`);
     const dragZone = event.target.closest(".drag-zone");
 
     if (dragZone) {
         dragZone.appendChild(draggedItem);
+    }
+}
+
+function handleNextButtonClick(e) {
+    Lang.setLocale(currentLocale);
+    if (parsedContent.includes("[exercise]") && !isMarkedDown()) {
+        e.preventDefault();
+        showWarningMessage(Lang.get("courses.notCorrectAnswer"));
+    } else if (parsedContent.includes("[drag]") && !areItemsInCorrectZones()) {
+        e.preventDefault();
+        showWarningMessage(Lang.get("courses.notCorrectAnswer"));
+    } else {
+        hideWarningMessage();
     }
 }
