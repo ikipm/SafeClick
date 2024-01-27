@@ -123,11 +123,14 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .drag-zone-container {
     display: flex;
+    flex-direction: row;
     gap: 20px;
+    flex-wrap: wrap;
     margin-top: 20px;
 }
 
@@ -136,10 +139,7 @@
     padding: 10px;
     background-color: #f0f0f0;
     cursor: move;
-}
-
-.drag-zone:hover {
-    background-color: #e0e0e0;
+    width: 10;
 }
 
 .draggable-item {
@@ -147,6 +147,11 @@
     border: 1px solid #ccc;
     background-color: #fff;
     cursor: grab;
+    width: auto;
+}
+
+.drag-zone:hover {
+    background-color: #e0e0e0;
 }
 
 .draggable-item.correct {
@@ -155,4 +160,12 @@
 
 .draggable-item.incorrect {
     color: red;
+}
+
+@media (max-width: 767px) {
+    .draggable-container,
+    .drag-zone-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
 }
