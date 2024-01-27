@@ -14,11 +14,19 @@
     </header>
 
     <!--<x-snow />-->
-    
+
     <main>
         @php
         use App\Models\UserCourseProgress;
         @endphp
+
+        <div id="announcement-wrapper" style="display: none;">
+            <div id="announcement">
+                <h2>@lang("courses.welcomeAnnouncementTitle")</h2>
+                <p>@lang("courses.welcomeAnnouncementText")</p>
+                <button id="close-announcement">@lang("courses.welcomeAnnouncementClose")</button>
+            </div>
+        </div>
 
         <section class="cards-section">
             <div class="container">
@@ -64,6 +72,7 @@
             </div>
         </section>
     </main>
+    <script src="{{ asset('js/alert.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/platform.css') }}">
 </body>
 
