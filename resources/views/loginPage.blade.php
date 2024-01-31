@@ -17,7 +17,7 @@
             <h2>@lang('loginPage.register')</h2>
             @if(request('verify') === 'yes')
             <div id="warning-alert-r" class="alert-warning" style="display: block" role="alert">
-                <p>You must verify your email address before logging in.</p>
+                <p>@lang('loginPage.verifyEmail')</p>
             </div>
             @endif
             @if ($errors->any() && !$errors->has("errorLogin"))

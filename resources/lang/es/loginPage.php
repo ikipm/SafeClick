@@ -26,5 +26,6 @@ return [
     'terms' => 'Acepto los',
     'termsLink' => 'Términos y Condiciones',
     'loginTest' => 'Entra como invitado',
-    'loginTestDescription' => '¡Al entrar como un invitado, tu progreso no se guardará!'
+    'loginTestDescription' => '¡Al entrar como un invitado, tu progreso no se guardará!',
+    'verifyEmail' => 'Debes verificar tu correo electrónico antes de iniciar sesión.',
 ];

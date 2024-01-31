@@ -26,5 +26,6 @@ return [
     'terms' => 'Accepto els',
     'termsLink' => 'Termes i Condicions',
     'loginTest' => 'Entra com a convidat',
-    'loginTestDescription' => 'Al entrar com a convidat, el teu progrès no es guardarà!'
+    'loginTestDescription' => 'Al entrar com a convidat, el teu progrès no es guardarà!',
+    'verifyEmail' => 'Has de verificar el teu correu electrònic abans d\'iniciar sessió.',
 ];
