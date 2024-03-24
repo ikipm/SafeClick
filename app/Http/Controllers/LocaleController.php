@@ -22,6 +22,6 @@ class LocaleController extends Controller
         session(['locale' => $lang]);
 
         // Redirect back to the previous page or any other desired page
-        return back();
+        return redirect("/");
     }
 }
