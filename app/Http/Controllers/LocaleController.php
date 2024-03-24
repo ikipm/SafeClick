@@ -21,7 +21,11 @@ class LocaleController extends Controller
         app()->setLocale($lang);
         session(['locale' => $lang]);
 
-        // Redirect back to the previous page or any other desired page
-        return redirect("/");
+        // If it comes from outside the website, it redirects to /, if not, it redirects to the previous page
+        if ($request->has('from')) {
+            return redirect("/");
+        } else {
+            return redirect()->back();
+        }
     }
 }
