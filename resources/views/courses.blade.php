@@ -41,7 +41,7 @@
                     if ($course->contents->count() !== 0) {
                     $totalContents = $course->contents->count() / 3;
                     $percentageCompleted = ($userProgress / $totalContents) * 100;
-                    if ($userProgress < $totalContents) { $userProgress +=1; } } else { $percentageCompleted=100; } @endphp @if ($userProgress==0) <a class="card" style="opacity: 0.5;">
+                    if ($userProgress == 0) { $userProgress +=1; } } else { $percentageCompleted=100; } @endphp @if ($userProgress==0) <a class="card" style="opacity: 0.5;">
                         <div class="card-header">
                             <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
                         </div>

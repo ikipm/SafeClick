@@ -135,15 +135,18 @@ class CourseController extends Controller
                     'last_content_id' => $contentId,
                 ]);
             } elseif ($userProgress->last_content_id < $contentId) {
-                // Update the last_content_id for the existing progress record
-                $userProgress->last_content_id = $contentId;
-                $userProgress->save();
+                if ($userProgress->last_content_id == $contentId - 1) {
+                    $userProgress->last_content_id = $contentId;
+                    $userProgress->save();
+                } else {
+                    return redirect()->back()->with('error', 'You must complete the previous content first');
+                }
             }
         }
 
         $content = $course->contents()->where('content_id', $contentId);
 
-        return view('courseID', compact('course', 'content'));
+        return view('courseID', compact('course', 'content', 'userProgress'));
     }
 
     public function search(Request $request)

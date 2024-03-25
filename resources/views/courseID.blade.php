@@ -51,6 +51,7 @@ $parsedContent = $parsedown->text($content->content);
     <script>
         // Pass the locale value to JavaScript
         var currentLocale = "{{ app()->getLocale() }}";
+        var isLastVisitedContent = "{{ ($userProgress->last_content_id ?? $content->content_id) == $content->content_id }}";
     </script>
     <script src="{{ asset('js/courses.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/courseView.css') }}" type="text/css">
