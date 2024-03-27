@@ -1,4 +1,4 @@
-![SafeClick](https://safeclick.cat/img/SafeClickAd.webp)
+![SafeClick](./public/img/SafeClickAd.webp)
 
 ## How to Run the Code
 
