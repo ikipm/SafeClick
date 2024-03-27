@@ -18,5 +18,7 @@ return [
     'collaborators' => 'Nuestros colaboradores',
     'cookiesDesc' => "Esta página utiliza cookies esenciales para garantizar un correcto funcionamiento. Si continuáis utilizando este sitio, accederéis a utilizarlas.",
     'cookiesButton' => 'De acuerdo',
-    'cookiesInfo' => 'Más información'
+    'cookiesInfo' => 'Más información',
+    'login' => 'Iniciar sesión',
+    'tryNow' => 'Pruébalo ahora',
 ];
