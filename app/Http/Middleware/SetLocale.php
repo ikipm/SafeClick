@@ -21,7 +21,8 @@ class SetLocale
             $locale = $request->input('lang');
             app()->setLocale($locale);
             session(['locale' => $locale]);
-        } else {
+        }
+        else {
             // If the lang parameter is not present, check if the locale is stored in the session
             $locale = session('locale');
             if ($locale) {

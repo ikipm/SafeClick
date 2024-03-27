@@ -20,6 +20,14 @@
         use App\Models\UserCourseProgress;
         @endphp
 
+        <div id="announcement-wrapper" style="display: none;">
+            <div id="announcement">
+                <h2>@lang("courses.welcomeAnnouncementTitle")</h2>
+                <p>@lang("courses.welcomeAnnouncementText")</p>
+                <button id="close-announcement">@lang("courses.welcomeAnnouncementClose")</button>
+            </div>
+        </div>
+
         <section class="cards-section">
             <div class="container">
                 <h2>@lang("courses.courses")</h2>
@@ -33,7 +41,7 @@
                     if ($course->contents->count() !== 0) {
                     $totalContents = $course->contents->count() / 3;
                     $percentageCompleted = ($userProgress / $totalContents) * 100;
-                    if ($userProgress < $totalContents) { $userProgress +=1; } } else { $percentageCompleted=100; } @endphp @if ($userProgress==0) <a class="card" style="opacity: 0.5;">
+                    if ($userProgress == 0) { $userProgress +=1; } } else { $percentageCompleted=100; } @endphp @if ($userProgress==0) <a class="card" style="opacity: 0.5;">
                         <div class="card-header">
                             <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
                         </div>
@@ -64,6 +72,7 @@
             </div>
         </section>
     </main>
+    <script src="{{ asset('js/alert.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/platform.css') }}">
 </body>
 

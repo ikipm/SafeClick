@@ -26,5 +26,6 @@ return [
     'terms' => 'I agree to the',
     'termsLink' => 'Terms and Conditions',
     'loginTest' => 'Continue as Guest',
-    'loginTestDescription' => 'If you enter as a guest, your progress won\'t be saved!'
+    'loginTestDescription' => 'If you enter as a guest, your progress won\'t be saved!',
+    'verifyEmail' => 'You must verify your email before login.',
 ];

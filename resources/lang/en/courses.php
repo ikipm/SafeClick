@@ -5,4 +5,7 @@ return [
     'previous' => 'Previous',
     'next' => 'Next',
     'notCorrectAnswer' => 'This is not the correct answer.',
+    'welcomeAnnouncementTitle' => 'Welcome to SafeClick!',
+    'welcomeAnnouncementText' => 'This platform is improving daily. If you have any questions or suggestions, you can contact us: info@safeclick.cat',
+    'welcomeAnnouncementClose' => 'Close',
 ];
