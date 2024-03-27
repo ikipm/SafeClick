@@ -14,7 +14,7 @@
     </header>
 
     <!--<x-snow />-->
-    
+
     <main>
         @php
         use App\Models\UserCourseProgress;
@@ -52,25 +52,31 @@
                         <div class="progress-bar">
                             <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
                         </div>
-                        </a>
-                        @else
-                        <a class="card" href="/courses/{{$course->id}}/{{$userProgress}}">
-                            <div class="card-header">
-                                <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
-                            </div>
-                            <img src="{{asset($course->img)}}" alt="Card Image">
-                            <div class="card-description">
-                                <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
-                            </div>
-                        </a>
-                        @endif
-                        @endforeach
+                    </a>
+                    @else
+                    <a class="card" href="/courses/{{$course->id}}/{{$userProgress}}">
+                        <div class="card-header">
+                            <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
+                        </div>
+                        <img src="{{asset($course->img)}}" alt="Card Image">
+                        <div class="card-description">
+                            <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
+                        </div>
+                    </a>
+                    @endif
+                    @endforeach
                 </div>
             </div>
         </section>
+        @if (auth()->user()->testUser)
+            <div class="register-alert-container">
+                <h3>@lang("courses.testUserRegister")</h3>
+                <a class="register-alert-button" href="/login">@lang("courses.testUserRegisterButton")</a>
+            </div>
+        @endif
     </main>
     <script src="{{ asset('js/alert.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/platform.css') }}">

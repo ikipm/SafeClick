@@ -71,11 +71,11 @@ h1 {
     font-weight: bold;
     transition: background-color 0.3s, transform 0.3s;
     display: inline-block;
+    margin-right: 10px; /* Added margin between buttons */
 }
 
 .hero-button:hover {
-    background-color: #48b963;
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .feature-section {
