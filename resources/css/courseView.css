@@ -150,10 +150,6 @@
     width: auto;
 }
 
-.drag-zone:hover {
-    background-color: #e0e0e0;
-}
-
 .draggable-item.correct {
     color: green;
 }

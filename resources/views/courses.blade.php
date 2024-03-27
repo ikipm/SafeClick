@@ -14,7 +14,7 @@
     </header>
 
     <!--<x-snow />-->
-
+    
     <main>
         @php
         use App\Models\UserCourseProgress;

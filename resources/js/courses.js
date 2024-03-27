@@ -46,6 +46,7 @@ function convertMarkdownToHTML(markdown) {
                 dragItems.push(line);
             }
         });
+
         const dragItemsHTML = dragItems.map((item, index) => {
             const matchResult = item.match(/^(.*?)\s*\((\d+)\)$/);
             if (matchResult) {
@@ -55,6 +56,7 @@ function convertMarkdownToHTML(markdown) {
             }
             return "";
         });
+
         const dragZoneContainers = dragZones.map((zone, index) => {
             const matchResult = zone.match(/^\[(.*?)\]\s*\((\d+)\)$/);
             if (matchResult) {
