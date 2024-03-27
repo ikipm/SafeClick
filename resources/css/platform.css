@@ -42,6 +42,8 @@
 
 .card-description {
     padding: 20px;
+    text-decoration: none;
+    color: black;
 }
 
 .card-description p {
