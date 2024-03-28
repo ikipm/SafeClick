@@ -43,7 +43,7 @@
                     </div>
                 </a>
 
-                <a href="/admin" class="card">
+                <a href="/admin/users" class="card">
                     <div class="card-header">
                         <h3>@lang('admin.newUsers')</h3>
                     </div>
@@ -52,30 +52,30 @@
                     </div>
                 </a>
 
-                <a href="/admin" class="card">
+                <a href="{{ env('HOSTING_PROVIDER_WEBSITE') }}" class="card" target="_blank">
                     <div class="card-header">
-                        <h3>@lang('admin.excercisesTitle')</h3>
+                        <h3>@lang('admin.panel')</h3>
                     </div>
                     <div class="content-text">
-                        <h3>15 @lang('admin.excercices')</h3>
+                        <h3>{{ env('HOSTING_PROVIDER_NAME') }} panel</h3>
                     </div>
                 </a>
 
-                <a href="/admin" class="card">
-                    <div class="card-header">
-                        <h3>@lang('admin.questionsTitle')</h3>
+                <a href="{{ env('MAIL_PROVIDER_WEBSITE') }}" class="card" target="_blank">
+                <div class="card-header">
+                        <h3>@lang('admin.email')</h3>
                     </div>
                     <div class="content-text">
-                        <h3>20 @lang('admin.questions')</h3>
+                        <h3>{{ env('MAIL_PROVIDER_NAME') }} email</h3>
                     </div>
                 </a>
 
-                <a href="/admin" class="card">
+                <a href="{{ env('STADISTICS_PROVIDER_WEBSITE') }}" class="card" target="_blank">
                     <div class="card-header">
-                        <h3>@lang('admin.feedbackTitle')</h3>
+                        <h3>@lang('admin.stadistics')</h3>
                     </div>
                     <div class="content-text">
-                        <h3>20 @lang('admin.feedback')</h3>
+                        <h3>{{ env('STADISTICS_PROVIDER_NAME') }} panel</h3>
                     </div>
                 </a>
             </div>
