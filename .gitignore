@@ -27,6 +27,7 @@ Homestead.json
 
 # Specific in this project
 /public/img/courses/*
+/public/img/news/*
 
 # Build CSS and JS files
 public/css/*

@@ -71,14 +71,33 @@
                 </div>
             </div>
         </section>
-        @if (auth()->user()->testUser)
-            <div class="register-alert-container">
-                <h3>@lang("courses.testUserRegister")</h3>
-                <a class="register-alert-button" href="/login">@lang("courses.testUserRegisterButton")</a>
+        <div id="newsSection">
+            <!--<div id="toggle-news" class="toggle-button">
+                <button id="toggle-news">Toggle News</button>
+            </div>-->
+            <div class="newsHeader">
+                <h2>Notícies</h2>
             </div>
+            @foreach ($news->reverse() as $newsItem)
+                <a href="{{ $newsItem->url }}" class="newsCard">
+                    <div class="newsImage" style="background-image: url('{{ $newsItem->img }}');"></div>
+                    <div class="newsContent">
+                        <h3>{{ $newsItem->translations->where('locale', $locale)->first()->title }}</h3>
+                        <p>{{ date('d-m H:i', strtotime($newsItem->created_at)) }} | {{ $newsItem->translations->where('locale', $locale)->first()->description }}</p>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+
+        @if (auth()->user()->testUser)
+        <div class="register-alert-container">
+            <h3>@lang("courses.testUserRegister")</h3>
+            <a class="register-alert-button" href="/login">@lang("courses.testUserRegisterButton")</a>
+        </div>
         @endif
     </main>
     <script src="{{ asset('js/alert.js') }}"></script>
+    <!--<script src="{{ asset('js/news.js') }}"></script>-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/platform.css') }}">
 </body>
 

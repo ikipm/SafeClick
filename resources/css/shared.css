@@ -12,12 +12,13 @@ h2 {
 }
 
 .button {
+    font-size: 16px;
     background-color: #64c97e;
     color: white;
-    padding: 12px;
-    border: none;
+    padding: 5px;
     border-radius: 4px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .button:hover {
