@@ -35,4 +35,9 @@ return [
     'panel' => 'Panell de control del hosting',
     'email' => 'Correu electrònic',
     'stadistics' => 'Estadístiques',
+    '404' => 'Codis 404',
+    'guest' => 'Registre de convidats',
+    'url-news' => 'Enllaç a la notícia',
+    'img-news' => 'Imatge de la notícia',
+    'add-news' => 'Afegir notícia',
 ];

@@ -10,4 +10,6 @@ return [
     'welcomeAnnouncementClose' => 'Cerrar',
     'testUserRegister' => 'Regístrate para obtener acceso completo a las funcionalidades de SafeClick',
     'testUserRegisterButton' => '¡Regístrate ahora!',
+    'newsHeader' => 'Noticias',
+    'noNews' => 'No hay noticias para listar.',
 ];

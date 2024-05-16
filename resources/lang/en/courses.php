@@ -10,4 +10,6 @@ return [
     'welcomeAnnouncementClose' => 'Close',
     'testUserRegister' => 'Register to get full access to SafeClick functionalities',
     'testUserRegisterButton' => 'Register now!',
+    'newsHeader' => 'News',
+    'noNews' => 'There are no news to list.',
 ];

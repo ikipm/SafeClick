@@ -13,8 +13,6 @@
         <x-navbar />
     </header>
 
-    <!--<x-snow />-->
-
     <main>
         @php
         use App\Models\UserCourseProgress;
@@ -33,60 +31,62 @@
                 <h2>@lang("courses.courses")</h2>
                 <div class="card-container">
                     @foreach ($courses as $course)
-                    @php
-                    $userProgress = UserCourseProgress::where('user_id', auth()->user()->id)
-                    ->where('course_id', $course->id)
-                    ->first()->last_content_id ?? 0;
+                        @php
+                            $userProgress = UserCourseProgress::where('user_id', auth()->user()->id)
+                            ->where('course_id', $course->id)
+                            ->first()->last_content_id ?? 0;
 
-                    if ($course->contents->count() !== 0) {
-                    $totalContents = $course->contents->count() / 3;
-                    $percentageCompleted = ($userProgress / $totalContents) * 100;
-                    if ($userProgress == 0) { $userProgress +=1; } } else { $percentageCompleted=100; } @endphp @if ($userProgress==0) <a class="card" style="opacity: 0.5;">
-                        <div class="card-header">
-                            <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
-                        </div>
-                        <img src="{{asset($course->img)}}" alt="Card Image">
-                        <div class="card-description">
-                            <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
-                        </div>
-                    </a>
-                    @else
-                    <a class="card" href="/courses/{{$course->id}}/{{$userProgress}}">
-                        <div class="card-header">
-                            <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
-                        </div>
-                        <img src="{{asset($course->img)}}" alt="Card Image">
-                        <div class="card-description">
-                            <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
-                        </div>
-                    </a>
-                    @endif
+                            if ($course->contents->count() !== 0) {
+                            $totalContents = $course->contents->count() / 3;
+                            $percentageCompleted = ($userProgress / $totalContents) * 100;
+                            if ($userProgress == 0) { $userProgress +=1; } } else { $percentageCompleted=100; } @endphp @if ($userProgress==0) <a class="card" style="opacity: 0.5;">
+                            <div class="card-header">
+                                <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
+                            </div>
+                            <img src="{{asset($course->img)}}" alt="Card Image">
+                            <div class="card-description">
+                                <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
+                            </div>
+                        </a>
+                        @else
+                            <a class="card" href="/courses/{{$course->id}}/{{$userProgress}}">
+                                <div class="card-header">
+                                    <h3>{{ $course->translations->where('locale', $locale)->first()->title }}</h3>
+                                </div>
+                                <img src="{{asset($course->img)}}" alt="Card Image">
+                                <div class="card-description">
+                                    <p>{{ $course->translations->where('locale', $locale)->first()->description }}</p>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" style="width: {{$percentageCompleted}}%;"></div>
+                                </div>
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             </div>
         </section>
+
         <div id="newsSection">
-            <!--<div id="toggle-news" class="toggle-button">
-                <button id="toggle-news">Toggle News</button>
-            </div>-->
-            <div class="newsHeader">
-                <h2>Notícies</h2>
+            <button id="toggle-news" class="toggle-button">></button>
+            <h4 id="vertical-news-text">@lang("courses.newsHeader")</h4>
+            <div id="newsContainer">
+                <h2>@lang("courses.newsHeader")</h2>
+                @if ($news->count() == 0)
+                    <p>@lang("courses.noNews")</p>
+                @else
+                    @foreach ($news->reverse() as $newsItem)
+                        <a href="{{ $newsItem->url }}" class="newsCard">
+                            <div class="newsImage" style="background-image: url('{{ $newsItem->img }}');"></div>
+                            <h3>{{ $newsItem->translations->where('locale', $locale)->first()->title }}</h3>
+                            <p>{{ date('d-m H:i', strtotime($newsItem->created_at)) }} | {{ $newsItem->translations->where('locale', $locale)->first()->description }}</p>
+                        </a>
+                    @endforeach
+                @endif
             </div>
-            @foreach ($news->reverse() as $newsItem)
-                <a href="{{ $newsItem->url }}" class="newsCard">
-                    <div class="newsImage" style="background-image: url('{{ $newsItem->img }}');"></div>
-                    <div class="newsContent">
-                        <h3>{{ $newsItem->translations->where('locale', $locale)->first()->title }}</h3>
-                        <p>{{ date('d-m H:i', strtotime($newsItem->created_at)) }} | {{ $newsItem->translations->where('locale', $locale)->first()->description }}</p>
-                    </div>
-                </a>
-            @endforeach
         </div>
 
         @if (auth()->user()->testUser)
@@ -97,7 +97,7 @@
         @endif
     </main>
     <script src="{{ asset('js/alert.js') }}"></script>
-    <!--<script src="{{ asset('js/news.js') }}"></script>-->
+    <script src="{{ asset('js/news.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/platform.css') }}">
 </body>
 
