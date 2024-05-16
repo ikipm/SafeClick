@@ -12,14 +12,13 @@
 }
 
 .card {
-    width: calc(
-        33.33% - 15px
-    );
+    width: calc(33.33% - 15px);
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-decoration: none !important;
+    color: black;
 }
 
 .card-header {
@@ -42,6 +41,7 @@
 
 .card-description {
     padding: 20px;
+    text-decoration: none;
 }
 
 .card-description p {
@@ -94,6 +94,32 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.register-alert-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #64c97e;
+    color: #000;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px 20px 0 0;
+    box-sizing: border-box;
+}
+
+.register-alert-button {
+    background-color: #000;
+    color: #64c97e;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 /* Dark mode styles */

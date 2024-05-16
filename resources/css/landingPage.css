@@ -60,22 +60,25 @@ h1 {
     margin-bottom: 40px;
 }
 
-.hero-button {
+/* Button styles */
+.btn {
     margin-top: 5%;
-    background-color: #64c97e;
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.2em;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.3s;
     display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.hero-button:hover {
-    background-color: #48b963;
-    transform: scale(1.05);
+.primary-btn {
+    background-color: #64c97e;
+    color: white;
+}
+
+.secondary-btn {
+    background-color: #333;
+    color: white;
+    margin-left: 10px;
 }
 
 .feature-section {

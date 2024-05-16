@@ -18,5 +18,7 @@ return [
     'collaborators' => 'Our collaborators',
     'cookiesDesc' => "This page uses essential cookies to ensure proper functionality. If you continue to use this site, you agree to use them.",
     'cookiesButton' => 'Agree',
-    'cookiesInfo' => 'More information'
+    'cookiesInfo' => 'More information',
+    'login' => 'Log in',
+    'tryNow' => 'Try now',
 ];
