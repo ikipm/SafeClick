@@ -35,4 +35,9 @@ return [
     'panel' => 'Panel de control del hosting',
     'email' => 'Correo electrónico',
     'stadistics' => 'Estadísticas',
+    '404' => 'Codigos 404',
+    'guest' => 'Registro de invitados',
+    'url-news' => 'Enlace a la noticia',
+    'img-news' => 'Imagen de la noticia',
+    'add-news' => 'Añadir noticia',
 ];

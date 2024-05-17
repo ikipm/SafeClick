@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::view('/admin/logs/guest', 'admin.logs.guest')->middleware('auth')->middle
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/loginTest', [UserController::class, 'loginTest'])->name('loginTest');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::post('/admin/news/create', [NewsController::class, 'store'])->middleware('auth')->middleware('verify')->middleware('admin')->name('admin.createNews');
 
 // Define the route for changing the locale
 Route::get('/locale/{lang}', [LocaleController::class, 'changeLocale'])->name('changeLocale');
@@ -50,6 +52,7 @@ Route::group(['middleware' => 'setLocale'], function () {
     Route::get('/admin/courses/content/{courseId}', [CourseController::class, 'courseInfoContent'])->middleware('auth')->middleware('verify')->middleware('admin')->name('admin.coursesContent');
     Route::get('/admin/courses/content/add/{courseId}', [CourseController::class, 'courseInfoAddContent'])->middleware('auth')->middleware('verify')->middleware('admin')->name('admin.coursesAddContent');
     Route::get('/admin/courses/content/edit/{courseId}/{contentId}', [CourseController::class, 'courseEditContent'])->middleware('auth')->middleware('verify')->middleware('admin')->name('admin.coursesEditContent');
+    Route::view('/admin/news', 'admin.news')->middleware('auth')->middleware('verify')->middleware('admin')->name('admin.news');
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();

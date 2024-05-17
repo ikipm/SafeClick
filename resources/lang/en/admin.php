@@ -35,4 +35,9 @@ return [
     'panel' => 'Hosting control panel',
     'email' => 'Email',
     'stadistics' => 'Stadistics',
+    '404' => '404 codes',
+    'guest' => 'Guests records',
+    'url-news' => 'News link',
+    'img-news' => 'News image',
+    'add-news' => 'Add news',
 ];

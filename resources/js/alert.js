@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (
         !document.cookie
             .split("; ")
-            .find((row) => row.startsWith("announcement_closed="))
+            .find((row) => row.startsWith("alert_closed="))
     ) {
         // If not, show the announcement
         announcementWrapper.style.display = "flex";
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var date = new Date();
         date.setFullYear(date.getFullYear() + 1); // The cookie will expire in 1 year
         document.cookie =
-            "announcement_closed=true; expires=" +
+            "alert_closed=true; expires=" +
             date.toUTCString() +
             "; path=/";
         announcementWrapper.style.display = "none";

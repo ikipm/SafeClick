@@ -28,7 +28,7 @@
             <h2>Admin log system</h2>
             <div class="card">
                 <div class="card-header">
-                    <h3>404 codes | Page: {{$currentPage}}/{{$totalPages}}</h3>
+                    <h3>@lang('admin.404') | Page: {{$currentPage}}/{{$totalPages}}</h3>
                 </div>
                 <div class="content-text">
                     @foreach($entriesToShow as $line)

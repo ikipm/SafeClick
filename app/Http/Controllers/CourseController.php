@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\News;
 use App\Models\UserCourseProgress;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -62,7 +63,8 @@ class CourseController extends Controller
     {
         $courses = Course::all();
         $locale = Session::get('locale', 'cat');
-        return view('courses', compact('courses', 'locale'));
+        $news = News::all();
+        return view('courses', compact('courses', 'locale', 'news'));
     }
 
     public function courseInfoContent($courseId)
