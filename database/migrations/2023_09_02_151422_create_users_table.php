@@ -40,6 +40,18 @@ class CreateUsersTable extends Migration
             'email_verified_at' => now(),
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'SafeClick Admin User',
+            'userName' => 'Admin',
+            'email' => 'admin@safeclick.cat',
+            'password' => Hash::make('admin'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'testUser' => true,
+            'email_verified_at' => now(),
+            'admin' => true,
+        ]);
+
         Schema::create('user_course_progress', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
