@@ -29,8 +29,14 @@ function hideWarningMessage() {
 function convertMarkdownToHTML(markdown) {
     const exerciseRegex = /\[exercise\]([\s\S]*?)\[\/exercise\]/g;
     markdown = markdown.replace(exerciseRegex, (match, content) => {
-        content = content.replace(/\[ \]/g, '<input type="radio" name="exercise">');
-        content = content.replace(/\[x\]/g, '<input type="radio" name="exercise" id="correct">');
+        content = content.replace(/\[ \]/g, () => {
+            var num = Math.random(1, 20);
+            return '<input type="radio" name="exercise" id="' + "f".charCodeAt() + num + ' ' + num + '">';
+        });
+        content = content.replace(/\[x\]/g, () => {
+            var num = Math.random(1, 20);
+            return '<input type="radio" name="exercise" id="' + "c".charCodeAt() + num + ' ' + num + '">';
+        });
         return content;
     });
 
@@ -71,7 +77,12 @@ function convertMarkdownToHTML(markdown) {
 }
 
 function isMarkedDown() {
-    return document.querySelector('input[name="exercise"][id="correct"]:checked') !== null;
+    const checkedInput = document.querySelector('input[name="exercise"]:checked');
+    const inputId = checkedInput.id.split(' ');
+    if (checkedInput !== null && inputId[0] === "c".charCodeAt() + inputId[1]) {
+        return true;
+    }
+    return false;
 }
 
 function areItemsInCorrectZones() {
