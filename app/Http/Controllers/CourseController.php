@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Session;
 
 class CourseController extends Controller
 {
+    /**
+     * Safe the course information at a first time.
+     * @Pre: The request $request is received as a parameter.
+     * @Post: The courses information is stored in the database.
+     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -59,6 +64,11 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Course created successfully');
     }
 
+    /**
+     * Display the courses page.
+     * @Pre: No parameters expected.
+     * @Post: The courses page is displayed.
+     */
     public function courseIndex()
     {
         $courses = Course::all();
@@ -67,18 +77,33 @@ class CourseController extends Controller
         return view('courses', compact('courses', 'locale', 'news'));
     }
 
+    /**
+     * Display a course information.
+     * @Pre: The course ID $courseId is received as a parameter.
+     * @Post: The courses information is displayed.
+     */
     public function courseInfoContent($courseId)
     {
         $course = Course::with('translations')->findOrFail($courseId);
         return view('admin.coursesContent', compact('course'));
     }
 
+    /**
+     * Display information at the add view.
+     * @Pre: The course ID $courseId is received as a parameter.
+     * @Post: The courses information is displayed at the add view.
+     */
     public function courseInfoAddContent($courseId)
     {
         $course = Course::with('translations')->findOrFail($courseId);
         return view('admin.coursesAddContent', compact('course'));
     }
 
+    /**
+     * Modify the course content information.
+     * @Pre: The request $request and the course ID $id are received as parameters.
+     * @Post: The courses content information is stored in the database.
+     */
     public function storeContent(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -118,7 +143,11 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Content added');
     }
 
-
+    /**
+     * Display course theory.
+     * @Pre: The course ID $courseId and the content ID $contentId are received as parameters.
+     * @Post: The courses theory are displayed and the user progress updated.
+     */
     public function courseInfo($courseId, $contentId)
     {
         // Retrieve the course
@@ -151,6 +180,11 @@ class CourseController extends Controller
         return view('courseID', compact('course', 'content', 'userProgress'));
     }
 
+    /**
+     * Search for a course.
+     * @Pre: The request $request is received as a parameter.
+     * @Post: The courses that match the search criteria are displayed.
+     */
     public function search(Request $request)
     {
         $query = Course::query();
@@ -173,12 +207,22 @@ class CourseController extends Controller
         return redirect('/admin/courses')->with('courses', $courses);
     }
 
+    /**
+     * Display the course edit view.
+     * @Pre: The course ID $courseId is received as a parameter.
+     * @Post: The course edit view is displayed with the course information.
+     */
     public function courseEditInfo($courseId)
     {
         $course = Course::with('translations')->findOrFail($courseId);
         return view('admin.coursesEdit', compact('course'));
     }
 
+    /**
+     * Update the course information.
+     * @Pre: The request $request and the course ID $id are received as parameters.
+     * @Post: The courses information is updated in the database.
+     */
     public function updateCourseTitle(Request $request, $id)
     {
         // Find the course by its ID
@@ -228,6 +272,11 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Course updated successfully');
     }
 
+    /**
+     * Display the course edit view for a course content
+     * @Pre: The course ID $courseId and the content ID $contentId are received as parameters.
+     * @Post: The course edit view for a course content is displayed with the content information.
+     */
     public function courseEditContent($courseId, $contentId)
     {
         $course = Course::with('translations')->findOrFail($courseId);
@@ -235,6 +284,11 @@ class CourseController extends Controller
         return view('admin.coursesEditContent', compact('course', 'content'));
     }
     
+    /**
+     * Update the course content information.
+     * @Pre: The request $request, the course ID $id and the content ID $contentId are received as parameters.
+     * @Post: The courses content information is updated in the database.
+     */
     public function updateContent(Request $request, $id, $contentId)
     {
         // Find the course by its ID

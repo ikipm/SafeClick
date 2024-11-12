@@ -67,12 +67,14 @@ h2 {
 .language-list {
     position: absolute;
     top: 65%;
-    left: 1;
-    background-color: white;
     list-style: none;
     padding: 4px;
     margin: 0;
     display: none;
+    border-radius: 0 0 4px 4px;
+    border: 3px solid #64c97e;
+    border-top: none;
+    background-color: #4b4b4b;
 }
 
 .language-list li {
@@ -83,7 +85,7 @@ h2 {
     display: block;
     padding: 4px 8px;
     text-decoration: none;
-    color: #333;
+    color: white;
 }
 
 .language-menu:hover .language-list {
