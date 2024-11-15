@@ -67,20 +67,9 @@ class UserController extends Controller
         // Set the locale for the logged-in user
         app()->setLocale($locale);
 
-        // Check if the "admin" key exists and set a default value if it doesn't
-        $admin = $request->admin;
-        if ($admin == "on") {
-            $admin = true;
-        } else {
-            $admin = false;
-        }
-
-        $testUser = $request->testUser;
-        if ($testUser == "on") {
-            $testUser = true;
-        } else {
-            $testUser = false;
-        }
+        // Set's the boolean value to true or false
+        $admin = $request->admin ? true : false;
+        $testUser = $request->testUser ? true : false;
 
         // Validate user input
         $validatedData = $request->validate([
