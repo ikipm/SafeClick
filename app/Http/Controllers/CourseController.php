@@ -18,6 +18,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        $public = $request->public ? true : false;
         $validatedData = $request->validate([
             'course-nameCat' => 'required|string|max:255',
             'course-nameEs' => 'required|string|max:255',
@@ -26,10 +27,12 @@ class CourseController extends Controller
             'course-descriptionEs' => 'required|string',
             'course-descriptionEn' => 'required|string',
             'course-image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            //'alowed-users' => 'required|json',
         ]);
 
         $course = Course::create([
-            'status' => true,
+            'public' => $public,
+            'alowed-users' => json_encode([]),
         ]);
 
         $course->translations()->createMany([
@@ -71,7 +74,7 @@ class CourseController extends Controller
      */
     public function courseIndex()
     {
-        $courses = Course::all();
+        $courses = Course::where('public', true)->get(); // Retrieve all public courses
         $locale = Session::get('locale', 'cat');
         $news = News::all();
         return view('courses', compact('courses', 'locale', 'news'));

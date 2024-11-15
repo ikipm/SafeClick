@@ -15,7 +15,7 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->boolean('status')->default(true);
+            $table->boolean('public')->default(false);
             $table->string('img')->nullable();
             $table->timestamps();
         });

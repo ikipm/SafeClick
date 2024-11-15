@@ -22,13 +22,23 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->json('availableCourses')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->boolean('admin')->default(false);
             $table->boolean('testUser')->default(false);
         });
 
-        // Guest user
+        Schema::create('user_course_progress', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->integer('last_content_id')->nullable();
+            $table->boolean('completed')->default(false);
+            $table->timestamps();
+        });
+
+        // Create a default test user
         DB::table('users')->insert([
             'name' => 'SafeClick Test User',
             'userName' => 'SafeClick',
@@ -40,6 +50,7 @@ class CreateUsersTable extends Migration
             'email_verified_at' => now(),
         ]);
 
+        // Create a default admin user
         DB::table('users')->insert([
             'name' => 'SafeClick Admin User',
             'userName' => 'Admin',
@@ -51,15 +62,6 @@ class CreateUsersTable extends Migration
             'email_verified_at' => now(),
             'admin' => true,
         ]);
-
-        Schema::create('user_course_progress', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
-            $table->integer('last_content_id')->nullable();
-            $table->boolean('completed')->default(false);
-            $table->timestamps();
-        });
     }
 
     /**

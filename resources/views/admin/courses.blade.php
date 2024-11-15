@@ -60,6 +60,8 @@
                             <input type="text" id="course-descriptionEn" name="course-descriptionEn" placeholder="@lang('admin.course-desc-en')" required>
                             <label for="course-image">@lang('admin.course-image')</label>
                             <input type="file" id="course-image" name="course-image" accept="image/*" required><br />
+                            <label for="public-course">Public: </label>
+                            <input type="checkbox" id="public" name="public"><br /><br />
                             <button type="submit" id="course-submit">@lang('admin.publish')</button>
                         </form>
                     </div>
