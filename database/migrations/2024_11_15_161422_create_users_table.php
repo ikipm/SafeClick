@@ -58,7 +58,7 @@ class CreateUsersTable extends Migration
             'password' => Hash::make('admin'),
             'created_at' => now(),
             'updated_at' => now(),
-            'testUser' => true,
+            'testUser' => false,
             'email_verified_at' => now(),
             'admin' => true,
         ]);

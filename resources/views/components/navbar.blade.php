@@ -46,7 +46,9 @@
         @elseif(Request::is('login'))
         <a href="/">@lang('shared.home')</a>
         @elseif(Request::is('courses*') or Request::is('admin*'))
-        <a href="{{ route('logout') }}">{{ Auth::user()->userName }}</a>
+        <a href="{{ route('user') }}">{{ Auth::user()->userName }}</a>
+        @elseif(Request::is('user'))
+        <a href="/courses">@lang('courses.courses')</a>
         @else
         <a href="/login">@lang('shared.login')</a>
         @endif

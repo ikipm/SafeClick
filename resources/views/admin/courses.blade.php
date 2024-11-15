@@ -93,6 +93,7 @@
                                     <a class="course-button-notworking">@lang('admin.info')</a>
                                     <a class="course-button" href="/admin/courses/edit/{{$course->id}}">@lang('admin.edit')</a>
                                     <a class="course-button" href="/admin/courses/content/{{$course->id}}">@lang('admin.content')</a>
+                                    <button class="course-button display-key-button" data-key="{{ $course->key }}">Display key</button>
                                 </div>
                             </li>
                             @endforeach
@@ -100,6 +101,13 @@
                         </ul>
                     </div>
                     @endif
+                </div>
+            </div>
+            <!-- Modal Dialog -->
+            <div id="keyModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p id="courseKey"></p>
                 </div>
             </div>
         </div>
@@ -113,5 +121,32 @@
     </script>
     <script src="{{ asset('js/sideBar.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/courses.css') }}">
+
+    <script>
+        // JavaScript to handle the modal dialog
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById("keyModal");
+            var span = document.getElementsByClassName("close")[0];
+            var courseKeyElement = document.getElementById("courseKey");
+
+            document.querySelectorAll('.display-key-button').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var key = this.getAttribute('data-key');
+                    courseKeyElement.textContent = key;
+                    modal.style.display = "block";
+                });
+            });
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
 
 </html>

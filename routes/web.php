@@ -53,6 +53,9 @@ Route::group(['middleware' => 'setLocale'], function () {
     Route::get('/admin/courses/content/add/{courseId}', [CourseController::class, 'courseInfoAddContent'])->middleware('auth')->middleware('verify')->middleware('admin')->name('admin.coursesAddContent');
     Route::get('/admin/courses/content/edit/{courseId}/{contentId}', [CourseController::class, 'courseEditContent'])->middleware('auth')->middleware('verify')->middleware('admin')->name('admin.coursesEditContent');
     Route::view('/admin/news', 'admin.news')->middleware('auth')->middleware('verify')->middleware('admin')->name('admin.news');
+    // User view
+    Route::view('/user', 'user')->middleware('auth')->middleware('verify')->name('user');
+    Route::post('/join', [CourseController::class, 'joinCourse'])->middleware('auth')->middleware('verify')->name('joinCourse');
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();

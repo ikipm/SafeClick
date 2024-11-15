@@ -28,22 +28,30 @@ class CourseController extends Controller
             'course-descriptionEs' => 'required|string',
             'course-descriptionEn' => 'required|string',
             'course-image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'allowed-users' => 'required|string',
         ]);
 
-        $usernames = explode(", ", $request->input('allowed-users'));
-        $existingUsers = User::whereIn('username', $usernames)->pluck('username')->toArray();
-        $nonExistingUsers = array_diff($usernames, $existingUsers);
+        if ($request->input('allowed-users')){
+            $usernames = explode(", ", $request->input('allowed-users'));
+            $existingUsers = User::whereIn('username', $usernames)->pluck('username')->toArray();
+            $nonExistingUsers = array_diff($usernames, $existingUsers);
 
-        if (!empty($nonExistingUsers)) {
-            return redirect()->back()->withErrors(['allowed-users' => 'The following users do not exist: ' . implode(', ', $nonExistingUsers)]);
+            if (!empty($nonExistingUsers)) {
+                return redirect()->back()->withErrors(['allowed-users' => 'The following users do not exist: ' . implode(', ', $nonExistingUsers)]);
+            }
+
+            $userIds = User::whereIn('username', $usernames)->pluck('id')->toArray();
+        } else {
+            $userIds = [];
         }
 
-        $userIds = User::whereIn('username', $usernames)->pluck('id')->toArray();
+        do {
+            $course_key = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 10);
+        } while (Course::where('key', $course_key)->exists());
 
         $course = Course::create([
             'public' => $public,
             'allowed_users' => json_encode($userIds),
+            'key' => $course_key,
         ]);
 
         $course->translations()->createMany([
@@ -199,7 +207,7 @@ class CourseController extends Controller
     /**
      * Search for a course.
      * @Pre: The request $request is received as a parameter.
-     * @Post: The courses that match the search criteria are displayed.
+     * @Post: List the courses that match the search criteria are displayed.
      */
     public function search(Request $request)
     {
@@ -355,5 +363,26 @@ class CourseController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Content updated successfully');
+    }
+
+    /**
+     * Join a course.
+     * @Pre: The request $request is received as a parameter.
+     * @Post: The user is added to the course.
+     */
+    public function joinCourse(Request $request)
+    {
+        $course = Course::where('key', $request->input('course-key'))->first();
+
+        if (!$course) {
+            return redirect()->back()->withErrors(['course-key' => 'Invalid course key']);
+        }
+
+        $allowedUsers = json_decode($course->allowed_users, true);
+        $allowedUsers[] = auth()->user()->id;
+        $course->allowed_users = json_encode($allowedUsers);
+        $course->save();
+
+        return redirect()->back()->with('success', 'Course joined successfully');
     }
 }
