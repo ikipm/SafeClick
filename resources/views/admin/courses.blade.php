@@ -61,7 +61,9 @@
                             <label for="course-image">@lang('admin.course-image')</label>
                             <input type="file" id="course-image" name="course-image" accept="image/*" required><br />
                             <label for="public-course">Public: </label>
-                            <input type="checkbox" id="public" name="public"><br /><br />
+                            <input type="checkbox" id="public" name="public"><br />
+                            <label for="allowed-users">Users with access:</label>
+                            <input type="text" id="allowed-users" name="allowed-users" placeholder="username1, username2, username3">
                             <button type="submit" id="course-submit">@lang('admin.publish')</button>
                         </form>
                     </div>

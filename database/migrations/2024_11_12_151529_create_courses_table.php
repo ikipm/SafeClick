@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->boolean('public')->default(false);
             $table->string('img')->nullable();
+            $table->string('allowed_users')->default("[]");
             $table->timestamps();
         });
 

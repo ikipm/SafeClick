@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\News;
+use App\Models\User;
 use App\Models\UserCourseProgress;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -27,12 +28,22 @@ class CourseController extends Controller
             'course-descriptionEs' => 'required|string',
             'course-descriptionEn' => 'required|string',
             'course-image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            //'alowed-users' => 'required|json',
+            'allowed-users' => 'required|string',
         ]);
+
+        $usernames = explode(", ", $request->input('allowed-users'));
+        $existingUsers = User::whereIn('username', $usernames)->pluck('username')->toArray();
+        $nonExistingUsers = array_diff($usernames, $existingUsers);
+
+        if (!empty($nonExistingUsers)) {
+            return redirect()->back()->withErrors(['allowed-users' => 'The following users do not exist: ' . implode(', ', $nonExistingUsers)]);
+        }
+
+        $userIds = User::whereIn('username', $usernames)->pluck('id')->toArray();
 
         $course = Course::create([
             'public' => $public,
-            'alowed-users' => json_encode([]),
+            'allowed_users' => json_encode($userIds),
         ]);
 
         $course->translations()->createMany([
@@ -74,7 +85,9 @@ class CourseController extends Controller
      */
     public function courseIndex()
     {
-        $courses = Course::where('public', true)->get(); // Retrieve all public courses
+        $courses = Course::where('public', true)
+            ->orWhereJsonContains('allowed_users', auth()->user()->id)
+            ->get();
         $locale = Session::get('locale', 'cat');
         $news = News::all();
         return view('courses', compact('courses', 'locale', 'news'));
@@ -218,7 +231,10 @@ class CourseController extends Controller
     public function courseEditInfo($courseId)
     {
         $course = Course::with('translations')->findOrFail($courseId);
-        return view('admin.coursesEdit', compact('course'));
+        $userIds = json_decode($course->allowed_users, true);
+        $usernames = User::whereIn('id', $userIds)->pluck('username')->toArray();
+        $usernamesString = implode(', ', $usernames);
+        return view('admin.coursesEdit', compact('course', 'usernamesString'));
     }
 
     /**
@@ -240,6 +256,7 @@ class CourseController extends Controller
             'course-descriptionEs' => 'required|string',
             'course-descriptionEn' => 'required|string',
             'course-image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'allowed-users' => 'required|string',
         ]);
 
         // Update the course's translations
@@ -268,6 +285,20 @@ class CourseController extends Controller
             // Update the course's image field with the new image name
             $course->img = '/img/courses/' . $imageName;
         }
+
+        $public = $request->public ? true : false;
+        $course->public = $public;
+
+        $usernames = explode(", ", $request->input('allowed-users'));
+        $existingUsers = User::whereIn('username', $usernames)->pluck('username')->toArray();
+        $nonExistingUsers = array_diff($usernames, $existingUsers);
+
+        if (!empty($nonExistingUsers)) {
+            return redirect()->back()->withErrors(['allowed-users' => 'The following users do not exist: ' . implode(', ', $nonExistingUsers)]);
+        }
+
+        $userIds = User::whereIn('username', $usernames)->pluck('id')->toArray();
+        $course->allowed_users = json_encode($userIds);
 
         // Save the course
         $course->save();
