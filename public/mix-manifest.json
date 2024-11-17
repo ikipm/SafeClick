@@ -9,11 +9,12 @@
     "/js/alert.js": "/js/alert.js",
     "/js/news.js": "/js/news.js",
     "/js/user.js": "/js/user.js",
-    "/css/platform.css": "/css/platform.css",
-    "/css/loginPage.css": "/css/loginPage.css",
+    "/js/bootstrap.js": "/js/bootstrap.js",
     "/css/landingPage.css": "/css/landingPage.css",
     "/css/courseView.css": "/css/courseView.css",
     "/css/admin.css": "/css/admin.css",
+    "/css/bootstrap.css": "/css/bootstrap.css",
+    "/css/app.css": "/css/app.css",
     "/css/user.css": "/css/user.css",
     "/css/snow.css": "/css/snow.css",
     "/css/admin/courseContentInfo.css": "/css/admin/courseContentInfo.css",
@@ -22,5 +23,7 @@
     "/css/admin/courses.css": "/css/admin/courses.css",
     "/css/admin/courseAdd.css": "/css/admin/courseAdd.css",
     "/css/sideBar.css": "/css/sideBar.css",
-    "/css/shared.css": "/css/shared.css"
+    "/css/shared.css": "/css/shared.css",
+    "/css/platform.css": "/css/platform.css",
+    "/css/loginPage.css": "/css/loginPage.css"
 }

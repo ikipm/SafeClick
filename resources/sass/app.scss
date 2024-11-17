@@ -1,0 +1,13 @@
+@import "~bootstrap/scss/bootstrap";
+
+// Custom styles
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #333;
+        color: #fff;
+    }
+}
