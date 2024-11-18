@@ -13,75 +13,31 @@ use Illuminate\Support\Facades\Session;
 class CourseController extends Controller
 {
     /**
-     * Safe the course information at a first time.
+     * Store the course information for the first time.
      * @Pre: The request $request is received as a parameter.
      * @Post: The courses information is stored in the database.
      */
     public function store(Request $request)
     {
-        $public = $request->public ? true : false;
-        $validatedData = $request->validate([
-            'course-nameCat' => 'required|string|max:255',
-            'course-nameEs' => 'required|string|max:255',
-            'course-nameEn' => 'required|string|max:255',
-            'course-descriptionCat' => 'required|string',
-            'course-descriptionEs' => 'required|string',
-            'course-descriptionEn' => 'required|string',
-            'course-image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        $validatedData = $this->validateCourse($request);
 
-        if ($request->input('allowed-users')){
-            $usernames = explode(", ", $request->input('allowed-users'));
-            $existingUsers = User::whereIn('username', $usernames)->pluck('username')->toArray();
-            $nonExistingUsers = array_diff($usernames, $existingUsers);
+        $userIds = $this->getUserIds($request->input('allowed-users'));
 
-            if (!empty($nonExistingUsers)) {
-                return redirect()->back()->withErrors(['allowed-users' => 'The following users do not exist: ' . implode(', ', $nonExistingUsers)]);
-            }
-
-            $userIds = User::whereIn('username', $usernames)->pluck('id')->toArray();
-        } else {
-            $userIds = [];
+        if (!is_array($userIds)) {
+            return redirect()->back()->withErrors(['allowed-users' => 'Some users do not exist.']);
         }
 
-        do {
-            $course_key = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 10);
-        } while (Course::where('key', $course_key)->exists());
+        $course_key = $this->generateUniqueCourseKey();
 
         $course = Course::create([
-            'public' => $public,
+            'public' => $request->boolean('public'),
             'allowed_users' => json_encode($userIds),
             'key' => $course_key,
         ]);
 
-        $course->translations()->createMany([
-            [
-                'locale' => 'cat',
-                'title' => $validatedData['course-nameCat'],
-                'description' => $validatedData['course-descriptionCat'],
-            ],
-            [
-                'locale' => 'es',
-                'title' => $validatedData['course-nameEs'],
-                'description' => $validatedData['course-descriptionEs'],
-            ],
-            [
-                'locale' => 'en',
-                'title' => $validatedData['course-nameEn'],
-                'description' => $validatedData['course-descriptionEn'],
-            ],
-        ]);
+        $this->createCourseTranslations($course, $validatedData);
 
-        // Handle image upload
-        if ($request->hasFile('course-image')) {
-            $image = $request->file('course-image');
-            $imageName = $course->id . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('/img/courses'), $imageName);
-
-            // Update the course's image field with the image name
-            $course->img = '/img/courses/' . $imageName;
-            $course->save();
-        }
+        $this->handleImageUpload($request, $course);
 
         return redirect()->back()->with('success', 'Course created successfully');
     }
@@ -130,39 +86,13 @@ class CourseController extends Controller
      */
     public function storeContent(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'title-cat' => 'required|string|max:255',
-            'title-es' => 'required|string|max:255',
-            'title-en' => 'required|string|max:255',
-            'content-cat' => 'required|string',
-            'content-es' => 'required|string',
-            'content-en' => 'required|string',
-        ]);
+        $validatedData = $this->validateContent($request);
 
         $course = Course::findOrFail($id);
 
         $content_id = ($course->contents()->latest()->first()->content_id ?? 0) + 1;
 
-        $course->contents()->createMany([
-            [
-                'locale' => 'cat',
-                'title' => $validatedData['title-cat'],
-                'content' => $validatedData['content-cat'],
-                'content_id' => $content_id,
-            ],
-            [
-                'locale' => 'es',
-                'title' => $validatedData['title-es'],
-                'content' => $validatedData['content-es'],
-                'content_id' => $content_id,
-            ],
-            [
-                'locale' => 'en',
-                'title' => $validatedData['title-en'],
-                'content' => $validatedData['content-en'],
-                'content_id' => $content_id,
-            ],
-        ]);
+        $this->createCourseContents($course, $validatedData, $content_id);
 
         return redirect()->back()->with('success', 'Content added');
     }
@@ -174,30 +104,9 @@ class CourseController extends Controller
      */
     public function courseInfo($courseId, $contentId)
     {
-        // Retrieve the course
         $course = Course::findOrFail($courseId);
 
-        // Check if the user has an existing progress record for this course
-        $userProgress = UserCourseProgress::where('user_id', auth()->user()->id)
-            ->where('course_id', $courseId)
-            ->first();
-        if ($contentId <= $course->contents->count() / 3 and !(auth()->user()->testUser)){
-            if (!$userProgress) {
-                // Create a new progress record if it doesn't exist
-                UserCourseProgress::create([
-                    'user_id' => auth()->user()->id,
-                    'course_id' => $courseId,
-                    'last_content_id' => $contentId,
-                ]);
-            } elseif ($userProgress->last_content_id < $contentId) {
-                if ($userProgress->last_content_id == $contentId - 1) {
-                    $userProgress->last_content_id = $contentId;
-                    $userProgress->save();
-                } else {
-                    return redirect()->back()->with('error', 'You must complete the previous content first');
-                }
-            }
-        }
+        $userProgress = $this->updateUserProgress($course, $courseId, $contentId);
 
         $content = $course->contents()->where('content_id', $contentId);
 
@@ -213,22 +122,19 @@ class CourseController extends Controller
     {
         $query = Course::query();
 
-        // Check if any search parameters are provided
-        if ($request->input('course-name') != null) {
-            $courseName = $request->input('course-name');
-            // Use whereHas to filter courses based on translations
+        if ($courseName = $request->input('course-name')) {
             $query->whereHas('translations', function ($query) use ($courseName) {
                 $query->where('title', 'like', "%$courseName%");
             });
         }
 
-        if ($request->input('id') != null) {
-            $query->where('id', $request->input('id'));
+        if ($id = $request->input('id')) {
+            $query->where('id', $id);
         }
 
         $courses = $query->get();
 
-        return redirect('/admin/courses')->with('courses', $courses);
+        return redirect('/admin/courses')->with(['courses' => $courses]);
     }
 
     /**
@@ -239,9 +145,7 @@ class CourseController extends Controller
     public function courseEditInfo($courseId)
     {
         $course = Course::with('translations')->findOrFail($courseId);
-        $userIds = json_decode($course->allowed_users, true);
-        $usernames = User::whereIn('id', $userIds)->pluck('username')->toArray();
-        $usernamesString = implode(', ', $usernames);
+        $usernamesString = $this->getUsernamesString($course->allowed_users);
         return view('admin.coursesEdit', compact('course', 'usernamesString'));
     }
 
@@ -252,64 +156,24 @@ class CourseController extends Controller
      */
     public function updateCourseTitle(Request $request, $id)
     {
-        // Find the course by its ID
         $course = Course::findOrFail($id);
 
-        // Validate the updated data (similar to the create method)
-        $validatedData = $request->validate([
-            'course-nameCat' => 'required|string|max:255',
-            'course-nameEs' => 'required|string|max:255',
-            'course-nameEn' => 'required|string|max:255',
-            'course-descriptionCat' => 'required|string',
-            'course-descriptionEs' => 'required|string',
-            'course-descriptionEn' => 'required|string',
-            'course-image' => 'image|mimes:jpeg,png,jpg|max:2048',
-            'allowed-users' => 'required|string',
-        ]);
+        $validatedData = $this->validateCourse($request);
 
-        // Update the course's translations
-        $course->translations()->where('locale', 'cat')->update([
-            'title' => $validatedData['course-nameCat'],
-            'description' => $validatedData['course-descriptionCat'],
-        ]);
+        $this->updateCourseTranslations($course, $validatedData);
 
-        $course->translations()->where('locale', 'es')->update([
-            'title' => $validatedData['course-nameEs'],
-            'description' => $validatedData['course-descriptionEs'],
-        ]);
+        $this->handleImageUpload($request, $course);
 
-        $course->translations()->where('locale', 'en')->update([
-            'title' => $validatedData['course-nameEn'],
-            'description' => $validatedData['course-descriptionEn'],
-        ]);
+        $userIds = $this->getUserIds($request->input('allowed-users'));
 
-        // Handle image upload if provided
-        if ($request->hasFile('course-image')) {
-            File::delete($course->img);
-            $image = $request->file('course-image');
-            $imageName = $course->id . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('/img/courses'), $imageName);
-
-            // Update the course's image field with the new image name
-            $course->img = '/img/courses/' . $imageName;
+        if ($userIds === false) {
+            return redirect()->back()->withErrors(['allowed-users' => 'Some users do not exist.']);
         }
 
-        $public = $request->public ? true : false;
-        $course->public = $public;
-
-        $usernames = explode(", ", $request->input('allowed-users'));
-        $existingUsers = User::whereIn('username', $usernames)->pluck('username')->toArray();
-        $nonExistingUsers = array_diff($usernames, $existingUsers);
-
-        if (!empty($nonExistingUsers)) {
-            return redirect()->back()->withErrors(['allowed-users' => 'The following users do not exist: ' . implode(', ', $nonExistingUsers)]);
-        }
-
-        $userIds = User::whereIn('username', $usernames)->pluck('id')->toArray();
-        $course->allowed_users = json_encode($userIds);
-
-        // Save the course
-        $course->save();
+        $course->update([
+            'public' => $request->boolean('public'),
+            'allowed_users' => json_encode($userIds),
+        ]);
 
         return redirect()->back()->with('success', 'Course updated successfully');
     }
@@ -325,7 +189,7 @@ class CourseController extends Controller
         $content = $course->contents()->where('content_id', $contentId)->get();
         return view('admin.coursesEditContent', compact('course', 'content'));
     }
-    
+
     /**
      * Update the course content information.
      * @Pre: The request $request, the course ID $id and the content ID $contentId are received as parameters.
@@ -333,34 +197,11 @@ class CourseController extends Controller
      */
     public function updateContent(Request $request, $id, $contentId)
     {
-        // Find the course by its ID
         $course = Course::findOrFail($id);
 
-        // Validate the updated data (similar to the create method)
-        $validatedData = $request->validate([
-            'title-cat' => 'required|string|max:255',
-            'title-es' => 'required|string|max:255',
-            'title-en' => 'required|string|max:255',
-            'content-cat' => 'required|string',
-            'content-es' => 'required|string',
-            'content-en' => 'required|string',
-        ]);
+        $validatedData = $this->validateContent($request);
 
-        // Update the course's translations
-        $course->contents()->where('locale', 'cat')->where('content_id', $contentId)->update([
-            'title' => $validatedData['title-cat'],
-            'content' => $validatedData['content-cat'],
-        ]);
-
-        $course->contents()->where('locale', 'es')->where('content_id', $contentId)->update([
-            'title' => $validatedData['title-es'],
-            'content' => $validatedData['content-es'],
-        ]);
-
-        $course->contents()->where('locale', 'en')->where('content_id', $contentId)->update([
-            'title' => $validatedData['title-en'],
-            'content' => $validatedData['content-en'],
-        ]);
+        $this->updateCourseContents($course, $validatedData, $contentId);
 
         return redirect()->back()->with('success', 'Content updated successfully');
     }
@@ -384,5 +225,234 @@ class CourseController extends Controller
         $course->save();
 
         return redirect()->back()->with('success', 'Course joined successfully');
+    }
+
+    /**
+     * Validate the course information received.
+     * @Pre: The request $request is received as a parameter with all the information insered.
+     * @Post: The course information is validated and errors are returned.
+     */
+
+    private function validateCourse(Request $request)
+    {
+        return $request->validate([
+            'course-nameCat' => 'required|string|max:255',
+            'course-nameEs' => 'required|string|max:255',
+            'course-nameEn' => 'required|string|max:255',
+            'course-descriptionCat' => 'required|string',
+            'course-descriptionEs' => 'required|string',
+            'course-descriptionEn' => 'required|string',
+            'course-image' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'allowed-users' => 'nullable|string',
+        ]);
+    }
+    
+    /**
+     * Validate the content information received.
+     * @Pre: The request $request is received as a parameter with all the information insered.
+     * @Post: The content information is validated and errors are returned.
+     */
+    private function validateContent(Request $request)
+    {
+        return $request->validate([
+            'title-cat' => 'required|string|max:255',
+            'title-es' => 'required|string|max:255',
+            'title-en' => 'required|string|max:255',
+            'content-cat' => 'required|string',
+            'content-es' => 'required|string',
+            'content-en' => 'required|string',
+        ]);
+    }
+
+    /**
+     * Get the user IDs from the usernames.
+     * @Pre: The usernames $usernames are received in an array as a parameter.
+     * @Post: An array of user ID's is returned.
+     */
+    private function getUserIds($usernames)
+    {
+        if (!$usernames) {
+            return [];
+        }
+
+        $usernamesArray = explode(", ", $usernames);
+        $users = User::whereIn('username', $usernamesArray)->pluck('id', 'username')->toArray();
+        $nonExistingUsers = array_diff($usernamesArray, array_keys($users));
+
+        if (!empty($nonExistingUsers)) {
+            return false;
+        }
+
+        return array_values($users);
+    }
+
+    /**
+     * Get the usernames from the user IDs.
+     * @Pre: The allowed users $allowed_users are received in an array as a parameter.
+     * @Post: A string containing the usernames splited with comas is returned.
+     */
+    private function getUsernamesString($allowed_users)
+    {
+        $userIds = json_decode($allowed_users, true);
+        $usernames = User::whereIn('id', $userIds)->pluck('username')->toArray();
+        return implode(', ', $usernames);
+    }
+
+    /**
+     * Generate a unique course key.
+     * @Pre: No parameters expected.
+     * @Post: A unique course key is returned combining numbers, uppercase and lowercase.
+     */
+    private function generateUniqueCourseKey()
+    {
+        do {
+            $course_key = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 10);
+        } while (Course::where('key', $course_key)->exists());
+
+        return $course_key;
+    }
+
+    /**
+     * Create the course translations.
+     * @Pre: The course $course and the validated data $validatedData are received as parameters.
+     * @Post: The course translations are created in the database linked with the $course.
+     */
+    private function createCourseTranslations($course, $validatedData)
+    {
+        $course->translations()->createMany([
+            [
+                'locale' => 'cat',
+                'title' => $validatedData['course-nameCat'],
+                'description' => $validatedData['course-descriptionCat'],
+            ],
+            [
+                'locale' => 'es',
+                'title' => $validatedData['course-nameEs'],
+                'description' => $validatedData['course-descriptionEs'],
+            ],
+            [
+                'locale' => 'en',
+                'title' => $validatedData['course-nameEn'],
+                'description' => $validatedData['course-descriptionEn'],
+            ],
+        ]);
+    }
+
+    /**
+     * Handle the image upload and storage.
+     * @Pre: The request $request and the course $course are received as parameters.
+     * @Post: The image is uploaded to the server and the course image path is stored in the database.
+     */
+    private function handleImageUpload(Request $request, $course)
+    {
+        if ($request->hasFile('course-image')) {
+            $image = $request->file('course-image');
+            $imageName = $course->id . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/img/courses'), $imageName);
+
+            $course->img = '/img/courses/' . $imageName;
+            $course->save();
+        }
+    }
+
+    /**
+     * Create the course contents.
+     * @Pre: The course $course, the validated data $validatedData and the content ID $content_id are received as parameters.
+     * @Post: The course contents are created in the database linked with the $course.
+     */
+    private function createCourseContents($course, $validatedData, $content_id)
+    {
+        $course->contents()->createMany([
+            [
+                'locale' => 'cat',
+                'title' => $validatedData['title-cat'],
+                'content' => $validatedData['content-cat'],
+                'content_id' => $content_id,
+            ],
+            [
+                'locale' => 'es',
+                'title' => $validatedData['title-es'],
+                'content' => $validatedData['content-es'],
+                'content_id' => $content_id,
+            ],
+            [
+                'locale' => 'en',
+                'title' => $validatedData['title-en'],
+                'content' => $validatedData['content-en'],
+                'content_id' => $content_id,
+            ],
+        ]);
+    }
+
+    /**
+     * Update the user progress.
+     * @Pre: The course $course, the course ID $courseId and the content ID $contentId are received as parameters.
+     * @Post: The user progress is updated in the database.
+     */
+    private function updateUserProgress($course, $courseId, $contentId)
+    {
+        $userProgress = UserCourseProgress::firstOrNew([
+            'user_id' => auth()->id(),
+            'course_id' => $courseId,
+        ]);
+
+        if ($contentId <= $course->contents->count() / 3 && !auth()->user()->testUser) {
+            if ($userProgress->last_content_id < $contentId) {
+                if ($userProgress->last_content_id == $contentId - 1) {
+                    $userProgress->last_content_id = $contentId;
+                    $userProgress->save();
+                } else {
+                    return redirect()->back()->with('error', 'You must complete the previous content first');
+                }
+            }
+        }
+
+        return $userProgress;
+    }
+
+    /**
+     * Update the course translations.
+     * @Pre: The course $course and the validated data $validatedData are received as parameters.
+     * @Post: The course translations are updated in the database.
+     */
+    private function updateCourseTranslations($course, $validatedData)
+    {
+        $course->translations()->where('locale', 'cat')->update([
+            'title' => $validatedData['course-nameCat'],
+            'description' => $validatedData['course-descriptionCat'],
+        ]);
+
+        $course->translations()->where('locale', 'es')->update([
+            'title' => $validatedData['course-nameEs'],
+            'description' => $validatedData['course-descriptionEs'],
+        ]);
+
+        $course->translations()->where('locale', 'en')->update([
+            'title' => $validatedData['course-nameEn'],
+            'description' => $validatedData['course-descriptionEn'],
+        ]);
+    }
+
+    /**
+     * Update the course contents.
+     * @Pre: The course $course, the validated data $validatedData and the content ID $contentId are received as parameters.
+     * @Post: The course contents are updated in the database.
+     */
+    private function updateCourseContents($course, $validatedData, $contentId)
+    {
+        $course->contents()->where('locale', 'cat')->where('content_id', $contentId)->update([
+            'title' => $validatedData['title-cat'],
+            'content' => $validatedData['content-cat'],
+        ]);
+
+        $course->contents()->where('locale', 'es')->where('content_id', $contentId)->update([
+            'title' => $validatedData['title-es'],
+            'content' => $validatedData['content-es'],
+        ]);
+
+        $course->contents()->where('locale', 'en')->where('content_id', $contentId)->update([
+            'title' => $validatedData['title-en'],
+            'content' => $validatedData['content-en'],
+        ]);
     }
 }
