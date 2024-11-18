@@ -22,7 +22,7 @@
         <x-navbar />
     </header>
 
-    <div id="app">
+    <div id="app" style="margin-top: 70px;">
         <main class="py-4">
             @yield('content')
         </main>

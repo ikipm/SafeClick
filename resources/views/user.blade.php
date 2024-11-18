@@ -6,7 +6,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-10 text-center">
-            <h1 class="mt-5">User Info</h1>
+            <h1>User Info: {{ Auth::user()->userName }}</h1>
 
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <a class="btn btn-danger" href="{{ route('logout') }}">Logout</a>
