@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    /**
+     * Store into the database the news.
+     * 
+     * @Pre: The $request is given as a parameter.
+     * @Post: The news is stored into the database.
+     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -46,6 +52,12 @@ class NewsController extends Controller
         return redirect()->back()->with('success', 'News created successfully!');
     }
 
+    /**
+     * Retrieve the news from the database.
+     * 
+     * @Pre: None.
+     * @Post: The news are retrieved from the database.
+     */
     public function newsIndex()
     {
         $news = News::all();

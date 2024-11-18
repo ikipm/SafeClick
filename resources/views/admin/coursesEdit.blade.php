@@ -62,6 +62,14 @@
                             <input type="text" id="course-descriptionEn" name="course-descriptionEn" placeholder="@lang('admin.course-desc-en')" value="{{ $course->translations->where('locale', 'en')->first()->description }}" required>
                             <label for="course-image">@lang('admin.course-image')</label>
                             <input type="file" id="course-image" name="course-image" accept="image/*"><br />
+                            <label for="public-course">Public: </label>
+                            @if($course->public)
+                                <input type="checkbox" id="public" name="public" checked><br />
+                            @else
+                                <input type="checkbox" id="public" name="public"><br />
+                            @endif
+                            <label for="allowed-users">Users with access:</label>
+                            <input type="text" id="allowed-users" name="allowed-users" placeholder="username1, username2, username3" value="{{ $usernamesString }}">
                             <button type="submit" id="course-submit">@lang('admin.publish')</button>
                         </form>
                     </div>

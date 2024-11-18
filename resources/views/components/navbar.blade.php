@@ -5,7 +5,7 @@
         </div>
     </a>
     <div class="name">
-        <h3>SafeClick.cat</h3>
+        <h3 class="title">SafeClick.cat</h3>
     </div>
     <div class="language-menu">
         <div class="current-language">
@@ -46,7 +46,9 @@
         @elseif(Request::is('login'))
         <a href="/">@lang('shared.home')</a>
         @elseif(Request::is('courses*') or Request::is('admin*'))
-        <a href="{{ route('logout') }}">{{ Auth::user()->userName }}</a>
+        <a href="{{ route('user') }}">{{ Auth::user()->userName }}</a>
+        @elseif(Request::is('user'))
+        <a href="/courses">@lang('courses.courses')</a>
         @else
         <a href="/login">@lang('shared.login')</a>
         @endif

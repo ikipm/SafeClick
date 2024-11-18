@@ -18,7 +18,7 @@ class CourseContent extends Model
 
 class Course extends Model
 {
-    protected $fillable = ['status', 'img'];
+    protected $fillable = ['public', 'img', 'allowed_users', 'key'];
 
     public function translations()
     {

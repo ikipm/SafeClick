@@ -28,9 +28,16 @@ function hideWarningMessage() {
 
 function convertMarkdownToHTML(markdown) {
     const exerciseRegex = /\[exercise\]([\s\S]*?)\[\/exercise\]/g;
+    // Convert the quiz questions into radio buttons and hash the id of the answers in ascii
     markdown = markdown.replace(exerciseRegex, (match, content) => {
-        content = content.replace(/\[ \]/g, '<input type="radio" name="exercise">');
-        content = content.replace(/\[x\]/g, '<input type="radio" name="exercise" id="correct">');
+        content = content.replace(/\[ \]/g, () => {
+            var num = parseInt(Math.random()*100);
+            return '<input type="radio" name="exercise" id="' + ("f".charCodeAt() + num) + ' ' + num + '">';
+        });
+        content = content.replace(/\[x\]/g, () => {
+            var num = parseInt(Math.random()*100);
+            return '<input type="radio" name="exercise" id="' + ("c".charCodeAt() + num) + ' ' + num + '">';
+        });
         return content;
     });
 
@@ -71,7 +78,13 @@ function convertMarkdownToHTML(markdown) {
 }
 
 function isMarkedDown() {
-    return document.querySelector('input[name="exercise"][id="correct"]:checked') !== null;
+    const checkedInput = document.querySelector('input[name="exercise"]:checked');
+    const inputId = checkedInput.id.split(' ');
+    // Check if the checked input is the correct answer by comparing the id of the checked input
+    if (checkedInput !== null && inputId[0] == (parseInt("c".charCodeAt()) + parseInt(inputId[1]))) {
+        return true;
+    }
+    return false;
 }
 
 function areItemsInCorrectZones() {
