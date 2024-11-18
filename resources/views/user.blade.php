@@ -1,42 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-8">
-            <h1 class="mt-5">User info</h1>
-            <a class="btn btn-secondary" href="{{ route('logout') }}">Logout</a></br></br>
-            <button class="add-course-btn btn-primary" id="show-id-card">Add Course</button>
+<script src="{{ asset('js/user.js') }}"></script>
+<link href="{{ asset('css/user.css') }}" rel="stylesheet">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 text-center">
+            <h1 class="mt-5">User Info</h1>
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <a class="btn btn-danger" href="{{ route('logout') }}">Logout</a>
+                <button class="btn btn-success" id="show-button">Add Course</button>
+            </div>
+
             @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-warning mt-4">
                 <ul>
                     @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    {{ $error }}
                     @endforeach
                 </ul>
             </div>
             @endif
-            <div class="id-card-overlay" id="id-card-overlay">
-                <div class="id-card">
-                    <button class="close-btn" id="close-id-card">&times;</button>
-                    <div class="id-card-header">
-                        <h3>Join a New Course</h3>
-                    </div>
-                    <div class="id-card-body">
-                        <form action="{{ route('joinCourse') }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="course-key">Course key</label>
-                                <input type="text" id="course-key" name="course-key" class="form-control" maxlength="10" required>
-                            </div>
-                            <button type="submit" class="btn-primary">Submit</button>
-                        </form>
+
+            @if(session('success'))
+            <div class="alert alert-success mt-4">
+                {{ session('success') }}
+            </div>
+            @endif
+
+            <div class="overlay" id="overlay" style="display: none;">
+                <div class="card-wrapper">
+                    <div class="card border-success mb-3" id="id-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            Join a New Course
+                            <button type="button" class="btn-close" aria-label="Close" id="close-button"></button>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Insert a Course Key</h5>
+                            <form action="{{ route('joinCourse') }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="course-key">Course Key</label>
+                                    <input type="text" id="course-key" name="course-key" class="form-control" maxlength="10" required>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success mt-3">Submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/user.css') }}">
-        <script src="{{ asset('js/user.js') }}"></script>
     </div>
 </div>
 @endsection

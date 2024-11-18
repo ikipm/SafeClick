@@ -3,11 +3,54 @@
 // Custom styles
 body {
     font-family: 'Poppins', sans-serif;
+    color: #111;
     background-color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #333;
         color: #fff;
     }
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    z-index: 999;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+    margin: -25px 5px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.logo img {
+    height: 50px; /* Adjust the height as needed */
+    margin-right: 5px; /* Add some spacing between the image and text */
 }

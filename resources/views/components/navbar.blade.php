@@ -5,7 +5,7 @@
         </div>
     </a>
     <div class="name">
-        <h3>SafeClick.cat</h3>
+        <h3 class="title">SafeClick.cat</h3>
     </div>
     <div class="language-menu">
         <div class="current-language">

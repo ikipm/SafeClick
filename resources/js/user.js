@@ -1,23 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const idCardOverlay = document.getElementById('id-card-overlay');
-    const showIdCard = document.getElementById('show-id-card');
-    const closeIdCard = document.getElementById('close-id-card');
-    const form = document.querySelector('.id-card form');
+    const overlay = document.getElementById('overlay');
+    const showButton = document.getElementById('show-button');
+    const closeButton = document.getElementById('close-button');
 
-    // Show id-card
-    showIdCard.addEventListener('click', () => {
-        idCardOverlay.classList.add('active');
-    });
+    // Show form when button pressed
+    showButton.onclick = function() {
+        overlay.style.display = 'flex'; // Flex to center the content
+    };
 
-    // Close id-card when close button is clicked
-    closeIdCard.addEventListener('click', () => {
-        idCardOverlay.classList.remove('active');
-    });
+    // Close overlay when close button is clicked
+    closeButton.onclick = function() {
+        overlay.style.display = 'none';
+    };
 
-    // Close id-card on Escape key press
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && idCardOverlay.classList.contains('active')) {
-            idCardOverlay.classList.remove('active');
+    // Close overlay when clicking outside the form
+    overlay.onclick = function(event) {
+        if (event.target === overlay) {
+            overlay.style.display = 'none';
         }
-    });
+    };
+
+    // Close overlay when pressing the escape key
+    document.onkeydown = function(event) {
+        if (event.key === 'Escape') {
+            overlay.style.display = 'none';
+        }
+    };
 });
