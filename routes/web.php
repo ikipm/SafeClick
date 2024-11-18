@@ -23,6 +23,7 @@ Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/loginTest', [UserController::class, 'loginTest'])->name('loginTest');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::post('/admin/news/create', [NewsController::class, 'store'])->middleware('auth')->middleware('verify')->middleware('admin')->name('admin.createNews');
 
 // Admin routes with auth, verify and admin middleware.
 Route::middleware(['auth', 'verify', 'admin'])->group(function () {
