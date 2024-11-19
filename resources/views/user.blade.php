@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('websiteTitle', 'User Info')
+
 @section('content')
 <script src="{{ asset('js/user.js') }}"></script>
 <link href="{{ asset('css/user.css') }}" rel="stylesheet">
