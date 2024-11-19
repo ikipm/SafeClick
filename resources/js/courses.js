@@ -56,10 +56,11 @@ function convertMarkdownToHTML(markdown) {
 
         const dragItemsHTML = dragItems.map((item, index) => {
             const matchResult = item.match(/^(.*?)\s*\((\d+)\)$/);
+            var randomNumber = parseInt(Math.random()*100);
             if (matchResult) {
                 const itemName = matchResult[1].trim();
                 const dragZoneNumber = matchResult[2];
-                return `<div class="draggable-item" draggable="true" data-index="${index}" data-dragzone="${dragZoneNumber}">${itemName}</div>`;
+                return `<div class="draggable-item" draggable="true" data-index="${index}" data-dragzone="${dragZoneNumber*randomNumber} ${randomNumber}">${itemName}</div>`;
             }
             return "";
         });
@@ -92,7 +93,10 @@ function areItemsInCorrectZones() {
     let allCorrect = true;
     draggableItems.forEach((item) => {
         const parentZone = item.parentElement;
-        if (!parentZone.dataset.dragzone || item.dataset.dragzone !== parentZone.dataset.dragzone) {
+        const itemDragZone = item.dataset.dragzone.split(' ');
+        const parentZoneDragZone = parentZone.dataset.dragzone;
+        const itemNumber = parseInt(itemDragZone[0]) / parseInt(itemDragZone[1]);
+        if (!parentZoneDragZone || itemNumber.toString() !== parentZoneDragZone) {
             item.classList.add("incorrect");
             item.classList.remove("correct");
             allCorrect = false;
